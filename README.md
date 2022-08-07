@@ -1,2 +1,2 @@
 # Anipet
-# Pom Rak mung Thai la ma yuu mueng thai rai pi
+# Pom Rak mueng Thai la ma yuu mueng thai rai pi
