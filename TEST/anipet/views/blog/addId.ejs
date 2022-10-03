@@ -11,7 +11,7 @@
     <%- include('../layout') %>
     <hr>
     <h2><%= data %></h2>
-    <form action="">
+    <form action="/blogs/add" method="POST">
         <div class="form-group">
             <label for="">ชื่อ-นามสกุล</label>
             <input type="text" name= "name" class="form-control" id="">
@@ -27,7 +27,7 @@
 
         <div class="form-group">
             <label for="">gender</label>
-            <select name="category" id="" class="form-control">
+            <select name="gender" id="" class="form-control">
                 <option value="men">men</option>
                 <option value="girl">girl</option>
             </select>
