@@ -28,6 +28,10 @@ router.get('/edit/:id', function(req, res, next) {
   })
 });
 
+router.get('/login', function(req, res, next) {
+  res.render("blog/login",{data:"เข้าสู่ระบบ"})
+});
+
 router.post('/add',[
   check('name','name is require').not().isEmpty(),
   check('username','username is require').not().isEmpty(),
@@ -55,7 +59,6 @@ router.post('/add',[
   }
   
 });
-
 
 router.post('/update',[
   check('name','name is require').not().isEmpty(),

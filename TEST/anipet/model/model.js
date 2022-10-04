@@ -29,7 +29,21 @@ const Regis =new Schema({
         require:true
     },
 })
+
+const userSchema =new Schema({
+    username:{
+        type:String,
+        require:true
+    },
+    password:{
+        type:String,
+        require:true
+    },
+})
+
 const Blogs = module.exports=mongoose.model("userId",Regis)
+const userModel= module.exports = mongoose.model('user',userSchema)
+
 module.exports.createBlog= function(newBlock,callback){
     newBlock.save(callback)
 }
