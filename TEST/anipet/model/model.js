@@ -8,7 +8,7 @@ mongoose.connect(dbUrl,{
 const db = mongoose.connect
 const Schema = mongoose.Schema
 
-const blogSchema =new Schema({
+const Regis =new Schema({
     id:{
             type:Schema.ObjectId
     },
@@ -29,7 +29,34 @@ const blogSchema =new Schema({
         require:true
     },
 })
-const Blogs = module.exports=mongoose.model("userId",blogSchema)
+const Blogs = module.exports=mongoose.model("userId",Regis)
 module.exports.createBlog= function(newBlock,callback){
     newBlock.save(callback)
+}
+module.exports.getAllPets=function(data){
+    Blogs.find(data)
+}
+module.exports.deleteUser = function(id,callback){
+    Blogs.findByIdAndDelete(id,callback)
+}
+
+module.exports.getUserid= function(id,callback){
+    var query= {
+        _id:id
+    }
+    Blogs.findOne(query,callback)
+}
+
+module.exports.updateUser= function(data,callback){
+    var query= {
+        _id:data.id
+    }
+    Blogs.findByIdAndUpdate(query,{
+        $set:{
+            name:data.name,
+            username:data.username,
+            password:data.password,
+            gender:data.gender
+        }
+    },{new:true},callback)
 }

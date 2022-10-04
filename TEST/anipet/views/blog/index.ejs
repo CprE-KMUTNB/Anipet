@@ -14,7 +14,18 @@
         <a href="/blogs/add" class="btn btn-primary">สมัครสมาชิก</a>
     </div>
     <hr>
-    <h2>สวัสดีครับไอแม่เย็ด</h2>
+    <h2>สวัสดีครับโหลวๆเทสๆ</h2>
     <p>by jeng</p>
+    <hr>
+    <p>
+        <% Object.values(blogs).forEach(function(blogs){%>
+            <h4><%=blogs.name%></h4>
+            <p> ID : <%=blogs.username%></p>
+            <p> Pass : <%=blogs.password%></p>
+            <a href="/blogs/edit/<%= blogs._id %>">แก้ไข</a>
+            <a href="/blogs/delete/<%= blogs._id %>" onclick="return confirm('ต้องการลบหรือไม่?')">ลบ</a>
+            <hr>
+        <% }) %>
+    </p>
 </body>
 </html>

@@ -11,6 +11,13 @@
     <%- include('../layout') %>
     <hr>
     <h2><%= data %></h2>
+    <% if (locals.errors) { %>
+        <ul>
+            <% Object.values(errors).forEach(function(error){ %>
+                  <li><%= error.msg %></li>
+            <% }); %>
+        </ul>
+        <% } %>
     <form action="/blogs/add" method="POST">
         <div class="form-group">
             <label for="">ชื่อ-นามสกุล</label>
