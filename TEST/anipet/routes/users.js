@@ -3,7 +3,6 @@ var router = express.Router();
 const Blogs = require('../model/model');
 const {check,validationResult} = require('express-validator');
 const passport = require('passport');
-const { response } = require('../app');
 const LocalStrategy = require('passport-local').Strategy
 
 /* GET users listing. */
@@ -22,11 +21,11 @@ router.get('/login', function(req, res, next) {
 router.post('/login',passport.authenticate('local',{
   failureRedirect:'/users/login',
   failureFlash:false
-}), function(req, res) {
+}), 
+function(req, res) {
   res.redirect('/');
 });
-
-passport.serializeUser(function(user,done){
+passport.serializeUser(function(user, done) {
   done(null,user.id)
 });
 passport.deserializeUser(function(id,done){
@@ -34,7 +33,6 @@ passport.deserializeUser(function(id,done){
     done(err,user)
   });
 });
-
 passport.use(new LocalStrategy(function(username,password,done){
   Blogs.getUserByname(username,function(err,user){
     if(err) throw err

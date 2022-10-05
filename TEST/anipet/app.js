@@ -25,7 +25,18 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({ secret: 'SECRET' }));
+app.use(
+  session({
+    secret: "this_is_a_secret",
+    resave: true,
+    saveUnitialized: true,
+    rolling: true, // forces resetting of max age
+    cookie: {
+      maxAge: 360000,
+      secure: false // this should be true only when you don't want to show it for security reason
+    }
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));

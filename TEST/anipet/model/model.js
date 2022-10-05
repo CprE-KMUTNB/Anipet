@@ -14,15 +14,15 @@ const Regis =new Schema({
     id:{
         type:Schema.ObjectId
     },
-    name:{
-        type:String,
-        require:true
-    },
     username:{
         type:String,
         require:true
     },
     password:{
+        type:String,
+        require:true
+    },
+    name:{
         type:String,
         require:true
     },
@@ -45,16 +45,16 @@ module.exports.createUser= function(newUser,callback){
         });
     });
 }
-
 module.exports.getUserByid= function(id,callback){
     Blogs.findById(id,callback);
 }
-module.exports.getUserByname= function(name,callback){
-    const query={
-        name:name
+module.exports.getUserByname= function(username,callback){
+    var query={
+        username:username
     }
     Blogs.findOne(query,callback);
 }
+
 module.exports.getAllPets=function(data){
     Blogs.find(data)
 }
