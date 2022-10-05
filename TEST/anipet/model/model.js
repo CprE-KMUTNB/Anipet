@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
 const mongo = require('mongodb')
-const dbUrl = 'mongodb://localhost:27017/BlogDB'
-    
+const dbUrl = 'mongodb://localhost:27017/LoginDB'
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 mongoose.connect(dbUrl,{
     useNewUrlParser:true
 })
@@ -10,7 +12,7 @@ const Schema = mongoose.Schema
 
 const Regis =new Schema({
     id:{
-            type:Schema.ObjectId
+        type:Schema.ObjectId
     },
     name:{
         type:String,
@@ -30,22 +32,28 @@ const Regis =new Schema({
     },
 })
 
-const userSchema =new Schema({
-    username:{
-        type:String,
-        require:true
-    },
-    password:{
-        type:String,
-        require:true
-    },
-})
-
 const Blogs = module.exports=mongoose.model("userId",Regis)
-const userModel= module.exports = mongoose.model('user',userSchema)
 
 module.exports.createBlog= function(newBlock,callback){
     newBlock.save(callback)
+}
+module.exports.createUser= function(newUser,callback){
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(newUser.password, salt, function(err, hash) {
+            newUser.password=hash;
+            newUser.save(callback);
+        });
+    });
+}
+
+module.exports.getUserByid= function(id,callback){
+    Blogs.findById(id,callback);
+}
+module.exports.getUserByname= function(name,callback){
+    const query={
+        name:name
+    }
+    Blogs.findOne(query,callback);
 }
 module.exports.getAllPets=function(data){
     Blogs.find(data)
