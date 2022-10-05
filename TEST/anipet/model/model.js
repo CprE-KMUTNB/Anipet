@@ -55,6 +55,12 @@ module.exports.getUserByname= function(username,callback){
     Blogs.findOne(query,callback);
 }
 
+module.exports.comparePassword= function(password,hash,callback){
+    bcrypt.compare(password,hash,function(err,isMatch){
+        callback(null,isMatch);
+    });
+}
+
 module.exports.getAllPets=function(data){
     Blogs.find(data)
 }

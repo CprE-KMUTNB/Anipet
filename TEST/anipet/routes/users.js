@@ -26,7 +26,7 @@ function(req, res) {
   res.redirect('/');
 });
 passport.serializeUser(function(user, done) {
-  done(null,user.id)
+  done(null,user._id)
 });
 passport.deserializeUser(function(id,done){
   Blogs.getUserByid(id,function(err,user){
@@ -35,8 +35,25 @@ passport.deserializeUser(function(id,done){
 });
 passport.use(new LocalStrategy(function(username,password,done){
   Blogs.getUserByname(username,function(err,user){
+    console.log(user)
     if(err) throw err
-    console.log(user);
+    if(!user){
+      //ไม่พบผู้ใช้ในระบบ
+      return done(null,false)
+    }
+    else{
+      return done(null,user)
+    }
+    Blogs.comparePassword(password,user.password,function(err,isMatch){
+      if(err) throw err
+      console.log(isMatch);
+      if(isMatch){
+        return done(null,user)
+      }
+      else{
+        return done(null,false)
+      }
+    });
   });
 }));
 
