@@ -14,10 +14,10 @@
           </li>
           <% if(locals.user){ %>
           <li class="nav-item">
-            <a class="nav-link" href="/users/register">Member</a>
+            <a class="nav-link" href="/">Member</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/users/login">Logout</a>
+            <a class="nav-link" href="/users/logout">Logout</a>
           </li>
           <% } %>
           <% if(!locals.user){ %>
@@ -42,13 +42,13 @@
           <li class="nav-item">
             <a class="nav-link disabled">Disabled</a>
           </li>
-        </ul>
-        <form class="d-flex" role="search">
           <% if(locals.user){ %>
             <li class="nav-item">
-              <a class="nav-link disabled">Hello</a>
+              <a class="nav-link"><%= user.name %></a>
             </li>
             <% } %>
+        </ul>
+        <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>

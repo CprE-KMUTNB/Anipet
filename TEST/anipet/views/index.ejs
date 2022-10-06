@@ -7,7 +7,16 @@
   <body>
     <%- include('layout') %>
     <h1><%= title %></h1>
+    <%- messages() %>
     <p>Welcome to <%= title %></p>
+    <% if(user) {%>
+      <h3>
+        <%= user.name %>
+      </h3>
+    <% } %>
     <h4>Hello my friend</h4>
+    <script type="text/javascript">
+      $('#messages').addClass("alert alert-sucess");
+    </script>
   </body>
 </html>

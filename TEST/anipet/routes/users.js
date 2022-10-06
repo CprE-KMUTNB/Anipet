@@ -15,14 +15,21 @@ router.get('/register', function(req, res, next) {
 });
 
 router.get('/login', function(req, res, next) {
-  res.render('Login/login',{data:"สมัครสมาชิก"});
+  res.render('Login/login',{data:"เข้าสู่ระบบ"});
+});
+router.get('/logout', function(req, res, next) {
+  req.logout(function(err){
+    if(err) throw err
+    res.redirect('/users/login');
+  });
 });
 
 router.post('/login',passport.authenticate('local',{
   failureRedirect:'/users/login',
-  failureFlash:false
+  failureFlash:true
 }), 
 function(req, res) {
+  req.flash("success","ลงชื่อเข้าใช้เรียบร้อย");
   res.redirect('/');
 });
 passport.serializeUser(function(user, done) {
@@ -42,18 +49,18 @@ passport.use(new LocalStrategy(function(username,password,done){
       return done(null,false)
     }
     else{
-      return done(null,user)
+      Blogs.comparePassword(password,user.password,function(err,isMatch){
+        console.log(isMatch)
+        if(err) throw err
+        console.log(isMatch);
+        if(isMatch){
+          return done(null,user)
+        }
+        else{
+          return done(null,false)
+        }
+      });
     }
-    Blogs.comparePassword(password,user.password,function(err,isMatch){
-      if(err) throw err
-      console.log(isMatch);
-      if(isMatch){
-        return done(null,user)
-      }
-      else{
-        return done(null,false)
-      }
-    });
   });
 }));
 

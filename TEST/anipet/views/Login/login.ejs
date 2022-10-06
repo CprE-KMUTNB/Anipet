@@ -10,6 +10,7 @@
 <body>
     <%- include('../layout') %>
     <h2>Login Form</h2>
+    <%- messages() %>
     <hr>
     <form action="/users/login" method="POST">
         <div class="form-group">
@@ -31,4 +32,7 @@
         <% } %>
     <p>by jeng</p>
 </body>
+<script type="text/javascript">
+    $('#messages').addClass("alert alert-danger");
+</script>
 </html>
