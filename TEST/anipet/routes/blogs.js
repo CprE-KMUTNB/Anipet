@@ -86,6 +86,5 @@ router.post('/update',[
       res.redirect("/blogs")
     });
   }
-  
 });
 module.exports = router;  

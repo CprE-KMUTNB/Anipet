@@ -60,7 +60,9 @@ module.exports.comparePassword= function(password,hash,callback){
         callback(null,isMatch);
     });
 }
-
+module.exports.searchUser=function(data){
+    Blogs.find(data)
+}
 module.exports.getAllPets=function(data){
     Blogs.find(data)
 }
@@ -71,6 +73,13 @@ module.exports.deleteUser = function(id,callback){
 module.exports.getUserid= function(id,callback){
     var query= {
         _id:id
+    }
+    Blogs.findOne(query,callback)
+}
+
+module.exports.getUsername= function(name,callback){
+    var query= {
+        name:name
     }
     Blogs.findOne(query,callback)
 }

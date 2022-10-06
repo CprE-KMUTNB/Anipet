@@ -7,7 +7,14 @@ const LocalStrategy = require('passport-local').Strategy
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.render('user/index',{data:"Hello mongoose"});
+});
+
+router.get('/search', function(req, res, next) {
+  Blogs.getAllPets(function(err,blog){
+    if(err) throw err
+    res.render("user/search",{data:"Hello mongoose",blogs:blog});
+  });
 });
 
 router.get('/register', function(req, res, next) {
@@ -63,6 +70,11 @@ passport.use(new LocalStrategy(function(username,password,done){
     }
   });
 }));
+
+router.post('/search',function(req,res,next){
+  console.log(req.body.search)
+  res.redirect("/users/search")
+})
 
 router.post('/register',[
   check('name','name is require').not().isEmpty(),

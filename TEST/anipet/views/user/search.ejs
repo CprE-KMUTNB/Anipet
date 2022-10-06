@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>Anipet</title>
+</head>
+<body>
+    <%- include('../layout') %>
+    <h2><%= data %></h2>
+    <div>
+        <form action="/users/search" method="POST">
+            <div class="form-group">
+                <label for="">ค้นหา</label>
+                <input type="text" name= "name" class="form-control" id="">
+            </div>
+            <input type="submit" class="btn btn-primary" name="" id="" value="เสร็จสิ้น">
+        </form>
+    </div>
+    <hr>
+    <h2>สวัสดีครับโหลวๆเทสๆ</h2>
+    <p>by jeng</p>
+    <hr>
+    <p>
+        <% Object.values(blogs).forEach(function(blogs){%>
+            <h4><%=blogs.name%></h4>
+            <p> name : <%=blogs.name%></p>
+            <p> ID : <%=blogs.username%></p>
+            <p> gender : <%=blogs.gender%></p>
+            <hr>
+        <% }) %>
+    </p>
+</body>
+</html>
