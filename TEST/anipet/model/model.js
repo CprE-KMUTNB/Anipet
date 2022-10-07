@@ -55,6 +55,10 @@ const Pet =new Schema({
         type:String,
         require:true
     },
+    type:{
+        type:String,
+        require:true
+    },
 })
 
 const Blogs = module.exports= conn.model("userId",Regis)
@@ -63,6 +67,13 @@ const pet = module.exports= conn2.model("animals",Pet)
 module.exports.searchAnimal=function(data,callback){
     var query= {
         name:data
+    }
+    pet.find(query,callback)
+}
+
+module.exports.searchAnimalType=function(data,callback){
+    var query= {
+        type:data
     }
     pet.find(query,callback)
 }

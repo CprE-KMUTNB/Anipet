@@ -18,6 +18,13 @@ router.get('/search', function(req, res, next) {
   });
 });
 
+router.get('/edit/:id', function(req, res, next) {
+  Blogs.getUserid([req.params.id],function(err,blog){
+    if(err) throw err
+    res.render("user/edit",{data:"แก้ไข",blog:blog})
+  })
+});
+
 router.get('/register', function(req, res, next) {
   res.render('Register/register',{data:"สมัครสมาชิก"})
 });
@@ -72,19 +79,19 @@ passport.use(new LocalStrategy(function(username,password,done){
 
 router.post('/search',function(req,res,next){
   person = req.body.name
-  if(person == {}){
-    pet.getAllAnimal(person,function(err,data){
-      if(err) throw err
+  pet.searchAnimal(person,function(err,data){
+    console.log(data)
+    try{
+      typedata = data[0].type
       res.render("user/search",{data:person,blogs:data});
-    })
-  }else{
-    pet.searchAnimal(person,function(err,data){
-      console.log(data)
-      console.log(JSON.stringify(data))
+    }catch{
       if(err) throw err
-      res.render("user/search",{data:person,blogs:data});
-    })
-  }
+      pet.searchAnimalType(person,function(err,typepet){
+        if(err) throw err
+        res.render("user/search",{data:person,blogs:typepet})
+      })
+    }
+  })
 })
 
 router.post('/register',[
