@@ -72,11 +72,19 @@ passport.use(new LocalStrategy(function(username,password,done){
 
 router.post('/search',function(req,res,next){
   person = req.body.name
-  console.log(person)
-  pet.searchAnimal(person,function(err,data){
-    if(err) throw err
-    res.render("user/search",{data:person,blogs:data});
-  })
+  if(person == {}){
+    pet.getAllAnimal(person,function(err,data){
+      if(err) throw err
+      res.render("user/search",{data:person,blogs:data});
+    })
+  }else{
+    pet.searchAnimal(person,function(err,data){
+      console.log(data)
+      console.log(JSON.stringify(data))
+      if(err) throw err
+      res.render("user/search",{data:person,blogs:data});
+    })
+  }
 })
 
 router.post('/register',[
