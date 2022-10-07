@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Blogs = require('../model/model');
+const pet = require('../model/model');
 const {check,validationResult} = require('express-validator');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy
@@ -11,7 +12,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/search', function(req, res, next) {
-  Blogs.getAllPets(function(err,blog){
+  pet.getAllAnimal(function(err,blog){
     if(err) throw err
     res.render("user/search",{data:"Hello mongoose",blogs:blog});
   });
@@ -72,8 +73,7 @@ passport.use(new LocalStrategy(function(username,password,done){
 router.post('/search',function(req,res,next){
   person = req.body.name
   console.log(person)
-  Blogs.searchUser(person,function(err,data){
-    console.log(data)
+  pet.searchAnimal(person,function(err,data){
     if(err) throw err
     res.render("user/search",{data:person,blogs:data});
   })

@@ -1,10 +1,13 @@
 const mongoose = require('mongoose')
 const mongo = require('mongodb')
-const dbUrl = 'mongodb://localhost:27017/LoginDB'
+const dbUrl1 = 'mongodb://localhost:27017/Anipet'
+const dbUrl2 = 'mongodb://localhost:27017/Anipet'
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-mongoose.connect(dbUrl,{
+const conn = mongoose.createConnection(dbUrl1, {useNewUrlParser:true})
+const conn2 = mongoose.createConnection(dbUrl2, {useNewUrlParser:true})
+mongoose.connect(dbUrl1,{
     useNewUrlParser:true
 })
 const db = mongoose.connect
@@ -32,7 +35,41 @@ const Regis =new Schema({
     },
 })
 
-const Blogs = module.exports=mongoose.model("userId",Regis)
+const Pet =new Schema({
+    id:{
+        type:Schema.ObjectId
+    },
+    name:{
+        type:String,
+        require:true
+    },
+    info:{
+        type:String,
+        require:true
+    },
+    price:{
+        type:String,
+        require:true
+    },
+    hard:{
+        type:String,
+        require:true
+    },
+})
+
+const Blogs = module.exports= conn.model("userId",Regis)
+const pet = module.exports= conn2.model("animals",Pet)
+
+module.exports.searchAnimal=function(data,callback){
+    var query= {
+        name:data
+    }
+    pet.find(query,callback)
+}
+
+module.exports.getAllAnimal=function(data){
+    pet.find(data)
+}
 
 module.exports.createBlog= function(newBlock,callback){
     newBlock.save(callback)
@@ -48,6 +85,7 @@ module.exports.createUser= function(newUser,callback){
 module.exports.getUserByid= function(id,callback){
     Blogs.findById(id,callback);
 }
+
 module.exports.getUserByname= function(username,callback){
     var query={
         username:username
@@ -66,9 +104,11 @@ module.exports.searchUser=function(data,callback){
     }
     Blogs.find(query,callback)
 }
+
 module.exports.getAllPets=function(data){
     Blogs.find(data)
 }
+
 module.exports.deleteUser = function(id,callback){
     Blogs.findByIdAndDelete(id,callback)
 }
