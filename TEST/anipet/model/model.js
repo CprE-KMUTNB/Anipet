@@ -60,8 +60,11 @@ module.exports.comparePassword= function(password,hash,callback){
         callback(null,isMatch);
     });
 }
-module.exports.searchUser=function(data){
-    Blogs.find(data)
+module.exports.searchUser=function(data,callback){
+    var query= {
+        name:data
+    }
+    Blogs.find(query,callback)
 }
 module.exports.getAllPets=function(data){
     Blogs.find(data)

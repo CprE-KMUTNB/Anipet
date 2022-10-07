@@ -57,9 +57,7 @@ passport.use(new LocalStrategy(function(username,password,done){
     }
     else{
       Blogs.comparePassword(password,user.password,function(err,isMatch){
-        console.log(isMatch)
         if(err) throw err
-        console.log(isMatch);
         if(isMatch){
           return done(null,user)
         }
@@ -72,8 +70,13 @@ passport.use(new LocalStrategy(function(username,password,done){
 }));
 
 router.post('/search',function(req,res,next){
-  console.log(req.body.search)
-  res.redirect("/users/search")
+  person = req.body.name
+  console.log(person)
+  Blogs.searchUser(person,function(err,data){
+    console.log(data)
+    if(err) throw err
+    res.render("user/search",{data:person,blogs:data});
+  })
 })
 
 router.post('/register',[
