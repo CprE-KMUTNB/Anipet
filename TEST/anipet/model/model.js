@@ -59,6 +59,10 @@ const Pet =new Schema({
         type:String,
         require:true
     },
+    salary:{
+        type:String,
+        require:true
+    },
 })
 
 const Blogs = module.exports= conn.model("userId",Regis)
@@ -74,6 +78,13 @@ module.exports.searchAnimal=function(data,callback){
 module.exports.searchAnimalType=function(data,callback){
     var query= {
         type:data
+    }
+    pet.find(query,callback)
+}
+
+module.exports.getSalaryAnimal=function(data,callback){
+    var query= {
+        salary:data
     }
     pet.find(query,callback)
 }

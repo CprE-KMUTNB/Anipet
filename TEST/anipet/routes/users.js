@@ -47,6 +47,18 @@ router.get('/logout', function(req, res, next) {
   });
 });
 
+router.post('/predic',function(req,res,next){
+  const salary = req.body.salary
+  const style = req.body.style
+  const environment = req.body.environment
+  const time = req.body.time
+  pet.getSalaryAnimal(salary,function(err,data){
+    if(err) throw err
+    res.render("user/prediced",{data:"ช่วยเลือก",blogs:data})
+    console.log(data)
+  })
+})
+
 router.post('/login',passport.authenticate('local',{
   failureRedirect:'/users/login',
   failureFlash:true
@@ -127,11 +139,9 @@ router.post('/register',[
       if(err) console.log(err);
       try{
         if(name.username == Uname){
-          console.log("already have user name")
           res.render("Register/register",{data:"สมัครสมาชิก",data:"Already have this user"})
         }
       }catch{
-        console.log("register")
         Blogs.createUser(user,function(err){
           if(err) console.log(err);
           res.redirect("/")
