@@ -15,6 +15,10 @@ router.get('/map', function(req, res, next) {
   res.render('user/map',{data:"Hello mongoose"});
 });
 
+router.get('/predic', function(req, res, next) {
+  res.render('user/predic',{data:"Hello mongoose"});
+});
+
 router.get('/search', function(req, res, next) {
   pet.getAllAnimal(function(err,blog){
     if(err) throw err
@@ -118,9 +122,21 @@ router.post('/register',[
       password:req.body.password,
       gender:req.body.gender
     })
-    Blogs.createUser(user,function(err){
+    const Uname = req.body.username
+    Blogs.getName(req.body.username,function(err,name){
       if(err) console.log(err);
-      res.redirect("/")
+      try{
+        if(name.username == Uname){
+          console.log("already have user name")
+          res.render("Register/register",{data:"สมัครสมาชิก",data:"Already have this user"})
+        }
+      }catch{
+        console.log("register")
+        Blogs.createUser(user,function(err){
+          if(err) console.log(err);
+          res.redirect("/")
+        })
+      }
     })
   }
   

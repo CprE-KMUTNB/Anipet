@@ -138,6 +138,13 @@ module.exports.getUsername= function(name,callback){
     Blogs.findOne(query,callback)
 }
 
+module.exports.getName= function(username,callback){
+    var query= {
+        username:username
+    }
+    Blogs.findOne(query,callback)
+}
+
 module.exports.updateUser= function(data,callback){
     var query= {
         _id:data.id
