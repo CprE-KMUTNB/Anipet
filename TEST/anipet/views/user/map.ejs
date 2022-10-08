@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>My google Map</title>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDziN8yZ8H1h7yOLyxeRQyoySDMlWZXIJc
+        &libraries=places
+        &callback=initMap" async defer>
+    </script>
+    <style>
+        #map{
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>My google Maps</h1>
+    <input type="text" id="autocomplete" placeholder="Enter a place" autocomplete="on" class="controls">
+    <input id="address" name="address" value='' type="hidden" placeholder="">
+    <div id = "map"></div>
+    <script>
+        function initAutocomplete(){
+            const input = document.getElementById('autocomplete');
+            const autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.addListener('place_changed',function(){
+                var place = autocomplete.getPlace();
+                document.getElementById("address").value = JSON.stringify(place.address_components)
+            });
+        }
+        
+        function initMap(){
+            //map option
+            var option = {
+                zoom:8,
+                center:{lat:13.736717,lng:100.523186}
+            }
+            //newmap
+            var map = new google.maps.Map(document.getElementById('map'),option)
+            
+            addMarker({coords:{lat:14,lng:101}})
+            addMarker({coords:{lat:14.5,lng:100.5}})
+            //Add marker funtion
+            function addMarker(props){
+                var marker = new google.maps.Marker({
+                    position:props.coords,
+                    map:map,
+                    icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+                    });
+            }
+        }
+    </script>
+</body>
+</html>

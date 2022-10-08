@@ -11,6 +11,10 @@ router.get('/', function(req, res, next) {
   res.render('user/index',{data:"Hello mongoose"});
 });
 
+router.get('/map', function(req, res, next) {
+  res.render('user/map',{data:"Hello mongoose"});
+});
+
 router.get('/search', function(req, res, next) {
   pet.getAllAnimal(function(err,blog){
     if(err) throw err
