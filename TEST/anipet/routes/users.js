@@ -33,6 +33,13 @@ router.get('/edit/:id', function(req, res, next) {
   })
 });
 
+router.get('/info/:id', function(req, res, next) {
+  pet.getAnimalId([req.params.id],function(err,blog){
+    if(err) throw err
+    res.render("user/info",{data:"แก้ไข",blogs:blog})
+  })
+});
+
 router.get('/register', function(req, res, next) {
   res.render('Register/register',{data:"สมัครสมาชิก"})
 });
@@ -45,6 +52,34 @@ router.get('/logout', function(req, res, next) {
     if(err) throw err
     res.redirect('/users/login');
   });
+});
+
+router.post('/update',[
+  check('name','name is require').not().isEmpty(),
+  check('username','username is require').not().isEmpty(),
+  check('password','password is require').not().isEmpty(),
+], function(req, res, next) {
+  const result= validationResult(req);
+  var errors = result.errors;
+  for (var key in errors) {
+        console.log(errors[key].value);
+  }
+  if (!result.isEmpty()) {
+  //ใส่ข้อมูลไม่ครบ
+    res.redirect("/blogs")
+  }else{
+    data =new Blogs({
+      id:req.body.id,
+      name:req.body.name,
+      username:req.body.username,
+      password:req.body.password,
+      gender:req.body.gender
+    })
+    Blogs.updateUser(data,function(err){
+      if(err) console.log(err);
+      res.redirect("/users")
+    });
+  }
 });
 
 router.post('/predic',function(req,res,next){

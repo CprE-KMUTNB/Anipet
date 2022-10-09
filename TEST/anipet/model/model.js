@@ -93,6 +93,9 @@ module.exports.getAllAnimal=function(data){
     pet.find(data)
 }
 
+module.exports.getAnimalId=function(id,callback){
+    pet.findById(id,callback)
+}
 module.exports.createBlog= function(newBlock,callback){
     newBlock.save(callback)
 }
