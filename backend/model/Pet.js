@@ -29,6 +29,18 @@ const Pet =new Schema({
         type:String,
         require:true
     },
+    style:{
+        type:String,
+        require:true
+    },
+    enviroment:{
+        type:String,
+        require:true
+    },
+    time:{
+        type:String,
+        require:true
+    },
 })
 
 module.exports= mongoose.model("animals",Pet)

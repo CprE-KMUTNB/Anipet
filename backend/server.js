@@ -10,6 +10,7 @@ var bcrypt = require('bcryptjs');
 var Register = require('./routes/register');
 var Login = require('./routes/login');
 var Search = require('./routes/search');
+var Predic = require('./routes/predic')
 const session = require('express-session');
 
 require("dotenv").config();
@@ -35,3 +36,4 @@ app.use(express.json());
 app.use('/api',Register);
 app.use('/api',Login);
 app.use('/api',Search);
+app.use('/api',Predic);
