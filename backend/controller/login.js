@@ -1,6 +1,6 @@
 const userdata = require("../model/user")
 const bcrypt = require('bcryptjs');
-var {sign} = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
 
 exports.login = (req,res) => {
     var {username,password} = req.body
@@ -13,10 +13,16 @@ exports.login = (req,res) => {
                 if(!result){
                     return res.status(400).json({error:"worng password"})
                 }else{
-                    const token = sign({userid:user._id},process.env.TOKENSECRET)
+                    const token = jwt.sign({userid:user._id},process.env.TOKENSECRET)
                     return res.status(200).json({token})
                 }
             })
         }
     })
+}
+
+exports.logout = (req,res) =>{
+    const token = req.body
+    //const newToken = jwt.Verify(token => token !== req.body.token)
+    return res.status(200).json("faile")
 }
