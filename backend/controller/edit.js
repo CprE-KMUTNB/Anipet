@@ -4,7 +4,6 @@ var jwt = require('jsonwebtoken');
 exports.update = (req,res) =>{
     const token = req.body.token
     const userid = jwt.decode(token)
-    console.log(userid);
     if(!userid){
         return res.status(400)
     }else{
