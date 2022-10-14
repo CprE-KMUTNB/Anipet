@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-native/no-inline-styles */
 /**
  * Sample React Native App
@@ -6,20 +7,25 @@
  * @format
  * @flow strict-local
  */
-import MapView from 'react-native-maps';
-import React, {useState, useEffect, useRef} from 'react';
+import MapView, {Marker, MarkerAnimated} from 'react-native-maps';
+import React, {useState, useEffect, useRef, Component} from 'react';
 import {
   StyleSheet,
   View,
+  Dimensions,
   Text,
+  TouchableOpacity,
   Button,
   PermissionsAndroid,
   ActivityIndicator,
 } from 'react-native';
-import Geolocation from 'react-native-geolocation-service';
+import Geolocation from '@react-native-community/geolocation';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 // Function to get permission for location
+const {width, height} = Dimensions.get('window');
 
+const SCREEN_HEIGHT = height;
+const SCREEN_WIDTH = width;
 const requestLocationPermission = async () => {
   try {
     const granted = await PermissionsAndroid.request(
@@ -48,40 +54,47 @@ const App = () => {
   const getAddress = () => {
     console.log(placesRef.current?.getAddressText());
   };
-  // state to hold location
-  const [location, setLocation] = useState(false);
-  // function to check permissions and get Location
-  function getLocation() {
+  const [position, setPosition] = useState({
+    latitude: 15,
+    longitude: 100,
+    latitudeDelta: 0.001,
+    longitudeDelta: 0.001,
+  });
+  useEffect(() => {
     const result = requestLocationPermission();
     result.then(res => {
-      console.log('res is:', res);
       if (res) {
-        Geolocation.getCurrentPosition(
-          position => {
-            setLocation(position);
-          },
-          error => {
-            // See error code charts below.
-            console.log(error.code, error.message);
-            setLocation(false);
-          },
-          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-        );
+        Geolocation.getCurrentPosition(pos => {
+          const crd = pos.coords;
+          setPosition({
+            latitude: crd.latitude,
+            longitude: crd.longitude,
+            latitudeDelta: 0.0421,
+            longitudeDelta: 0.0421,
+          });
+        });
       }
     });
-  }
+  }, []);
   return (
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        //specify our coordinates.
-        initialRegion={{
-          latitude: 15.870032,
-          longitude: 100.992541,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      />
+        Region={position}
+        showsUserLocation={true}
+        followsUserLocation={true}
+        showsCompass={true}
+        scrollEnabled={true}
+        zoomEnabled={true}
+        pitchEnabled={true}
+        coords={position}
+        rotateEnabled={true}>
+        <MarkerAnimated
+          title="Yor are here"
+          //  description='This is a description'
+          coordinate={position}
+        />
+      </MapView>
       <View style={styles.searchContainer}>
         <GooglePlacesAutocomplete
           GooglePlacesDetailsQuery={{fields: 'geometry'}}
@@ -89,23 +102,23 @@ const App = () => {
           styles={{textinput: styles.input}}
           placeholder="Search"
           query={{
-            key: 'AIzaSyDziN8yZ8H1h7yOLyxeRQyoySDMlWZXIJc',
+            key: 'process.env.API',
             components: 'country:th',
             language: 'en', // language of the results
           }}
           onPress={(data, details = null) => {
+            setPosition({
+              latitude: details?.geometry?.location?.lat,
+              longitude: details?.geometry?.location?.lng,
+              latitudeDelta: 0.0421,
+              longitudeDelta: 0.0421,
+            });
             console.log(JSON.stringify(details?.geometry?.location));
           }}
           onNotFound={() => console.log('no results')}
           ref={placesRef}
         />
       </View>
-      <View
-        style={{marginTop: 10, padding: 10, borderRadius: 10, width: '40%'}}>
-        <Button title="Go to my location" onPress={getLocation} />
-      </View>
-      <Text>Latitude: {location ? location.coords.latitude : null}</Text>
-      <Text>Longitude: {location ? location.coords.longitude : null}</Text>
     </View>
   );
 };
@@ -130,7 +143,7 @@ const styles = StyleSheet.create({
     elevation: 4,
     padding: 8,
     borderRadius: 8,
-    top: 40,
+    top: 65,
   },
   input: {
     borderColor: '#888',
