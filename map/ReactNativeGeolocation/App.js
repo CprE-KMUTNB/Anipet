@@ -17,10 +17,10 @@ import {
   Button,
   PermissionsAndroid,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import {googleAPIKey, placeType} from '../../Helpers/GooglePlacesAPI';
 
 const {width, height} = Dimensions.get('window');
 const SCREEN_HEIGHT = height;
@@ -68,7 +68,7 @@ const App = () => {
   useEffect(() => {
     const latitude = position.latitude; // you can update it with user's latitude & Longitude
     const longitude = position.longitude;
-    let radMetter = 5 * 1000; // Search withing 5 KM radius
+    let radMetter = 3 * 1000; // Search withing 2 KM radius
     const url1 =
       'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' +
       latitude +
@@ -118,55 +118,7 @@ const App = () => {
       .catch(error => {
         console.log(error);
       });
-    const url2 =
-      'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' +
-      latitude +
-      ',' +
-      longitude +
-      '&radius=' +
-      radMetter +
-      '&type=veterinary_care' +
-      '&key=' +
-      'AIzaSyDziN8yZ8H1h7yOLyxeRQyoySDMlWZXIJc';
 
-    fetch(url2)
-      .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        var places = []; // This Array WIll contain locations received from google
-        for (let googlePlace of res.results) {
-          var place = {};
-          var lat = googlePlace.geometry.location.lat;
-          var lng = googlePlace.geometry.location.lng;
-          var coordinate = {
-            latitude: lat,
-            longitude: lng,
-          };
-
-          var gallery = [];
-
-          if (googlePlace.photos) {
-            for (let photo of googlePlace.photos) {
-              var photoUrl = url2.GooglePicBaseUrl + photo.photo_reference;
-              gallery.push(photoUrl);
-            }
-          }
-
-          place.placeTypes = googlePlace.types;
-          place.coordinate = coordinate;
-          place.placeId = googlePlace.place_id;
-          place.placeName = googlePlace.name;
-          place.gallery = gallery;
-
-          places.push(place);
-        }
-        setMarker2(places);
-        // Do your work here with places Array
-      })
-      .catch(error => {
-        console.log(error);
-      });
     const result = requestLocationPermission();
     result.then(res => {
       if (res) {
@@ -187,7 +139,7 @@ const App = () => {
         });
       }
     });
-  }, [marker1, marker2, position.latitude, position.longitude]);
+  }, [marker1, position.latitude, position.longitude]);
   return (
     <View style={styles.container}>
       <MapView
@@ -207,10 +159,11 @@ const App = () => {
           coordinate={Search}
         />
         {marker1.map(point => (
-          <Marker title={point.placeName} coordinate={point.coordinate} />
-        ))}
-        {marker2.map(point => (
-          <Marker title={point.placeName} coordinate={point.coordinate} />
+          <Marker
+            title={point.placeName}
+            coordinate={point.coordinate}
+            image={require('./asset/map_marker.png')}
+          />
         ))}
       </MapView>
       <View style={styles.searchContainer}>
@@ -249,6 +202,30 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+  },
+  scrollView: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingVertical: 10,
+  },
+  chipsIcon: {
+    marginRight: 5,
+  },
+  chipsItem: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    padding: 8,
+    paddingHorizontal: 20,
+    marginHorizontal: 10,
+    height: 35,
+    shadowColor: '#ccc',
+    shadowOffset: {width: 0, height: 3},
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 10,
   },
   searchContainer: {
     position: 'absolute',
