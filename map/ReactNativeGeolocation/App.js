@@ -49,7 +49,9 @@ const requestLocationPermission = async () => {
 };
 
 const App = () => {
-  const [Search, Location] = useState({
+  const [marker1, setMarker1] = useState([]);
+  const [marker2, setMarker2] = useState([]);
+  const [Search, setLocation] = useState({
     latitude: 15,
     longitude: 100,
     latitudeDelta: 0.001,
@@ -67,18 +69,18 @@ const App = () => {
     const latitude = position.latitude; // you can update it with user's latitude & Longitude
     const longitude = position.longitude;
     let radMetter = 5 * 1000; // Search withing 5 KM radius
-    const url =
+    const url1 =
       'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' +
       latitude +
       ',' +
       longitude +
       '&radius=' +
       radMetter +
-      '&type=hospital' +
+      '&type=pet_store' +
       '&key=' +
       'AIzaSyDziN8yZ8H1h7yOLyxeRQyoySDMlWZXIJc';
 
-    fetch(url)
+    fetch(url1)
       .then(res => {
         return res.json();
       })
@@ -97,7 +99,7 @@ const App = () => {
 
           if (googlePlace.photos) {
             for (let photo of googlePlace.photos) {
-              var photoUrl = url.GooglePicBaseUrl + photo.photo_reference;
+              var photoUrl = url1.GooglePicBaseUrl + photo.photo_reference;
               gallery.push(photoUrl);
             }
           }
@@ -110,12 +112,57 @@ const App = () => {
 
           places.push(place);
         }
-        console.log(
-          `The places around thailand: ${places.map(
-            nearbyPlaces => nearbyPlaces.placeName,
-          )}`,
-          // Do your work here with places Array
-        );
+        setMarker1(places);
+        // Do your work here with places Array
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    const url2 =
+      'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' +
+      latitude +
+      ',' +
+      longitude +
+      '&radius=' +
+      radMetter +
+      '&type=veterinary_care' +
+      '&key=' +
+      'AIzaSyDziN8yZ8H1h7yOLyxeRQyoySDMlWZXIJc';
+
+    fetch(url2)
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        var places = []; // This Array WIll contain locations received from google
+        for (let googlePlace of res.results) {
+          var place = {};
+          var lat = googlePlace.geometry.location.lat;
+          var lng = googlePlace.geometry.location.lng;
+          var coordinate = {
+            latitude: lat,
+            longitude: lng,
+          };
+
+          var gallery = [];
+
+          if (googlePlace.photos) {
+            for (let photo of googlePlace.photos) {
+              var photoUrl = url2.GooglePicBaseUrl + photo.photo_reference;
+              gallery.push(photoUrl);
+            }
+          }
+
+          place.placeTypes = googlePlace.types;
+          place.coordinate = coordinate;
+          place.placeId = googlePlace.place_id;
+          place.placeName = googlePlace.name;
+          place.gallery = gallery;
+
+          places.push(place);
+        }
+        setMarker2(places);
+        // Do your work here with places Array
       })
       .catch(error => {
         console.log(error);
@@ -131,7 +178,7 @@ const App = () => {
             latitudeDelta: 0.0421,
             longitudeDelta: 0.0421,
           });
-          Location({
+          setLocation({
             latitude: crd.latitude,
             longitude: crd.longitude,
             latitudeDelta: 0.0421,
@@ -140,7 +187,7 @@ const App = () => {
         });
       }
     });
-  }, [position.latitude, position.longitude]);
+  }, [marker1, marker2, position.latitude, position.longitude]);
   return (
     <View style={styles.container}>
       <MapView
@@ -159,6 +206,12 @@ const App = () => {
           //  description='This is a description'
           coordinate={Search}
         />
+        {marker1.map(point => (
+          <Marker title={point.placeName} coordinate={point.coordinate} />
+        ))}
+        {marker2.map(point => (
+          <Marker title={point.placeName} coordinate={point.coordinate} />
+        ))}
       </MapView>
       <View style={styles.searchContainer}>
         <GooglePlacesAutocomplete
@@ -172,7 +225,7 @@ const App = () => {
             language: 'en', // language of the results
           }}
           onPress={(data, details = null) => {
-            Location({
+            setLocation({
               latitude: details?.geometry?.location?.lat,
               longitude: details?.geometry?.location?.lng,
               latitudeDelta: 0.0421,
