@@ -20,6 +20,7 @@ import {
   ScrollView,
 } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
+import getDirections from 'react-native-google-maps-directions';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 
 const {width, height} = Dimensions.get('window');
@@ -139,7 +140,8 @@ const App = () => {
         });
       }
     });
-  }, [marker1, position.latitude, position.longitude]);
+  }, [position.latitude, position.longitude]);
+  const [name, setName] = useState('you are here');
   return (
     <View style={styles.container}>
       <MapView
@@ -154,7 +156,7 @@ const App = () => {
         coords={position}
         rotateEnabled={true}>
         <MarkerAnimated
-          title="Yor are here"
+          title={name}
           //  description='This is a description'
           coordinate={Search}
         />
@@ -178,13 +180,13 @@ const App = () => {
             language: 'en', // language of the results
           }}
           onPress={(data, details = null) => {
+            setName(data?.description);
             setLocation({
               latitude: details?.geometry?.location?.lat,
               longitude: details?.geometry?.location?.lng,
               latitudeDelta: 0.0421,
               longitudeDelta: 0.0421,
             });
-            console.log(JSON.stringify(details?.geometry?.location));
           }}
           onNotFound={() => console.log('no results')}
           ref={placesRef}
@@ -202,30 +204,6 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject,
-  },
-  scrollView: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    paddingVertical: 10,
-  },
-  chipsIcon: {
-    marginRight: 5,
-  },
-  chipsItem: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    borderRadius: 20,
-    padding: 8,
-    paddingHorizontal: 20,
-    marginHorizontal: 10,
-    height: 35,
-    shadowColor: '#ccc',
-    shadowOffset: {width: 0, height: 3},
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 10,
   },
   searchContainer: {
     position: 'absolute',
