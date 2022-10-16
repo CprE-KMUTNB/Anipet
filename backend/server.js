@@ -9,8 +9,10 @@ var db = mongoose.connection;
 var bcrypt = require('bcryptjs');
 var Register = require('./routes/register');
 var Login = require('./routes/login');
+var Logout = require('./routes/login');
 var Search = require('./routes/search');
-var Predic = require('./routes/predic')
+var Predic = require('./routes/predic');
+var Edit = require('./routes/edit')
 const session = require('express-session');
 
 require("dotenv").config();
@@ -37,3 +39,5 @@ app.use('/api',Register);
 app.use('/api',Login);
 app.use('/api',Search);
 app.use('/api',Predic);
+app.use('/api',Logout);
+app.use('/api',Edit);
