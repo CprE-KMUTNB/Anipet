@@ -1,7 +1,7 @@
 const pet = require("../model/Pet")
 
 exports.predic = (req,res) => {
-    var {salary,style,environment,time} = req.body
+    var {salary,style,environment,time} = req.body //รับค่าจากการตอบคำถาม
     pet.find({salary,style,environment,time}).then(predicted => {
         if(!predicted[0]){
             return res.status(400).json({error:"fail"})

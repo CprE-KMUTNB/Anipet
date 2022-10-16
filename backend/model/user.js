@@ -13,7 +13,6 @@ const User =new Schema({
     password:{
         type:String,
         require:true,
-        unique:true
     },
     name:{
         type:String,

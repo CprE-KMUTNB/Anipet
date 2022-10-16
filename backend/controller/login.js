@@ -11,7 +11,7 @@ exports.login = (req,res) => {
         }else{
             bcrypt.compare(password,user.password).then(result =>{
                 if(!result){
-                    return res.status(400).json({error:"worng password"})
+                    return res.status(400).json({error:"wrong password"})
                 }else{
                     const token = jwt.sign({userid:user._id},process.env.TOKENSECRET)
                     return res.status(200).json({token})

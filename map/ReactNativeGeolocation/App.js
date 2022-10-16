@@ -69,7 +69,7 @@ const App = () => {
   useEffect(() => {
     const latitude = position.latitude; // you can update it with user's latitude & Longitude
     const longitude = position.longitude;
-    let radMetter = 3 * 1000; // Search withing 2 KM radius
+    let radMetter = 5 * 1000; // Search withing 2 KM radius
     const url1 =
       'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' +
       latitude +
