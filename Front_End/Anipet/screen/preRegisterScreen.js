@@ -1,3 +1,8 @@
+/* eslint-disable eol-last */
+/* eslint-disable semi */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable prettier/prettier */
 import React from 'react';
 // import type {Node} from 'react';
 import {

@@ -1,3 +1,7 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable prettier/prettier */
 import React from 'react';
 // import type {Node} from 'react';
 import {
@@ -14,21 +18,17 @@ import {
   ImageBackground,
 } from 'react-native';
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-const Home = ({navigation}) => { 
+const Home = ({navigation}) => {
     const [number, onChangeNumber] = React.useState(null);
     return (
         <SafeAreaView
             style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#FFE0F3'
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#FFE0F3',
             }}>
         <View>
-        
         {/* search */}
         <Image
             style={{position:'absolute',top:-350,right:-149}}
@@ -46,7 +46,7 @@ const Home = ({navigation}) => {
         <Image
             style={{position:'absolute',top:-270,right:-170}}
             source={require('../assets/fonts/Home/บก.png')}
-            />    
+            />
         {/* หลังม่วง */}
         <Image
             style={{position:'absolute',top:-104,right:53}}
