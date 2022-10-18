@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React ,{useState,useContext} from 'react';
 // import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -17,9 +17,11 @@ import {
   Button,
   ImageBackground,
 } from 'react-native';
+import { AuthContext } from '../context/AuthContext';
 
 const Home = ({navigation}) => {
-    const [number, onChangeNumber] = React.useState(null);
+    const [name, SetName] = useState(null);
+    const {search} = useContext(AuthContext);
     return (
         <SafeAreaView
             style={{
@@ -125,11 +127,16 @@ const Home = ({navigation}) => {
             {/* Textบน */}
         <TextInput
             style={{position:'absolute',top:-345,right:80}}
-            onChangeText={onChangeNumber}
-            value={number}
+            onChangeText={SetName}
+            value={name}
             placeholder="ค้นหา..."
             keyboardType="ascii-capable"
         />
+        <TouchableOpacity
+          onPress={() => {search(name);}}
+          style={{position: 'absolute', top: 70, right: -110}}>
+          <Image source={require('../assets/fonts/Register/Login.png')} />
+        </TouchableOpacity>
         <Text style={{fontSize: 20, fontStyle: 'bold', color: '#FBF6F6',fontFamily:'ITIM-REGULAR',position:'absolute',top:-270,right:90}}>
             สัตว์บก
         </Text>

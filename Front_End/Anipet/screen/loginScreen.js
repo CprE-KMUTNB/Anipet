@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -13,8 +13,8 @@ import {
 import {AuthContext} from '../context/AuthContext';
 
 const Login = ({navigation}) => {
-  const [Username, onChangeUssername] = React.useState(null);
-  const [Password, onChangePassword] = React.useState(null);
+  const [username, SetUsername] = useState(null);
+  const [password, SetPassword] = useState(null);
   const {login} = useContext(AuthContext);
   return (
     <SafeAreaView
@@ -56,8 +56,8 @@ const Login = ({navigation}) => {
         />
         <TextInput
           style={{position: 'absolute', top: -162, right: 100}}
-          onChangeText={onChangeUssername}
-          value={Username}
+          onChangeText={text => SetUsername(text)}
+          value={username}
           keyboardType="ascii-capable"
         />
         <Text
@@ -78,13 +78,13 @@ const Login = ({navigation}) => {
         />
         <TextInput
           style={{position: 'absolute', top: -42, right: 100}}
-          onChangeText={onChangePassword}
-          value={Password}
+          onChangeText={text => SetPassword(text)}
+          value={password}
           keyboardType="ascii-capable"
         />
         {/* Login */}
         <TouchableOpacity
-          onPress={() => {login(), navigation.navigate('Home');}}
+          onPress={() => {login(username,password);}}
           style={{position: 'absolute', top: 70, right: -110}}>
           <Image source={require('../assets/fonts/Register/Login.png')} />
         </TouchableOpacity>
