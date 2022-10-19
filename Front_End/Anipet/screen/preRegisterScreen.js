@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable eol-last */
 /* eslint-disable semi */
 /* eslint-disable no-unused-vars */
@@ -23,13 +24,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const PreRegister = ({navigation}) =>{
-    return(
+    return (
         <SafeAreaView
         style={{
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#FFE0F3'
+            backgroundColor: '#FFE0F3',
         }}>
         <View>
         <TouchableOpacity
