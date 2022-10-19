@@ -49,7 +49,7 @@ const requestLocationPermission = async () => {
   }
 };
 
-const App = () => {
+const Map = () => {
   const [marker1, setMarker1] = useState([]);
   const [marker2, setMarker2] = useState([]);
   const [Search, setLocation] = useState({
@@ -224,4 +224,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Map;

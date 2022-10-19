@@ -8,6 +8,18 @@ const URL = 'http://10.0.2.2:3000';
 export const AuthProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [userToken, setUserToken] = useState([]);
+    const edit = (name,gender) => {
+        setIsLoading(true);
+        axios.post(`${URL}/api/update`,{
+            userToken,name,gender,
+        })
+        .then(res => {
+            console.log(res.data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    };
     const search = (name) => {
         setIsLoading(true);
         axios.post(`${URL}/api/search`,{
@@ -69,7 +81,7 @@ export const AuthProvider = ({children}) => {
         isLoggedIn();
     },[]);
     return (
-        <AuthContext.Provider value={{register, login, logout, search, isLoading, userToken}}>
+        <AuthContext.Provider value={{register, login, logout, search, edit, isLoading, userToken}}>
             {children}
         </AuthContext.Provider>
     );

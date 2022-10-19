@@ -7,13 +7,15 @@ exports.update = (req,res) =>{
     if(!userid){
         return res.status(400)
     }else{
-        userdata.findByIdAndUpdate(userid.userid,{
-            $set:{
-                name : req.body.name || user.name,
-                gender : req.body.gender || user.gender
-            }
-        }).then(user => {
-            res.status(200).json(user)
+        userdata.findById(userid.userid).then(userInfo => {
+            userdata.findByIdAndUpdate(userid.userid,{
+                $set:{
+                    name : req.body.name || userInfo.name,
+                    gender : req.body.gender || userInfo.gender
+                }
+            }).then(user => {
+                return res.status(200).json(user)
+            })
         })
     }
 }

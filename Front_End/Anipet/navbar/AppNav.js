@@ -24,7 +24,7 @@ const AppNav = () => {
     }
     return (
         <NavigationContainer>
-            {userToken !== null ? <AuthStack/> : <AuthStack/> }
+            {userToken !== null ? <AuthStack/> : null }
         </NavigationContainer>
     );
 };
