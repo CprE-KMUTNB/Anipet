@@ -186,7 +186,7 @@ const Home = ({navigation}) => {
     {/* แถบล่าง */}
     <Image
         style={{position:'absolute',top:275,right:-195}}
-        source={require('./assets/fonts/Home/ล่าง.png')}
+        source={require('./assets/fonts/Home/ss.png')}
       />
     <Image
         style={{position:'absolute',top:280,right:-49}}
@@ -231,12 +231,12 @@ const PreRegister = ({navigation}) =>{
         backgroundColor: '#FFE0F3'
       }}>
     <View>
-    <Text style={{fontSize: 20, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-350,right:90}}>
+    <Text style={{fontSize: 20, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-310,right:90}}>
       เข้าสู่ระบบ
     </Text>  
     {/* setting */}
     <Image
-        style={{position:'absolute',top:-350,right:-155}}
+        style={{position:'absolute',top:-320,right:-165}}
         source={require('./assets/fonts/PR/เฟือง.png')}
         />
     {/* pic */}
@@ -319,74 +319,74 @@ const Register1 = ({navigation}) =>{
       {/* กลับ */}
     <TouchableOpacity
         onPress={() => navigation.navigate('PreRegister')}
-        style={{position:'absolute',top:-350,right:120}}>
+        style={{position:'absolute',top:-320,right:120}}>
         <Image source={require('./assets/fonts/Register/กลับ.png')} />
         </TouchableOpacity>
       {/* reg */}
       <Text style={{fontSize: 30, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-300,right:-80}}>
       สมัครสมาชิก
     </Text>
-    <Text style={{fontSize: 18, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-230,right:50}}>
+    <Text style={{fontSize: 18, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-255,right:50}}>
       user-name*
     </Text>
     <Image
-        style={{position:'absolute',top:-200,right:-150}}
+        style={{position:'absolute',top:-225,right:-150}}
         source={require('./assets/fonts/Register/ว่าง.png')}
         />
       <TextInput
-      style={{position:'absolute',top:-190,right:100}}
+      style={{position:'absolute',top:-215,right:100}}
       onChangeText={onChangeUser}
       value={user}
       keyboardType="ascii-capable"
     />
-    <Text style={{fontSize: 18, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-120,right:50}}>
+    <Text style={{fontSize: 18, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-150,right:50}}>
       password*
     </Text>
     <Image
-        style={{position:'absolute',top:-90,right:-150}}
+        style={{position:'absolute',top:-125,right:-150}}
         source={require('./assets/fonts/Register/ว่าง.png')}
         />
       <TextInput
-      style={{position:'absolute',top:-80,right:100}}
+      style={{position:'absolute',top:-115,right:100}}
       onChangeText={onChangePass}
       value={Pass}
       keyboardType="ascii-capable"
     />
-        <Text style={{fontSize: 18, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:0,right:45}}>
+        <Text style={{fontSize: 18, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-50,right:45}}>
       ชื่อ-นามสกุล*
     </Text>
     <Image
-        style={{position:'absolute',top:30,right:-150}}
+        style={{position:'absolute',top:-20,right:-150}}
         source={require('./assets/fonts/Register/ว่าง.png')}
         />
       <TextInput
-      style={{position:'absolute',top:40,right:100}}
+      style={{position:'absolute',top:-10,right:100}}
       onChangeText={onChangeName}
       value={Name}
       keyboardType="ascii-capable"
     />
-    <Text style={{fontSize: 18, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:110,right:100}}>
+    <Text style={{fontSize: 18, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:50,right:100}}>
       อีเมล
     </Text>
     <Image
-        style={{position:'absolute',top:140,right:-150}}
+        style={{position:'absolute',top:80,right:-150}}
         source={require('./assets/fonts/Register/ว่าง.png')}
         />
       <TextInput
-      style={{position:'absolute',top:150,right:100}}
+      style={{position:'absolute',top:90,right:100}}
       onChangeText={onChangeMail}
       value={Mail}
       keyboardType="ascii-capable"
     />
-    <Text style={{fontSize: 18, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:220,right:-20}}>
+    <Text style={{fontSize: 18, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:160,right:-20}}>
       สัตวเลี้ยง (ไม่มีให้ใส่ -)
     </Text>
     <Image
-        style={{position:'absolute',top:250,right:-150}}
+        style={{position:'absolute',top:190,right:-150}}
         source={require('./assets/fonts/Register/ว่าง.png')}
         />
       <TextInput
-      style={{position:'absolute',top:260,right:100}}
+      style={{position:'absolute',top:200,right:100}}
       onChangeText={onChangePet}
       value={Pet}
       keyboardType="ascii-capable"
@@ -394,7 +394,7 @@ const Register1 = ({navigation}) =>{
     {/* next */}
     <TouchableOpacity
         onPress={() => navigation.navigate('Login')}
-        style={{position:'absolute',top:330,right:-180}}>
+        style={{position:'absolute',top:275,right:-180}}>
         <Image source={require('./assets/fonts/Register/CP.png')} />
         </TouchableOpacity>
     </View>
@@ -465,17 +465,17 @@ const User = ({navigation}) =>{
         backgroundColor: '#FFE0F3'
       }}>
     <View>
-    <Text style={{fontSize: 25, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-350,right:100}}>
+    <Text style={{fontSize: 25, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-310,right:100}}>
       ลุงใจดี
     </Text>
           {/* setting */}
     <Image
-        style={{position:'absolute',top:-350,right:-155}}
+        style={{position:'absolute',top:-320,right:-155}}
         source={require('./assets/fonts/PR/เฟือง.png')}
         />
     <Image
-        style={{position:'absolute',top:-300,right:-175}}
-        source={require('./assets/fonts/User/User.png')}
+        style={{position:'absolute',top:-250,right:-175}}
+        source={require('./assets/fonts/User/qeww.png')}
         />
             {/* แถบล่าง */}
     <Image
