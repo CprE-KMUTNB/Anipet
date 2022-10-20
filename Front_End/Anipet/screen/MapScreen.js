@@ -20,7 +20,6 @@ import {
   ScrollView,
 } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
-import getDirections from 'react-native-google-maps-directions';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 
 const {width, height} = Dimensions.get('window');
@@ -49,22 +48,21 @@ const requestLocationPermission = async () => {
   }
 };
 
-const Map = () => {
+const Map = ({navigation}) => {
   const [marker1, setMarker1] = useState([]);
   const [marker2, setMarker2] = useState([]);
-  const [Search, setLocation] = useState({
-    latitude: 15,
-    longitude: 100,
-    latitudeDelta: 0.001,
-    longitudeDelta: 0.001,
-  });
   const [position, setPosition] = useState({
-    latitude: 15,
-    longitude: 100,
+    latitude: 13.7563,
+    longitude: 100.5018,
     latitudeDelta: 0.001,
     longitudeDelta: 0.001,
   });
-  const mapRef = useRef(null);
+  const [Search, setLocation] = useState({
+    latitude: position.latitude,
+    longitude: position.longitude,
+    latitudeDelta: 0.001,
+    longitudeDelta: 0.001,
+  });
   const placesRef = useRef();
   useEffect(() => {
     const latitude = position.latitude; // you can update it with user's latitude & Longitude
@@ -123,7 +121,7 @@ const Map = () => {
     const result = requestLocationPermission();
     result.then(res => {
       if (res) {
-        Geolocation.getCurrentPosition(pos => {
+        global.Geolocation.getCurrentPosition(pos => {
           const crd = pos.coords;
           setPosition({
             latitude: crd.latitude,
@@ -146,10 +144,9 @@ const Map = () => {
     <View style={styles.container}>
       <MapView
         style={styles.map}
-        Region={position}
+        initialRegion={position}
         showsUserLocation={true}
         followsUserLocation={true}
-        showsCompass={true}
         scrollEnabled={true}
         zoomEnabled={true}
         pitchEnabled={true}
@@ -164,7 +161,7 @@ const Map = () => {
           <Marker
             title={point.placeName}
             coordinate={point.coordinate}
-            image={require('./asset/map_marker.png')}
+            image={require('../assets/map_marker.png')}
           />
         ))}
       </MapView>

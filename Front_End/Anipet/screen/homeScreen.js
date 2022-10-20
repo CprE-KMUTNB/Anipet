@@ -137,8 +137,11 @@ const Home = ({navigation}) => {
                 <TouchableOpacity
                 onPress={() => {search(name);}}
                 style={{position: 'absolute', top: 70, right: -110}}>
-                <Image source={require('../assets/fonts/Register/Login.png')} />
+
+                    <Image source={require('../assets/fonts/Register/Login.png')} />
+
                 </TouchableOpacity>
+
                 <Text style={{fontSize: 20, fontStyle: 'bold', color: '#FBF6F6',fontFamily:'ITIM-REGULAR',position:'absolute',top:-270,right:90}}>
                     สัตว์บก
                 </Text>
@@ -171,27 +174,27 @@ const Home = ({navigation}) => {
 
                 {/* แถบล่าง */}
                 <Image
-                    style={{position:'absolute',top:275,right:-195}}
+                    style={{flex: 1,position:'absolute',top:275,right:-195}}
                     source={require('../assets/fonts/Home/ล่าง.png')}
                     />
                 <Image
-                    style={{position:'absolute',top:280,right:-49}}
+                    style={{flex: 1,position:'absolute',top:280,right:-49}}
                     source={require('../assets/fonts/Home/เลือก.png')}
                     />
                 <Image
-                    style={{position:'absolute',top:275,right:80}}
+                    style={{flex: 1,position:'absolute',top:275,right:80}}
                     source={require('../assets/fonts/Home/โลก.png')}
                     />
                 <TouchableOpacity
                     onPress={() => navigation.navigate('PreRegister')}
-                    style={{position:'absolute',top:290,right:-170}}>
+                    style={{flex: 1,position:'absolute',top:290,right:-170}}>
                         <Image source={require('../assets/fonts/Home/1User.png')}/>
                     </TouchableOpacity>
                 <Image
-                    style={{position:'absolute',top:269,right:-49}}
+                    style={{flex: 1,position:'absolute',top:269,right:-49}}
                     source={require('../assets/fonts/Home/แว่น.png')}
                     />
-                    {/* Textล่าง */}
+                {/* Textล่าง */}
                 <Text style={{fontSize: 20, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:375,right:132}}>
                     Find
                 </Text>
