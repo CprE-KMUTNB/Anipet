@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "nodemon": "^2.0.20",
+    "react-native-google-places-api": "^1.0.2"
+  }
+}
