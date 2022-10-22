@@ -30,12 +30,12 @@ const PreRegister = ({navigation}) =>{
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#FFE0F3'
+            backgroundColor: '#FFE0F3',
           }}>
         <View>
         <Text style={{fontSize: 20, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-290,right:90}}>
           เข้าสู่ระบบ
-        </Text>  
+        </Text>
         {/* setting */}
         <Image
             style={{position:'absolute',top:-290,right:-165}}

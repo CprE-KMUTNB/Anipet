@@ -87,6 +87,7 @@ const Login = ({navigation}) => {
           />
           {/* Login */}
           <TouchableOpacity
+            // eslint-disable-next-line no-sequences
             onPress={() => {login(username,password),navigation.navigate('User');}}
             style={{position: 'absolute', top: 70, right: -110}}>
             <Image source={require('../assets/fonts/Register/Login.png')} />
