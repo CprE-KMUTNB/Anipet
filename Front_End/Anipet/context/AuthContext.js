@@ -72,6 +72,7 @@ export const AuthProvider = ({children}) => {
     const isLoggedIn = async() => {
         try {
             setIsLoading(true);
+            // eslint-disable-next-line no-shadow
             let userToken = await AsyncStorage.getItem('userToken');
             setUserToken(userToken);
             setIsLoading(false);
