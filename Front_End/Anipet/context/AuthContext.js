@@ -31,6 +31,7 @@ export const AuthProvider = ({children}) => {
         .catch(err => {
             console.log(`Search failed ${err}`);
         });
+        setIsLoading(false);
     };
     const register = (name,username,password,gender) => {
         setIsLoading(true);

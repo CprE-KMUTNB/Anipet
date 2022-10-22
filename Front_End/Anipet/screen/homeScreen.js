@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
-import React ,{useState,useContext} from 'react';
+import React ,{useState,useContext, useEffect} from 'react';
 // import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -17,12 +17,66 @@ import {
   Button,
   ImageBackground,
   KeyboardAvoidingView,
+  FlatList,
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 
 const Home = ({navigation}) => {
-    const [name, SetName] = useState(null);
     const {search} = useContext(AuthContext);
+    const [name, SetName] = useState(null);
+    const [filterData, setfilterData] = useState([]);
+    const [masterData, setmasterData] = useState([]);
+    const [Find, setFind] = useState('');
+    useEffect(() => {
+        fetchPosts();
+        return () => {
+
+        };
+    },[]);
+
+    const fetchPosts = () => {
+        const apiURL = 'https://jsonplaceholder.typicode.com/users';
+        fetch(apiURL)
+        .then((response) => response.json())
+        .then((responseJson) => {
+            setfilterData(responseJson);
+            setmasterData(responseJson);
+        }).catch((error) => {
+            console.log(error);
+        });
+    };
+    const searchFilter = (text) => {
+        if (text) {
+            const newData = masterData.filter((item) => {
+                const itemData = item.name ?
+                item.name.toUpperCase() : ''.toUpperCase();
+            const textData = text.toUpperCase();
+            return itemData.indexOf(textData) > -1;
+            });
+            setfilterData(newData);
+            setFind(text);
+        } else {
+            setfilterData(masterData);
+            setFind(text);
+        }
+    };
+
+    const ItemView = ({item}) => {
+        return (
+            <Text style = {styles.itemStyle}>
+                {item.name}
+            </Text>
+        );
+    };
+
+    const ItemSeparatorView = () => {
+        return (
+            <View
+                style = {{height:0.5,width:'100%',backgroundColor:'#FFE0F3'}}
+            />
+        );
+    };
+
     return (
         <KeyboardAvoidingView style = {styles.container}>
             <SafeAreaView
@@ -33,92 +87,19 @@ const Home = ({navigation}) => {
                     backgroundColor: '#FFE0F3',
                 }}>
                 <View>
-                {/* search */}
-                <Image
-                    style={{position:'absolute',top:-260,right:-119}}
-                    source={require('../assets/fonts/Home/หา.png')}
+                    <TextInput
+                        style={styles.textInputStyle}
+                        value={Find}
+                        placeholder="Search Here"
+                        underlineColorAndroid="transparent"
+                        onChangeText={(text) => searchFilter(text)}
                     />
-                {/* หมวดหมู่ */}
-                {/* หลังม่วง */}
-                <Image
-                    style={{position:'absolute',top:-54,right:83}}
-                    source={require('../assets/fonts/Home/ชื่อ.png')}
+                    <FlatList
+                        data = {filterData}
+                        keyExtractor = {(item,index) => index.toString()}
+                        ItemSeparatorComponent = {ItemSeparatorView}
+                        renderItem = {ItemView}
                     />
-                <Image
-                    style={{position:'absolute',top:115,right:83}}
-                    source={require('../assets/fonts/Home/ชื่อ.png')}
-                    />
-                <Image
-                    style={{position:'absolute',top:-150,right:70}}
-                    source={require('../assets/fonts/Home/หลัง.png')}
-                    />
-                <Image
-                    style={{position:'absolute',top:20,right:70}}
-                    source={require('../assets/fonts/Home/หลัง.png')}
-                    />
-                <Image
-                    style={{position:'absolute',top:-145,right:74}}
-                    source={require('../assets/fonts/Home/1แมว.png')}
-                    />
-                <Image
-                    style={{position:'absolute',top:25,right:78}}
-                    source={require('../assets/fonts/Home/1แมวส้ม.png')}
-                    />
-
-                {/* หลังเขียว */}
-                <Image
-                    style={{position:'absolute',top:-54,right:-107}}
-                    source={require('../assets/fonts/Home/ชื่อ.png')}
-                    />
-                <Image
-                    style={{position:'absolute',top:115,right:-107}}
-                    source={require('../assets/fonts/Home/ชื่อ.png')}
-                    />
-                <Image
-                    style={{position:'absolute',top:-150,right:-120}}
-                    source={require('../assets/fonts/Home/หลังเขียว.png')}
-                    />
-                <Image
-                    style={{position:'absolute',top:20,right:-120}}
-                    source={require('../assets/fonts/Home/หลังเขียว.png')}
-                    />
-                <Image
-                    style={{position:'absolute',top:-145,right:-112}}
-                    source={require('../assets/fonts/Home/Bulldog.png')}
-                    />
-                <Image
-                    style={{position:'absolute',top:25,right:-113}}
-                    source={require('../assets/fonts/Home/ไหม้.png')}
-                    />
-                    {/* Textบน */}
-                <TextInput
-                    style={{position:'absolute',top:-255,right:100}}
-                    onChangeText={SetName}
-                    value={name}
-                    placeholder="ค้นหา..."
-                    keyboardType="ascii-capable"
-                />
-                <View style={{top:-200}}>
-                    <Button
-                        title="Search"
-                        onPress={() => {search(name);}}
-                    />
-                </View>
-
-                    {/* Textชื่อ */}
-                <Text style={{fontSize: 20, fontStyle: 'bold', color: '#FBF6F6',fontFamily:'ITIM-REGULAR',position:'absolute',top:-54,right:95}}>
-                    แมวเทา
-                </Text>
-                <Text style={{fontSize: 20, fontStyle: 'bold', color: '#FBF6F6',fontFamily:'ITIM-REGULAR',position:'absolute',top:117,right:95}}>
-                    แมวส้ม
-                </Text>
-                <Text style={{fontSize: 20, fontStyle: 'bold', color: '#FBF6F6',fontFamily:'ITIM-REGULAR',position:'absolute',top:-54,right:-97}}>
-                    Bulldog
-                </Text>
-                <Text style={{fontSize: 20, fontStyle: 'bold', color: '#FBF6F6',fontFamily:'ITIM-REGULAR',position:'absolute',top:120,right:-83}}>
-                    ไหม้
-                </Text>
-
                 </View>
             </SafeAreaView>
         </KeyboardAvoidingView>
@@ -130,5 +111,18 @@ export default Home;
 const styles = StyleSheet.create({
     container:{
         flex:1,
+    },
+    itemStyle:{
+        fontSize:20,
+        padding:15,
+    },
+    textInputStyle:{
+        height:50,
+        borderWidth:1,
+        paddingLeft:20,
+        margin:25,
+        borderColor: 'white',
+        borderRadius: 18,
+        backgroundColor: '#FFABC4',
     },
 });
