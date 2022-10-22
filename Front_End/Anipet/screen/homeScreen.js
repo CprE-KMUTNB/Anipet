@@ -22,29 +22,27 @@ import {
 import { AuthContext } from '../context/AuthContext';
 
 const Home = ({navigation}) => {
-    const {search} = useContext(AuthContext);
+    const {search, animalsData} = useContext(AuthContext);
     const [name, SetName] = useState(null);
     const [filterData, setfilterData] = useState([]);
     const [masterData, setmasterData] = useState([]);
     const [Find, setFind] = useState('');
-    useEffect(() => {
-        fetchPosts();
-        return () => {
+    const filter = () => {
+        search('');
+        if (filterData == []) {
+            setfilterData(animalsData);
+            setmasterData(animalsData);
+        }
+    };
 
+    useEffect(() => {
+        search('');
+        setfilterData(animalsData);
+        setmasterData(animalsData);
+        return () => {
         };
     },[]);
 
-    const fetchPosts = () => {
-        const apiURL = 'https://jsonplaceholder.typicode.com/users';
-        fetch(apiURL)
-        .then((response) => response.json())
-        .then((responseJson) => {
-            setfilterData(responseJson);
-            setmasterData(responseJson);
-        }).catch((error) => {
-            console.log(error);
-        });
-    };
     const searchFilter = (text) => {
         if (text) {
             const newData = masterData.filter((item) => {
@@ -63,9 +61,14 @@ const Home = ({navigation}) => {
 
     const ItemView = ({item}) => {
         return (
-            <Text style = {styles.itemStyle}>
-                {item.name}
-            </Text>
+            <View>
+                <Text style = {styles.itemStyle}>
+                {item.name.toUpperCase()}
+                </Text>
+                <Text style = {styles.infoStyle}>
+                {item.info}
+                </Text>
+            </View>
         );
     };
 
@@ -76,7 +79,6 @@ const Home = ({navigation}) => {
             />
         );
     };
-
     return (
         <KeyboardAvoidingView style = {styles.container}>
             <SafeAreaView
@@ -113,14 +115,19 @@ const styles = StyleSheet.create({
         flex:1,
     },
     itemStyle:{
-        fontSize:20,
+        fontSize:25,
+        fontWeight:'bold',
+        padding:15,
+    },
+    infoStyle:{
+        fontSize:15,
         padding:15,
     },
     textInputStyle:{
         height:50,
         borderWidth:1,
         paddingLeft:20,
-        margin:25,
+        margin:20,
         borderColor: 'white',
         borderRadius: 18,
         backgroundColor: '#FFABC4',
