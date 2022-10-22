@@ -12,6 +12,7 @@ import {
   StyleSheet,
   View,
   Dimensions,
+  Image,
   Text,
   TouchableOpacity,
   Button,
@@ -139,6 +140,61 @@ const Map = ({navigation}) => {
       }
     });
   }, [position.latitude, position.longitude]);
+
+  useEffect(() => {
+    const latitude = position.latitude; // you can update it with user's latitude & Longitude
+    const longitude = position.longitude;
+    let radMetter = 5 * 1000;
+    const url1 =
+      'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' +
+      latitude +
+      ',' +
+      longitude +
+      '&radius=' +
+      radMetter +
+      '&type=veterinary_care' +
+      '&key=' +
+      'AIzaSyDziN8yZ8H1h7yOLyxeRQyoySDMlWZXIJc';
+
+    fetch(url1)
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        var places = []; // This Array WIll contain locations received from google
+        for (let googlePlace of res.results) {
+          var place = {};
+          var lat = googlePlace.geometry.location.lat;
+          var lng = googlePlace.geometry.location.lng;
+          var coordinate = {
+            latitude: lat,
+            longitude: lng,
+          };
+
+          var gallery = [];
+
+          if (googlePlace.photos) {
+            for (let photo of googlePlace.photos) {
+              var photoUrl = url1.GooglePicBaseUrl + photo.photo_reference;
+              gallery.push(photoUrl);
+            }
+          }
+
+          place.placeTypes = googlePlace.types;
+          place.coordinate = coordinate;
+          place.placeId = googlePlace.place_id;
+          place.placeName = googlePlace.name;
+          place.gallery = gallery;
+
+          places.push(place);
+        }
+        setMarker2(places);
+        // Do your work here with places Array
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [position.latitude, position.longitude]);
   const [name, setName] = useState('you are here');
   return (
     <View style={styles.container}>
@@ -152,17 +208,24 @@ const Map = ({navigation}) => {
         pitchEnabled={true}
         coords={position}
         rotateEnabled={true}>
-        <MarkerAnimated
-          title={name}
-          //  description='This is a description'
-          coordinate={Search}
-        />
+        <MarkerAnimated title={name} coordinate={Search} />
         {marker1.map(point => (
-          <Marker
-            title={point.placeName}
-            coordinate={point.coordinate}
-            image={require('../assets/map_marker.png')}
-          />
+          <Marker title={point.placeName} coordinate={point.coordinate}>
+            <Image
+              source={require('../assets/petshop.png')}
+              style={styles.tinyLogo}
+              resizeMode="contain"
+            />
+          </Marker>
+        ))}
+        {marker2.map(point => (
+          <Marker title={point.placeName} coordinate={point.coordinate}>
+            <Image
+              source={require('../assets/pethospital.png')}
+              style={styles.tinyLogo}
+              resizeMode="contain"
+            />
+          </Marker>
         ))}
       </MapView>
       <View style={styles.searchContainer}>
@@ -218,6 +281,10 @@ const styles = StyleSheet.create({
   input: {
     borderColor: '#888',
     borderWidth: 1,
+  },
+  tinyLogo: {
+    width: 45,
+    height: 45,
   },
 });
 

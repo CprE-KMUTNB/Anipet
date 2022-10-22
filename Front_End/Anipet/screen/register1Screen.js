@@ -23,84 +23,70 @@ const Register1 = ({navigation}) =>{
   [Mail, onChangeMail] = React.useState(null);
   [Pet, onChangePet] = React.useState(null);
   return (
-    <SafeAreaView
-      style={{
+    <KeyboardAvoidingView style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#FFE0F3',
       }}>
-    <View>
-      {/* กลับ */}
-    <TouchableOpacity
-        onPress={() => navigation.navigate('PreRegis')}
-        style={{position:'absolute',top:200,right:120}}>
-        <Image source={require('../assets/fonts/Register/กลับ.png')} />
+      <SafeAreaView>
+        <TouchableOpacity
+            onPress={() => navigation.navigate('PreRegis')}
+            style={styles.backStyle}>
+            <Image source={require('../assets/fonts/Register/กลับ.png')} />
         </TouchableOpacity>
-      {/* reg */}
-      <Text style={{fontSize: 30, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-290,right:-80}}>
-      สมัครสมาชิก
-    </Text>
-    <Text style={{fontSize: 18, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-255,right:50}}>
-      user-name*
-    </Text>
-    <Image
-        style={{position:'absolute',top:-225,right:-150}}
-        source={require('../assets/fonts/Register/ว่าง.png')}
-        />
-      <TextInput
-      style={{position:'absolute',top:-215,right:100}}
-      onChangeText={onChangeUser}
-      value={user}
-      keyboardType="ascii-capable"
-    />
-    <Text style={{fontSize: 18, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-150,right:50}}>
-      password*
-    </Text>
-    <Image
-        style={{position:'absolute',top:-125,right:-150}}
-        source={require('../assets/fonts/Register/ว่าง.png')}
-        />
-      <TextInput
-      style={{position:'absolute',top:-115,right:100}}
-      onChangeText={onChangePass}
-      value={Pass}
-      keyboardType="ascii-capable"
-    />
-        <Text style={{fontSize: 18, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-50,right:45}}>
-      ชื่อ-นามสกุล*
-    </Text>
-    <Image
-        style={{position:'absolute',top:-20,right:-150}}
-        source={require('../assets/fonts/Register/ว่าง.png')}
-        />
-      <TextInput
-      style={{position:'absolute',top:-10,right:100}}
-      onChangeText={onChangeName}
-      value={Name}
-      keyboardType="ascii-capable"
-    />
-    <Text style={{fontSize: 18, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:60,right:-20}}>
-      สัตวเลี้ยง (ไม่มีให้ใส่ -)
-    </Text>
-    <Image
-        style={{position:'absolute',top:100,right:-150}}
-        source={require('../assets/fonts/Register/ว่าง.png')}
-        />
-      <TextInput
-      style={{position:'absolute',top:110,right:100}}
-      onChangeText={onChangePet}
-      value={Pet}
-      keyboardType="ascii-capable"
-    />
-    {/* next */}
-    <TouchableOpacity
-        onPress={() => navigation.navigate('Login')}
-        style={{position:'absolute',top:205,right:-180}}>
-        <Image source={require('../assets/fonts/Register/CP.png')} />
-        </TouchableOpacity>
-    </View>
-    </SafeAreaView>
+        <View>
+          {/* reg */}
+          <Text style={styles.headderStyle}>
+          สมัครสมาชิก
+          </Text>
+          <Text style={styles.textStyle}>
+            user-name*
+          </Text>
+          <TextInput
+            style={styles.textInputStyle}
+            onChangeText={onChangeUser}
+            value={user}
+            placeholder="Username"
+          />
+          <Text style={styles.textStyle}>
+            password*
+          </Text>
+            <TextInput
+            style={styles.textInputStyle}
+            onChangeText={onChangePass}
+            value={Pass}
+            placeholder="Password"
+          />
+          <Text style={styles.textStyle}>
+            ชื่อ-นามสกุล*
+          </Text>
+          <TextInput
+            style={styles.textInputStyle}
+            onChangeText={onChangeName}
+            value={Name}
+            placeholder="Name"
+          />
+          <Text style={styles.textStyle}>
+            สัตวเลี้ยง (ไม่มีให้ใส่ -)
+          </Text>
+          <TextInput
+            style={styles.textInputStyle}
+            onChangeText={onChangePet}
+            value={Pet}
+            placeholder="Pet"
+          />
+          {/* next */}
+          <View>
+            <TouchableOpacity
+                onPress={() => navigation.navigate('Login')}
+                style={styles.buttonStyle}>
+                <Image source={require('../assets/fonts/Register/CP.png')} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -109,5 +95,34 @@ export default Register1;
 const styles = StyleSheet.create({
     container:{
         flex:1,
+    },
+    textInputStyle:{
+      height:50,
+      borderWidth:1,
+      paddingLeft:20,
+      margin:12,
+      marginRight: 0,
+      marginLeft: 0,
+      borderColor: '#FFABC4',
+      borderRadius: 25,
+      backgroundColor: 'white',
+    },
+    headderStyle:{
+      fontSize: 30,
+      fontStyle: 'bold',
+      marginLeft: 80,
+      color: '#D70505',
+      fontFamily:'ITIM-REGULAR',
+    },
+    textStyle:{
+      fontSize: 18,
+      color: '#D70505',
+      fontFamily:'ITIM-REGULAR',
+    },
+    buttonStyle:{
+      marginLeft:230,
+    },
+    backStyle:{
+      marginRight:280,
     },
 });

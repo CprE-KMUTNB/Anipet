@@ -27,22 +27,20 @@ const Home = ({navigation}) => {
     const [filterData, setfilterData] = useState([]);
     const [masterData, setmasterData] = useState([]);
     const [Find, setFind] = useState('');
-    const filter = () => {
-        search('');
-        if (filterData == []) {
-            setfilterData(animalsData);
-            setmasterData(animalsData);
-        }
-    };
 
     useEffect(() => {
-        search('');
+        const filter = () => {
+            search('');
+        };
+        filter();
+        return () => {
+          };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
+    useEffect(() => {
         setfilterData(animalsData);
         setmasterData(animalsData);
-        return () => {
-        };
-    },[]);
-
+    }, [animalsData]);
     const searchFilter = (text) => {
         if (text) {
             const newData = masterData.filter((item) => {
@@ -61,7 +59,7 @@ const Home = ({navigation}) => {
 
     const ItemView = ({item}) => {
         return (
-            <View>
+            <View style = {styles.itemWrapperStyle}>
                 <Text style = {styles.itemStyle}>
                 {item.name.toUpperCase()}
                 </Text>
@@ -92,7 +90,7 @@ const Home = ({navigation}) => {
                     <TextInput
                         style={styles.textInputStyle}
                         value={Find}
-                        placeholder="Search Here"
+                        placeholder="Search Here                                                                             "
                         underlineColorAndroid="transparent"
                         onChangeText={(text) => searchFilter(text)}
                     />
@@ -131,5 +129,11 @@ const styles = StyleSheet.create({
         borderColor: 'white',
         borderRadius: 18,
         backgroundColor: '#FFABC4',
+    },
+    itemWrapperStyle:{
+        borderBottomWidth: 1,
+        paddingVertical: 8,
+        borderColor: '#ccc',
+        paddingHorizontal: 16,
     },
 });
