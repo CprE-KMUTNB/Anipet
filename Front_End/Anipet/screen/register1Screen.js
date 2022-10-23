@@ -1,9 +1,8 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable eol-last */
-/* eslint-disable no-undef */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 // import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -15,13 +14,24 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
 } from 'react-native';
+import { AuthContext } from '../context/AuthContext';
 
 const Register1 = ({navigation}) =>{
-    const [user, onChangeUser] = React.useState(null);
-  [Pass, onChangePass] = React.useState(null);
-  [Name, onChangeName] = React.useState(null);
-  [Mail, onChangeMail] = React.useState(null);
-  [Pet, onChangePet] = React.useState(null);
+  const {register, ResRegister} = useContext(AuthContext);
+  const [username, onChangeUser] = useState(null);
+  const [password, onChangePass] = useState(null);
+  const [Name, onChangeName] = useState(null);
+  const [Pet, onChangePet] = useState(null);
+  useEffect(() => {
+    const checkRegister = () => {
+        if (ResRegister === true){
+          navigation.navigate('Login');
+      }
+    };
+    checkRegister();
+    return () => {
+    };
+  }, [ResRegister, navigation]);
   return (
     <KeyboardAvoidingView style={{
         flex: 1,
@@ -41,24 +51,6 @@ const Register1 = ({navigation}) =>{
           สมัครสมาชิก
           </Text>
           <Text style={styles.textStyle}>
-            user-name*
-          </Text>
-          <TextInput
-            style={styles.textInputStyle}
-            onChangeText={onChangeUser}
-            value={user}
-            placeholder="Username"
-          />
-          <Text style={styles.textStyle}>
-            password*
-          </Text>
-            <TextInput
-            style={styles.textInputStyle}
-            onChangeText={onChangePass}
-            value={Pass}
-            placeholder="Password"
-          />
-          <Text style={styles.textStyle}>
             ชื่อ-นามสกุล*
           </Text>
           <TextInput
@@ -68,18 +60,37 @@ const Register1 = ({navigation}) =>{
             placeholder="Name"
           />
           <Text style={styles.textStyle}>
-            สัตวเลี้ยง (ไม่มีให้ใส่ -)
+            user-name*
           </Text>
           <TextInput
             style={styles.textInputStyle}
-            onChangeText={onChangePet}
-            value={Pet}
-            placeholder="Pet"
+            onChangeText={onChangeUser}
+            value={username}
+            placeholder="Username"
           />
+          <Text style={styles.textStyle}>
+            password*
+          </Text>
+            <TextInput
+              secureTextEntry={true}
+              style={styles.textInputStyle}
+              onChangeText={onChangePass}
+              value={password}
+              placeholder="Password"
+            />
+          <Text style={styles.textStyle}>
+            สัตวเลี้ยง (ไม่มีให้ใส่ -)
+          </Text>
+            <TextInput
+              style={styles.textInputStyle}
+              onChangeText={onChangePet}
+              value={Pet}
+              placeholder="Pet"
+            />
           {/* next */}
           <View>
             <TouchableOpacity
-                onPress={() => navigation.navigate('Login')}
+                onPress={() => {register(Name,username,password);}}
                 style={styles.buttonStyle}>
                 <Image source={require('../assets/fonts/Register/CP.png')} />
             </TouchableOpacity>

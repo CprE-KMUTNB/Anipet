@@ -7,11 +7,11 @@ exports.register = (req,res)=>{
     var password = req.body.password
     switch(true){
         case !req.body.name:
-            return res.json("need name")
+            return res.json({error:"error",data:"need name"})
         case !req.body.username:
-            return res.json("need username")
+            return res.json({error:"error",data:"need Username"})
         case !password:
-            return res.json("need password")
+            return res.json({error:"error",data:"need password"})
     }
     bcrypt.genSalt(saltRounds, function(err, salt) {
         bcrypt.hash(password, salt, function(err, hash) {
@@ -24,7 +24,7 @@ exports.register = (req,res)=>{
             }
             userdata.create(data,(err)=>{
                 if(err) {
-                    return res.status(400).json({error:"already have username"})
+                    return res.json({error:"error",data:"already have this username"})
                 }
                 return res.status(200).json("Register finish")
             })

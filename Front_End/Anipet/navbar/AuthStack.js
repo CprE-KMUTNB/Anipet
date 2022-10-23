@@ -3,7 +3,7 @@
 /* eslint-disable prettier/prettier */
 import React, {useContext} from 'react';
 // import type {Node} from 'react';
-import { Image } from 'react-native';
+import { Image, KeyboardAvoidingView } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -22,36 +22,37 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 const AuthStack = () => {
     return (
-        <Tab.Navigator screenOptions={{
-            headerShown:false,
-            tabBarShowLabel:false,
-            tabBarStyle:{
-                backgroundColor:'#FFABC4',
-                height:90,
-            }
-            }}>
-            <Tab.Screen component={Home} name="Home" options={{
+            <Tab.Navigator screenOptions={{
                 headerShown:false,
-                tabBarLabel: 'Home',
-                tabBarIcon: ({ color, size }) => (
-                    <Image
-                    source={require('../assets/fonts/Home/แว่น.png')}
-                    />
-                ),
-                }} />
-            <Tab.Screen component={Map} name="Map" options={{
-                headerShown:false,
-                tabBarLabel: 'PreRegister', tabBarIcon: ({ color, size }) => (
-                    <Image
-                    source={require('../assets/fonts/Home/โลก.png')}
-                    />)}} />
-            <Tab.Screen component={UserStackScreen} name="PreRegister" options={{
-                headerShown:false,
-                tabBarLabel: 'PreRegister', tabBarIcon: ({ color, size }) => (
-                    <Image
-                    source={require('../assets/fonts/Home/1User.png')}
-                    />)}} />
-        </Tab.Navigator>
+                tabBarShowLabel:false,
+                tabBarStyle:{
+                    backgroundColor:'#FFABC4',
+                    height:90,
+                },
+                tabBarHideOnKeyboard:true,
+                }}>
+                <Tab.Screen component={Home} name="Home" options={{
+                    headerShown:false,
+                    tabBarLabel: 'Home',
+                    tabBarIcon: ({ color, size }) => (
+                        <Image
+                        source={require('../assets/fonts/Home/แว่น.png')}
+                        />
+                    ),
+                    }} />
+                <Tab.Screen component={Map} name="Map" options={{
+                    headerShown:false,
+                    tabBarLabel: 'PreRegister', tabBarIcon: ({ color, size }) => (
+                        <Image
+                        source={require('../assets/fonts/Home/โลก.png')}
+                        />)}} />
+                <Tab.Screen component={UserStackScreen} name="PreRegister" options={{
+                    headerShown:false,
+                    tabBarLabel: 'PreRegister', tabBarIcon: ({ color, size }) => (
+                        <Image
+                        source={require('../assets/fonts/Home/1User.png')}
+                        />)}} />
+            </Tab.Navigator>
     );
 };
 
