@@ -22,8 +22,7 @@ import {
 import { AuthContext } from '../context/AuthContext';
 
 const Home = ({navigation}) => {
-    const {search, animalsData} = useContext(AuthContext);
-    const [name, SetName] = useState(null);
+    const {search, animalsData, tradeData} = useContext(AuthContext);
     const [filterData, setfilterData] = useState([]);
     const [masterData, setmasterData] = useState([]);
     const [Find, setFind] = useState('');
@@ -60,9 +59,11 @@ const Home = ({navigation}) => {
     const ItemView = ({item}) => {
         return (
             <View style = {styles.itemWrapperStyle}>
-                <Text style = {styles.itemStyle}>
-                {item.name.toUpperCase()}
-                </Text>
+                <TouchableOpacity
+                    onPress={() =>{navigation.navigate('Cat'),tradeData(item);}}>
+                    <Text style = {styles.itemStyle}>
+                    {item.name.toUpperCase()}</Text>
+                </TouchableOpacity>
                 <Text style = {styles.infoStyle}>
                 {item.info}
                 </Text>

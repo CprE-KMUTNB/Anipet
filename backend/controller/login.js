@@ -11,7 +11,6 @@ exports.login = (req,res) => {
             return res.json({error:"error",data:"need password"})
     }
     userdata.findOne({username}).then(user => {
-        console.log(user)
         if(!user){
             return res.json({error:"error",data:"not have this user"})
         }else{
@@ -25,10 +24,4 @@ exports.login = (req,res) => {
             })
         }
     })
-}
-
-exports.logout = (req,res) =>{
-    const token = req.body
-    //const newToken = jwt.Verify(token => token !== req.body.token)
-    return res.status(200).json("faile")
 }

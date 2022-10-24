@@ -10,15 +10,17 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator(bottomNavigatorConfigs);
 const Stack = createNativeStackNavigator();
+const HomeStack = createNativeStackNavigator();
 const UserStack = createNativeStackNavigator();
 import Home from '../screen/homeScreen';
 import Login from '../screen/loginScreen';
 import PreRegister from '../screen/preRegisterScreen';
 import Register1 from '../screen/register1Screen';
 import Map from '../screen/MapScreen';
+import Cat from '../screen/catC';
 import { AuthContext, AuthProvider } from '../context/AuthContext';
 import User from '../screen/userScreen';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 const AuthStack = () => {
     return (
@@ -31,7 +33,7 @@ const AuthStack = () => {
                 },
                 tabBarHideOnKeyboard:true,
                 }}>
-                <Tab.Screen component={Home} name="Home" options={{
+                <Tab.Screen component={HomeStackScreen} name="HomeS" options={{
                     headerShown:false,
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
@@ -42,7 +44,7 @@ const AuthStack = () => {
                     }} />
                 <Tab.Screen component={Map} name="Map" options={{
                     headerShown:false,
-                    tabBarLabel: 'PreRegister', tabBarIcon: ({ color, size }) => (
+                    tabBarLabel: 'Map', tabBarIcon: ({ color, size }) => (
                         <Image
                         source={require('../assets/fonts/Home/โลก.png')}
                         />)}} />
@@ -55,7 +57,14 @@ const AuthStack = () => {
             </Tab.Navigator>
     );
 };
-
+function HomeStackScreen(){
+    return (
+        <HomeStack.Navigator>
+            <HomeStack.Screen component={Home} name="Home" options={{headerShown:false}} />
+            <UserStack.Screen component={Cat} name="Cat" options={{headerShown:false}} />
+        </HomeStack.Navigator>
+    );
+}
 function UserStackScreen () {
     const {userToken} = useContext(AuthContext);
     if (userToken !== null){

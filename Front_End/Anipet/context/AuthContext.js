@@ -26,6 +26,12 @@ export const AuthProvider = ({children,navigation}) => {
     const [animalsData, setanimalsData] = useState([]);
     const [ResRegister, setResRegister] = useState(false);
     const [ResLogin, setResLogin] = useState(false);
+    const [Data, setData] = useState();
+    const tradeData = (item) => {
+        setIsLoading(true);
+        setData(item);
+        setIsLoading(false);
+    };
     const edit = (name,gender) => {
         setIsLoading(true);
         axios.post(`${URL}/api/update`,{
@@ -37,6 +43,7 @@ export const AuthProvider = ({children,navigation}) => {
         .catch(err => {
             console.log(err);
         });
+        setIsLoading(false);
     };
     const search = (name) => {
         setIsLoading(true);
@@ -123,8 +130,10 @@ export const AuthProvider = ({children,navigation}) => {
     },[]);
     return (
         <AuthContext.Provider value={
-            {register, login, logout, search, edit, setResRegister, setResLogin,
-            isLoading, userToken, animalsData, ResRegister, ResLogin, userInfo}
+            {register, login, logout, search,
+            edit, setResRegister, setResLogin,tradeData,
+            isLoading, userToken, animalsData, Data,
+            ResRegister, ResLogin, userInfo}
             }>
             {children}
         </AuthContext.Provider>
