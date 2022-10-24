@@ -16,7 +16,7 @@ import Login from '../screen/loginScreen';
 import PreRegister from '../screen/preRegisterScreen';
 import Register1 from '../screen/register1Screen';
 import Map from '../screen/MapScreen';
-import { AuthContext, AuthProvider } from './context/AuthContext';
+import { AuthContext, AuthProvider } from '../context/AuthContext';
 import User from '../screen/userScreen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 

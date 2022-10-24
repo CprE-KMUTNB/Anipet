@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React ,{useContext} from 'react';
 // import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -11,8 +11,10 @@ import {
   Image,
   StyleSheet,
 } from 'react-native';
+import { AuthContext } from '../context/AuthContext';
 
 const User = ({navigation}) => {
+  const {logout} = useContext(AuthContext);
     return (
         <SafeAreaView
           style={{
@@ -35,7 +37,7 @@ const User = ({navigation}) => {
             source={require('../assets/User/qeww.png')}
             />
         <TouchableOpacity
-          onPress={() => {navigation.navigate('PreRegis');}}
+          onPress={() => {logout(),navigation.navigate('PreRegis');}}
           style={styles.button}>
           <Text style={styles.buttonText}>Logout</Text>
         </TouchableOpacity>

@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable prettier/prettier */
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -15,7 +15,17 @@ import {AuthContext} from '../context/AuthContext';
 const Login = ({navigation}) => {
   const [username, SetUsername] = useState(null);
   const [password, SetPassword] = useState(null);
-  const {login} = useContext(AuthContext);
+  const {login, ResLogin} = useContext(AuthContext);
+  useEffect(() => {
+    const checkLogin = () => {
+        if (ResLogin === true){
+          navigation.navigate('User');
+      }
+    };
+    checkLogin();
+    return () => {
+    };
+  }, [ResLogin, navigation]);
   return (
     <>
       <KeyboardAvoidingView style={styles.container}>
@@ -46,8 +56,7 @@ const Login = ({navigation}) => {
           />
           <View style={styles.buttonContainer}>
             <TouchableOpacity
-              // eslint-disable-next-line no-sequences
-              onPress={() => {login(username,password)}}
+              onPress={() => {login(username,password);}}
               style={styles.button}>
               <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>

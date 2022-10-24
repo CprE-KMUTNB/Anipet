@@ -24,7 +24,7 @@ export const AuthProvider = ({children,navigation}) => {
     const [userToken, setUserToken] = useState([]);
     const [animalsData, setanimalsData] = useState([]);
     const [ResRegister, setResRegister] = useState(false);
-    const [ResLogin, setResLogin] = useState(false)
+    const [ResLogin, setResLogin] = useState(false);
     const edit = (name,gender) => {
         setIsLoading(true);
         axios.post(`${URL}/api/update`,{
@@ -106,14 +106,13 @@ export const AuthProvider = ({children,navigation}) => {
             console.log(`isLogged in err ${err}`);
         }
     };
-
     useEffect(() => {
         isLoggedIn();
     },[]);
     return (
         <AuthContext.Provider value={
-            {register, login, logout, search, edit, setResRegister,
-            isLoading, userToken, animalsData, ResRegister}
+            {register, login, logout, search, edit, setResRegister, setResLogin,
+            isLoading, userToken, animalsData, ResRegister, ResLogin}
             }>
             {children}
         </AuthContext.Provider>

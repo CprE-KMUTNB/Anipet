@@ -23,7 +23,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthContext } from '../context/AuthContext';
 const PreRegister = ({navigation}) =>{
-  const {setResRegister} = useContext(AuthContext);
+  const {setResRegister, setResLogin} = useContext(AuthContext);
     return (
       <SafeAreaView style={styles.container}>
         <View>
@@ -47,7 +47,9 @@ const PreRegister = ({navigation}) =>{
             <Text style={styles.buttonText}>Register</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => {navigation.navigate('Login')}}
+            // eslint-disable-next-line no-sequences
+            onPress={() => {navigation.navigate('Login'),
+              setResLogin(false)}}
             style={styles.buttonOutline}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
