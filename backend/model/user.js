@@ -18,7 +18,7 @@ const User =new Schema({
         type:String,
         require:true,
     },
-    gender:{
+    pet:{
         type:String,
         require:true
     },

@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React ,{useContext} from 'react';
 // import type {Node} from 'react';
@@ -14,33 +13,28 @@ import {
 import { AuthContext } from '../context/AuthContext';
 
 const User = ({navigation}) => {
-  const {logout} = useContext(AuthContext);
+  const {userInfo} = useContext(AuthContext);
+  const {logout, setResLogin} = useContext(AuthContext);
     return (
-        <SafeAreaView
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#FFE0F3',
-          }}>
+        <SafeAreaView style={styles.container}>
         <View>
-        <Text style={{fontSize: 25, fontStyle: 'bold', color: '#D70505',fontFamily:'ITIM-REGULAR',position:'absolute',top:-280,right:100}}>
-          ลุงใจดี
-        </Text>
-              {/* setting */}
-        <Image
-            style={{position:'absolute',top:-280,right:-155}}
-            source={require('../assets/fonts/PR/เฟือง.png')}
-            />
-        <Image
-            style={{position:'absolute',top:-230,right:-175}}
-            source={require('../assets/User/qeww.png')}
-            />
-        <TouchableOpacity
-          onPress={() => {logout(),navigation.navigate('PreRegis');}}
-          style={styles.button}>
-          <Text style={styles.buttonText}>Logout</Text>
-        </TouchableOpacity>
+          <Image
+              style={styles.settingStyle}
+              source={require('../assets/fonts/PR/เฟือง.png')}
+          />
+          <Text style={styles.headderStyle}>Hello {userInfo.name}</Text>
+        </View>
+        <View style={styles.detailContainer}>
+        <Text style={styles.textStyle}>Name : {userInfo.name}</Text>
+          <Text style={styles.textStyle}>Pet      : {userInfo.pet}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            // eslint-disable-next-line no-sequences
+            onPress={() => {logout(),navigation.navigate('Login'),setResLogin(false);}}
+            style={styles.button}>
+            <Text style={styles.buttonText}>Logout</Text>
+          </TouchableOpacity>
         </View>
         </SafeAreaView>
       );
@@ -56,7 +50,40 @@ const styles = StyleSheet.create({
       backgroundColor: '#FFE0F3',
   },
   settingStyle:{
+    marginStart:300,
     margin:10,
+  },
+  detailContainer:{
+    width:'80%',
+    justifyContent:'center',
+    backgroundColor:'white',
+    borderColor: '#e0ffec',
+    borderWidth:4,
+    padding:15,
+    borderRadius:20,
+  },
+  textStyle:{
+    fontSize: 18,
+    color: '#920059',
+    fontFamily:'ITIM-REGULAR',
+  },
+  textInputStyle:{
+    height:50,
+    borderWidth:1,
+    paddingLeft:20,
+    margin:12,
+    marginRight: 0,
+    marginLeft: 0,
+    borderColor: '#FFABC4',
+    borderRadius: 25,
+    backgroundColor: 'white',
+  },
+  headderStyle:{
+    fontSize: 25,
+    fontStyle: 'bold',
+    margin: 10,
+    color: '#D70505',
+    fontFamily:'ITIM-REGULAR',
   },
   buttonContainer:{
     width:'70%',

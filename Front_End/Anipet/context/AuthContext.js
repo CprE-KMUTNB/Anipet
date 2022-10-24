@@ -22,6 +22,7 @@ export const AuthProvider = ({children,navigation}) => {
     );
     const [isLoading, setIsLoading] = useState(false);
     const [userToken, setUserToken] = useState([]);
+    const [userInfo, setUserInfo] = useState([]);
     const [animalsData, setanimalsData] = useState([]);
     const [ResRegister, setResRegister] = useState(false);
     const [ResLogin, setResLogin] = useState(false);
@@ -50,10 +51,10 @@ export const AuthProvider = ({children,navigation}) => {
         });
         setIsLoading(false);
     };
-    const register = (name,username,password,gender) => {
+    const register = (name,username,password,pet) => {
         setIsLoading(true);
         axios.post(`${URL}/api/register`,{
-            name,username,password,gender,
+            name,username,password,pet,
         })
         .then(res => {
             if (res.data.error){
@@ -78,20 +79,27 @@ export const AuthProvider = ({children,navigation}) => {
                 createAlert('LoginFailed',res.data.data);
             }
             else {
+                // eslint-disable-next-line no-shadow
+                let userInfo = res.data;
+                setUserToken(userInfo.token);
+                setUserInfo(userInfo.user);
+
+                AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+                AsyncStorage.setItem('userToken', userInfo.token);
+
                 setResLogin(true);
             }
         })
         .catch(err => {
             console.log(`Login error ${err}`);
         });
-        //setUserToken('adslfoFD');
-        //AsyncStorage.setItem('userToken', 'adslfoFD');
         setIsLoading(false);
     };
     const logout = () =>{
         setIsLoading(true);
         setUserToken(null);
         AsyncStorage.removeItem('userToken');
+        AsyncStorage.removeItem('userInfo');
         setIsLoading(false);
     };
 
@@ -100,7 +108,13 @@ export const AuthProvider = ({children,navigation}) => {
             setIsLoading(true);
             // eslint-disable-next-line no-shadow
             let userToken = await AsyncStorage.getItem('userToken');
-            setUserToken(userToken);
+            // eslint-disable-next-line no-shadow
+            let userInfo = await AsyncStorage.getItem('userInfo');
+            userInfo = JSON.parse(userInfo);
+            if (userInfo) {
+                setUserToken(userToken);
+                setUserInfo(userInfo);
+            }
             setIsLoading(false);
         } catch (err){
             console.log(`isLogged in err ${err}`);
@@ -112,7 +126,7 @@ export const AuthProvider = ({children,navigation}) => {
     return (
         <AuthContext.Provider value={
             {register, login, logout, search, edit, setResRegister, setResLogin,
-            isLoading, userToken, animalsData, ResRegister, ResLogin}
+            isLoading, userToken, animalsData, ResRegister, ResLogin, userInfo}
             }>
             {children}
         </AuthContext.Provider>

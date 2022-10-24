@@ -15,7 +15,7 @@ import {AuthContext} from '../context/AuthContext';
 const Login = ({navigation}) => {
   const [username, SetUsername] = useState(null);
   const [password, SetPassword] = useState(null);
-  const {login, ResLogin} = useContext(AuthContext);
+  const {login, ResLogin, setResLogin} = useContext(AuthContext);
   useEffect(() => {
     const checkLogin = () => {
         if (ResLogin === true){
@@ -56,7 +56,8 @@ const Login = ({navigation}) => {
           />
           <View style={styles.buttonContainer}>
             <TouchableOpacity
-              onPress={() => {login(username,password);}}
+              // eslint-disable-next-line no-sequences
+              onPress={() => {login(username,password),setResLogin(false);}}
               style={styles.button}>
               <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>

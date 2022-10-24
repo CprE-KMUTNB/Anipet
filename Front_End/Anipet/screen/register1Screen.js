@@ -21,7 +21,7 @@ const Register1 = ({navigation}) =>{
   const [username, onChangeUser] = useState(null);
   const [password, onChangePass] = useState(null);
   const [Name, onChangeName] = useState(null);
-  const [Pet, onChangePet] = useState(null);
+  const [pet, onChangePet] = useState(null);
   useEffect(() => {
     const checkRegister = () => {
         if (ResRegister === true){
@@ -84,13 +84,13 @@ const Register1 = ({navigation}) =>{
             <TextInput
               style={styles.textInputStyle}
               onChangeText={onChangePet}
-              value={Pet}
+              value={pet}
               placeholder="Pet"
             />
           {/* next */}
           <View>
             <TouchableOpacity
-                onPress={() => {register(Name,username,password);}}
+                onPress={() => {register(Name,username,password,pet);}}
                 style={styles.buttonStyle}>
                 <Image source={require('../assets/fonts/Register/CP.png')} />
             </TouchableOpacity>

@@ -20,7 +20,7 @@ exports.login = (req,res) => {
                     return res.json({error:"error",data:"Wrong password"})
                 }else{
                     const token = jwt.sign({userid:user._id},process.env.TOKENSECRET)
-                    return res.status(200).json({token})
+                    return res.status(200).json({token,user})
                 }
             })
         }

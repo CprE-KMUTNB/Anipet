@@ -57,6 +57,15 @@ const AuthStack = () => {
 };
 
 function UserStackScreen () {
+    const {userToken} = useContext(AuthContext);
+    if (userToken !== null){
+        return (
+            <UserStack.Navigator >
+                <UserStack.Screen component={User} name="User" options={{headerShown:false}} />
+                <UserStack.Screen component={Login} name="Login" options={{headerShown:false}} />
+            </UserStack.Navigator>
+        );
+    }
     return (
         <UserStack.Navigator >
             <UserStack.Screen component={PreRegister} name="PreRegis" options={{headerShown:false}} />
