@@ -40,6 +40,7 @@ const PreRegister = ({navigation}) =>{
           {/* ปุ่มregister */}
         <View style={styles.buttonContainer}>
           <TouchableOpacity
+            // eslint-disable-next-line no-sequences
             onPress={() => {navigation.navigate('Register1'),
               setResRegister(false)}}
             style={styles.button}>

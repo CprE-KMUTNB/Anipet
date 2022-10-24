@@ -47,8 +47,7 @@ const Login = ({navigation}) => {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               // eslint-disable-next-line no-sequences
-              onPress={() => {login(username,password),
-                navigation.navigate('User');}}
+              onPress={() => {login(username,password)}}
               style={styles.button}>
               <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>

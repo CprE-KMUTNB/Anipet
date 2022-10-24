@@ -4,14 +4,20 @@ var jwt = require('jsonwebtoken');
 
 exports.login = (req,res) => {
     var {username,password} = req.body
+    switch(true){
+        case !username:
+            return res.json({error:"error",data:"need Username"})
+        case !password:
+            return res.json({error:"error",data:"need password"})
+    }
     userdata.findOne({username}).then(user => {
         console.log(user)
         if(!user){
-            return res.status(400).json({error:"not have this user"})
+            return res.json({error:"error",data:"not have this user"})
         }else{
             bcrypt.compare(password,user.password).then(result =>{
                 if(!result){
-                    return res.status(400).json({error:"wrong password"})
+                    return res.json({error:"error",data:"Wrong password"})
                 }else{
                     const token = jwt.sign({userid:user._id},process.env.TOKENSECRET)
                     return res.status(200).json({token})

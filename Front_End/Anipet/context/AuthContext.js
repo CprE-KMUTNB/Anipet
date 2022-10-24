@@ -24,6 +24,7 @@ export const AuthProvider = ({children,navigation}) => {
     const [userToken, setUserToken] = useState([]);
     const [animalsData, setanimalsData] = useState([]);
     const [ResRegister, setResRegister] = useState(false);
+    const [ResLogin, setResLogin] = useState(false)
     const edit = (name,gender) => {
         setIsLoading(true);
         axios.post(`${URL}/api/update`,{
@@ -73,7 +74,12 @@ export const AuthProvider = ({children,navigation}) => {
             username,password,
         })
         .then(res=>{
-            console.log(res.data.token);
+            if (res.data.error){
+                createAlert('LoginFailed',res.data.data);
+            }
+            else {
+                setResLogin(true);
+            }
         })
         .catch(err => {
             console.log(`Login error ${err}`);
