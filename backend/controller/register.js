@@ -20,7 +20,10 @@ exports.register = (req,res)=>{
                 name:req.body.name,
                 username:req.body.username,
                 password:password,
-                pet:req.body.pet
+                pet:req.body.pet,
+                fund: null,
+                lifestyle: null,
+                time: null,
             }
             userdata.create(data,(err)=>{
                 if(err) {

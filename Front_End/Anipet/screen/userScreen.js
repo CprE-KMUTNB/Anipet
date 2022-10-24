@@ -25,8 +25,18 @@ const User = ({navigation}) => {
           <Text style={styles.headderStyle}>Hello {userInfo.name}</Text>
         </View>
         <View style={styles.detailContainer}>
-        <Text style={styles.textStyle}>Name : {userInfo.name}</Text>
-          <Text style={styles.textStyle}>Pet      : {userInfo.pet}</Text>
+        <Text style={styles.textStyle}>Name     : {userInfo.name}</Text>
+          <Text style={styles.textStyle}>Pet          : {userInfo.pet}</Text>
+          <Text style={styles.textStyle}>Fund       : {userInfo.fund}</Text>
+          <Text style={styles.textStyle}>Lifestyle : {userInfo.lifestyle}</Text>
+          <Text style={styles.textStyle}>Time       : {userInfo.time}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => {}}
+            style={styles.buttonOutline}>
+            <Text style={styles.buttonText}>Edit Account</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
@@ -63,6 +73,7 @@ const styles = StyleSheet.create({
     borderRadius:20,
   },
   textStyle:{
+    margin:5,
     fontSize: 18,
     color: '#920059',
     fontFamily:'ITIM-REGULAR',
@@ -103,7 +114,7 @@ const styles = StyleSheet.create({
     width:'100%',
     padding: 15,
     borderRadius:40,
-    backgroundColor:'#FF7CA3',
+    backgroundColor:'#cfadff',
     alignItems:'center',
   },
   buttonText:{

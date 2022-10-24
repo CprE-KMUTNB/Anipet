@@ -79,13 +79,11 @@ export const AuthProvider = ({children,navigation}) => {
                 createAlert('LoginFailed',res.data.data);
             }
             else {
-                // eslint-disable-next-line no-shadow
-                let userInfo = res.data;
-                setUserToken(userInfo.token);
-                setUserInfo(userInfo.user);
+                setUserToken(res.data.token);
+                setUserInfo(res.data.user);
 
-                AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
-                AsyncStorage.setItem('userToken', userInfo.token);
+                AsyncStorage.setItem('userInfo', JSON.stringify(res.data.user));
+                AsyncStorage.setItem('userToken', res.data.token);
 
                 setResLogin(true);
             }
@@ -107,13 +105,13 @@ export const AuthProvider = ({children,navigation}) => {
         try {
             setIsLoading(true);
             // eslint-disable-next-line no-shadow
-            let userToken = await AsyncStorage.getItem('userToken');
-            // eslint-disable-next-line no-shadow
             let userInfo = await AsyncStorage.getItem('userInfo');
+            // eslint-disable-next-line no-shadow
+            let userToken = await AsyncStorage.getItem('userToken');
             userInfo = JSON.parse(userInfo);
             if (userInfo) {
-                setUserToken(userToken);
                 setUserInfo(userInfo);
+                setUserToken(userToken);
             }
             setIsLoading(false);
         } catch (err){

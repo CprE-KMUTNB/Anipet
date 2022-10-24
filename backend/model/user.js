@@ -22,6 +22,18 @@ const User =new Schema({
         type:String,
         require:true
     },
+    fund:{
+        type:String,
+        require:true
+    },
+    lifestyle:{
+        type:String,
+        require:true
+    },
+    time:{
+        type:String,
+        require:true
+    },
 })
 
 module.exports= mongoose.model("userId",User)
