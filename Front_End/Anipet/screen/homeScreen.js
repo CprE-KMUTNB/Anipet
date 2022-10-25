@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
@@ -55,7 +54,6 @@ const Home = ({navigation}) => {
             setFind(text);
         }
     };
-
     const ItemView = ({item}) => {
         return (
             <View style = {styles.itemWrapperStyle}>

@@ -11,7 +11,8 @@ var Register = require('./routes/register');
 var Login = require('./routes/login');
 var Search = require('./routes/search');
 var Predic = require('./routes/predic');
-var Edit = require('./routes/edit')
+var Edit = require('./routes/edit');
+var Delete = require('./routes/deleteAcc');
 const session = require('express-session');
 
 require("dotenv").config();
@@ -39,3 +40,4 @@ app.use('/api',Login);
 app.use('/api',Search);
 app.use('/api',Predic);
 app.use('/api',Edit);
+app.use('/api',Delete);
