@@ -1,7 +1,4 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable eol-last */
-/* eslint-disable semi */
-/* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 import React ,{useContext} from 'react';
 // import type {Node} from 'react';
@@ -11,54 +8,39 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  style,
-  TextInput,
   StyleSheet,
-  onPress,
-  Button,
-  ImageBackground,
 } from 'react-native';
-
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthContext } from '../context/AuthContext';
-const PreRegister = ({navigation}) =>{
-  const {setResRegister, setResLogin} = useContext(AuthContext);
+
+const User = ({navigation}) => {
+  const {userInfo} = useContext(AuthContext);
+  const {logout, setResLogin} = useContext(AuthContext);
     return (
-      <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.container}>
         <View>
-          {/* setting */}
           <Image
               style={styles.settingStyle}
               source={require('../assets/fonts/PR/เฟือง.png')}
-              />
-          <Image
-              style={styles.settingStyle}
-              source={require('../assets/induce.png')}
-            />
+          />
+          <Text style={styles.headderStyle}>Hello {userInfo.name}</Text>
         </View>
-          {/* ปุ่มregister */}
+        <View style={styles.detailContainer}>
+        <Text style={styles.textStyle}>Name : {userInfo.name}</Text>
+          <Text style={styles.textStyle}>Pet      : {userInfo.pet}</Text>
+        </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             // eslint-disable-next-line no-sequences
-            onPress={() => {navigation.navigate('Register1'),
-              setResRegister(false)}}
+            onPress={() => {logout(),navigation.navigate('Login'),setResLogin(false);}}
             style={styles.button}>
-            <Text style={styles.buttonText}>Register</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            // eslint-disable-next-line no-sequences
-            onPress={() => {navigation.navigate('Login'),
-              setResLogin(false)}}
-            style={styles.buttonOutline}>
-            <Text style={styles.buttonText}>Login</Text>
+            <Text style={styles.buttonText}>Logout</Text>
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
-    );
-}
+        </SafeAreaView>
+      );
+    };
 
-export default PreRegister;
+export default User;
 
 const styles = StyleSheet.create({
   container:{
@@ -68,7 +50,40 @@ const styles = StyleSheet.create({
       backgroundColor: '#FFE0F3',
   },
   settingStyle:{
+    marginStart:300,
     margin:10,
+  },
+  detailContainer:{
+    width:'80%',
+    justifyContent:'center',
+    backgroundColor:'white',
+    borderColor: '#e0ffec',
+    borderWidth:4,
+    padding:15,
+    borderRadius:20,
+  },
+  textStyle:{
+    fontSize: 18,
+    color: '#920059',
+    fontFamily:'ITIM-REGULAR',
+  },
+  textInputStyle:{
+    height:50,
+    borderWidth:1,
+    paddingLeft:20,
+    margin:12,
+    marginRight: 0,
+    marginLeft: 0,
+    borderColor: '#FFABC4',
+    borderRadius: 25,
+    backgroundColor: 'white',
+  },
+  headderStyle:{
+    fontSize: 25,
+    fontStyle: 'bold',
+    margin: 10,
+    color: '#D70505',
+    fontFamily:'ITIM-REGULAR',
   },
   buttonContainer:{
     width:'70%',
