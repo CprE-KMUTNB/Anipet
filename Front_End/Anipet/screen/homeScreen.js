@@ -60,6 +60,7 @@ const Home = ({navigation}) => {
         return (
             <View style = {styles.itemWrapperStyle}>
                 <TouchableOpacity
+                    // eslint-disable-next-line no-sequences
                     onPress={() =>{navigation.navigate('Cat'),tradeData(item);}}>
                     <Text style = {styles.itemStyle}>
                     {item.name.toUpperCase()}</Text>

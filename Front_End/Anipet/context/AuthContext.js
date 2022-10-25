@@ -32,13 +32,14 @@ export const AuthProvider = ({children,navigation}) => {
         setData(item);
         setIsLoading(false);
     };
-    const edit = (name,gender) => {
+    const edit = (name,pet) => {
         setIsLoading(true);
         axios.post(`${URL}/api/update`,{
-            userToken,name,gender,
+            userToken,name,pet,
         })
         .then(res => {
-            console.log(res.data);
+            setUserInfo(res.data);
+            AsyncStorage.setItem('userInfo', JSON.stringify(res.data));
         })
         .catch(err => {
             console.log(err);

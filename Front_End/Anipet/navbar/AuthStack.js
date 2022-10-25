@@ -18,6 +18,7 @@ import PreRegister from '../screen/preRegisterScreen';
 import Register1 from '../screen/register1Screen';
 import Map from '../screen/MapScreen';
 import Cat from '../screen/catC';
+import Edit from '../screen/Edit';
 import { AuthContext, AuthProvider } from '../context/AuthContext';
 import User from '../screen/userScreen';
 
@@ -72,6 +73,7 @@ function UserStackScreen () {
             <UserStack.Navigator >
                 <UserStack.Screen component={User} name="User" options={{headerShown:false}} />
                 <UserStack.Screen component={Login} name="Login" options={{headerShown:false}} />
+                <UserStack.Screen component={Edit} name="Edit" options={{headerShown:false}} />
             </UserStack.Navigator>
         );
     }

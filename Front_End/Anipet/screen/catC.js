@@ -31,6 +31,13 @@ const CatC = ({navigation}) =>{
               <Image source={require('../assets/fonts/Register/กลับ.png')}/>
         </TouchableOpacity>
         <View style={styles.inputContainer}>
+          <View style={styles.imageContainer}>
+            <Image
+              // eslint-disable-next-line react-native/no-inline-styles
+              style={{width: 140, height: 140}}
+              source={{uri: Data.url}}
+            />
+          </View>
           <Text style={styles.textStyle}>name  : {Data.name}</Text>
           <Text style={styles.textStyle}>info  : {Data.info}</Text>
           <Text style={styles.textStyle}>hard  : {Data.hard}</Text>
@@ -67,7 +74,17 @@ const styles = StyleSheet.create({
   textStyle:{
     fontSize: 18,
     color: 'green',
-    margin:10,
+    margin:5,
+  },
+  imageContainer:{
+    marginStart:60,
+    width:'62%',
+    justifyContent:'center',
+    backgroundColor:'#94ffbd',
+    borderColor: '#bd94ff',
+    borderWidth:4,
+    padding:15,
+    borderRadius:20,
   },
   inputContainer:{
     width:'80%',
