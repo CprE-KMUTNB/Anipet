@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable eol-last */
 /* eslint-disable semi */
 /* eslint-disable no-unused-vars */

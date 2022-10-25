@@ -2,7 +2,7 @@
 /* eslint-disable eol-last */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 // import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -59,7 +59,6 @@ const Edit = ({navigation}) =>{
           {/* next */}
           <View>
             <TouchableOpacity
-                // eslint-disable-next-line no-sequences
                 onPress={() => {edit(newName,newpet),navigation.navigate('User');}}
                 style={styles.buttonStyle}>
                 <Image source={require('../assets/fonts/Register/CP.png')} />

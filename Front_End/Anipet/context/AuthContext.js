@@ -32,18 +32,6 @@ export const AuthProvider = ({children,navigation}) => {
         setData(item);
         setIsLoading(false);
     };
-    const predic = (salary,style,environment,time) => {
-        setIsLoading(true);
-        axios.post(`${URL}/api/predic`,{
-            salary,style,environment,time,
-        })
-        .then(res => {
-            console.log(res.data);
-        })
-        .catch(err => {
-            console.log(err);
-        });
-    };
     const edit = (name,pet) => {
         setIsLoading(true);
         axios.post(`${URL}/api/update`,{
@@ -144,7 +132,7 @@ export const AuthProvider = ({children,navigation}) => {
     return (
         <AuthContext.Provider value={
             {register, login, logout, search,
-            edit, setResRegister, setResLogin,tradeData,predic,
+            edit, setResRegister, setResLogin,tradeData,
             isLoading, userToken, animalsData, Data,
             ResRegister, ResLogin, userInfo}
             }>

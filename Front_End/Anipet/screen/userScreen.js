@@ -33,7 +33,7 @@ const User = ({navigation}) => {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            onPress={() => {navigation.navigate('Edit');}}
+            onPress={() => {navigation.navigate('Edit')}}
             style={styles.buttonOutline}>
             <Text style={styles.buttonText}>Edit Account</Text>
           </TouchableOpacity>
