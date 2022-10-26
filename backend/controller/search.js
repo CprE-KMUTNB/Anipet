@@ -5,7 +5,7 @@ exports.search = (req,res) => {
     pet.find({name:{$regex:name}}).then(animal =>{
         if(!animal[0])
         {
-            return res.status(200).json({result:"not found that "})
+            return res.json({result:"not found that "})
         }
         else
         {

@@ -6,7 +6,7 @@ import axios from 'axios';
 export const AuthContext = createContext();
 const URL = 'http://10.0.2.2:3000';
 
-export const AuthProvider = ({children,navigation}) => {
+export const AuthProvider = ({children}) => {
     const createAlert = (status,item) =>
     Alert.alert(
       status,
@@ -30,6 +30,19 @@ export const AuthProvider = ({children,navigation}) => {
     const tradeData = (item) => {
         setIsLoading(true);
         setData(item);
+        setIsLoading(false);
+    };
+    const Delete = () => {
+        setIsLoading(true);
+        axios.post(`${URL}/api/delete`,{
+            userToken,
+        })
+        .then(res => {
+            console.log(res.data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
         setIsLoading(false);
     };
     const predic = (salary,style,environment,time) => {
@@ -144,7 +157,7 @@ export const AuthProvider = ({children,navigation}) => {
     },[]);
     return (
         <AuthContext.Provider value={
-            {register, login, logout, search,predic,
+            {register, login, logout, search,predic,Delete,
             edit, setResRegister, setResLogin,tradeData,
             isLoading, userToken, animalsData, Data,
             ResRegister, ResLogin, userInfo}
