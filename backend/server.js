@@ -13,6 +13,7 @@ var Search = require('./routes/search');
 var Predic = require('./routes/predic');
 var Edit = require('./routes/edit');
 var Delete = require('./routes/deleteAcc');
+var Info = require('./routes/info');
 const session = require('express-session');
 
 require("dotenv").config();
@@ -41,3 +42,4 @@ app.use('/api',Search);
 app.use('/api',Predic);
 app.use('/api',Edit);
 app.use('/api',Delete);
+app.use('/api',Info);

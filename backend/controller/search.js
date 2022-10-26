@@ -1,4 +1,5 @@
 const pet = require("../model/Pet")
+const peturl = require("../model/ImagePet")
 
 exports.search = (req,res) => {
     const {name} = req.body
