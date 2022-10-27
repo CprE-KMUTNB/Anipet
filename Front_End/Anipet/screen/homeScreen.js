@@ -94,6 +94,18 @@ const Home = ({navigation}) => {
                         underlineColorAndroid="transparent"
                         onChangeText={(text) => searchFilter(text)}
                     />
+                    <TouchableOpacity
+                    onPress={() => navigation.navigate('From')}
+                    style={styles.FromButtomStyle}
+                    >
+                        <Text
+                        style={styles.fromStyle}>
+                            ให้พวกเราช่วยเลือกสัตว์เลี้ยงให้คุณนะ
+                        </Text>
+                        <Image
+                         style={styles.fromcat}
+                        source={require('../assets/fonts/Register/cat_prev_ui.png')}/>
+                    </TouchableOpacity>
                     <FlatList
                         data = {filterData}
                         keyExtractor = {(item,index) => index.toString()}
@@ -121,6 +133,13 @@ const styles = StyleSheet.create({
         fontSize:15,
         padding:15,
     },
+    fromStyle:{
+        fontSize:15,
+        fontFamily:'ITIM-REGULAR',
+        fontWeight:'bold',
+        padding:7,
+        color:'#white'
+    },
     textInputStyle:{
         height:50,
         borderWidth:1,
@@ -136,4 +155,20 @@ const styles = StyleSheet.create({
         borderColor: '#ccc',
         paddingHorizontal: 16,
     },
+    FromButtomStyle:{
+        height:40,
+        width:335,
+        borderWidth:2,
+        paddingLeft:55,
+        marginLeft:30,
+        borderColor: '#9DDDA4',
+        borderRadius: 15,
+        backgroundColor: '#CDF2C7',
+    },
+    fromcat: {
+        marginLeft:-42,
+        marginTop:-38,
+        width: 42,
+        height: 42,
+      },
 });

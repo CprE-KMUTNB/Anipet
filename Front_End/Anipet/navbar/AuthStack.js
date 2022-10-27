@@ -21,6 +21,7 @@ import Cat from '../screen/catC';
 import Edit from '../screen/Edit';
 import { AuthContext, AuthProvider } from '../context/AuthContext';
 import User from '../screen/userScreen';
+import From1 from '../screen/fromScreen';
 
 
 const AuthStack = () => {
@@ -63,6 +64,7 @@ function HomeStackScreen(){
         <HomeStack.Navigator>
             <HomeStack.Screen component={Home} name="Home" options={{headerShown:false}} />
             <UserStack.Screen component={Cat} name="Cat" options={{headerShown:false}} />
+            <UserStack.Screen component={From1} name="From" options={{headerShown:false}} />
         </HomeStack.Navigator>
     );
 }
