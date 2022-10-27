@@ -21,15 +21,78 @@ export const AuthProvider = ({children}) => {
       ]
     );
     const [isLoading, setIsLoading] = useState(false);
-    const [userToken, setUserToken] = useState([]);
+    const [userToken, setUserToken] = useState(null);
     const [userInfo, setUserInfo] = useState([]);
+    const [petInfo, setpetInfo] = useState([]);
     const [animalsData, setanimalsData] = useState([]);
     const [ResRegister, setResRegister] = useState(false);
     const [ResLogin, setResLogin] = useState(false);
     const [Data, setData] = useState();
+    const [favData, setfavData] = useState(true);
     const tradeData = (item) => {
         setIsLoading(true);
         setData(item);
+        setIsLoading(false);
+    };
+    const info = (name) => {
+        setIsLoading(true);
+        axios.post(`${URL}/api/info`,{
+            name,
+        })
+        .then(res => {
+            setpetInfo(res.data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+        setIsLoading(false);
+    };
+    const checkfavorite = (name,petName) => {
+        setIsLoading(true);
+        axios.post(`${URL}/api/checkfavorite`,{
+            name,petName,
+        })
+        .then(res => {
+            if (res.data.success){
+                setfavData(false);
+            }
+            else {
+                setfavData(true);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+        setIsLoading(false);
+    };
+    const disfavorite = (name,petName) => {
+        setIsLoading(true);
+        axios.post(`${URL}/api/disfavorite`,{
+            name,petName,
+        })
+        .then(res => {
+            if (res.data.success){
+                setfavData(true);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+        setIsLoading(false);
+    };
+    const favorite = (name,petName) => {
+        setIsLoading(true);
+        axios.post(`${URL}/api/favorite`,{
+            name,petName,
+        })
+        .then(res => {
+            if (res.data.success){
+                setfavData(false);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
         setIsLoading(false);
     };
     const Delete = () => {
@@ -157,10 +220,10 @@ export const AuthProvider = ({children}) => {
     },[]);
     return (
         <AuthContext.Provider value={
-            {register, login, logout, search,predic,Delete,
-            edit, setResRegister, setResLogin,tradeData,
-            isLoading, userToken, animalsData, Data,
-            ResRegister, ResLogin, userInfo}
+            {register, login, logout, search,predic,Delete,favorite,setfavData,checkfavorite,
+            edit, setResRegister, setResLogin,tradeData,info,setpetInfo,disfavorite,
+            isLoading, userToken, animalsData, Data,petInfo,
+            ResRegister, ResLogin, userInfo, favData}
             }>
             {children}
         </AuthContext.Provider>

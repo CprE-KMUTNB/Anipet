@@ -21,7 +21,7 @@ import {
 import { AuthContext } from '../context/AuthContext';
 
 const Home = ({navigation}) => {
-    const {search, animalsData, tradeData} = useContext(AuthContext);
+    const {search, animalsData, info, favorite, userInfo,setfavData} = useContext(AuthContext);
     const [filterData, setfilterData] = useState([]);
     const [masterData, setmasterData] = useState([]);
     const [Find, setFind] = useState('');
@@ -59,7 +59,7 @@ const Home = ({navigation}) => {
             <View style = {styles.itemWrapperStyle}>
                 <TouchableOpacity
                     // eslint-disable-next-line no-sequences
-                    onPress={() =>{navigation.navigate('Cat'),tradeData(item);}}>
+                    onPress={() =>{navigation.navigate('Cat'),info(item.name),setfavData(true);}}>
                     <Text style = {styles.itemStyle}>
                     {item.name.toUpperCase()}</Text>
                 </TouchableOpacity>
@@ -69,7 +69,6 @@ const Home = ({navigation}) => {
             </View>
         );
     };
-
     const ItemSeparatorView = () => {
         return (
             <View
@@ -94,18 +93,6 @@ const Home = ({navigation}) => {
                         underlineColorAndroid="transparent"
                         onChangeText={(text) => searchFilter(text)}
                     />
-                    <TouchableOpacity
-                    onPress={() => navigation.navigate('From')}
-                    style={styles.FromButtomStyle}
-                    >
-                        <Text
-                        style={styles.fromStyle}>
-                            ให้พวกเราช่วยเลือกสัตว์เลี้ยงให้คุณนะ
-                        </Text>
-                        <Image
-                         style={styles.fromcat}
-                        source={require('../assets/fonts/Register/cat_prev_ui.png')}/>
-                    </TouchableOpacity>
                     <FlatList
                         data = {filterData}
                         keyExtractor = {(item,index) => index.toString()}
@@ -133,13 +120,6 @@ const styles = StyleSheet.create({
         fontSize:15,
         padding:15,
     },
-    fromStyle:{
-        fontSize:15,
-        fontFamily:'ITIM-REGULAR',
-        fontWeight:'bold',
-        padding:7,
-        color:'#white'
-    },
     textInputStyle:{
         height:50,
         borderWidth:1,
@@ -155,20 +135,25 @@ const styles = StyleSheet.create({
         borderColor: '#ccc',
         paddingHorizontal: 16,
     },
-    FromButtomStyle:{
-        height:40,
-        width:335,
-        borderWidth:2,
-        paddingLeft:55,
-        marginLeft:30,
-        borderColor: '#9DDDA4',
-        borderRadius: 15,
-        backgroundColor: '#CDF2C7',
+    button:{
+        width:'20%',
+        padding: 15,
+        borderRadius:40,
+        backgroundColor:'#87D38E',
+        alignItems:'center',
+        marginStart:280,
     },
-    fromcat: {
-        marginLeft:-42,
-        marginTop:-38,
-        width: 42,
-        height: 42,
-      },
+    buttonRed:{
+        width:'22%',
+        padding: 15,
+        borderRadius:40,
+        backgroundColor:'#de1794',
+        alignItems:'center',
+        marginStart:280,
+    },
+    buttonText:{
+        color:'white',
+        fontSize:13,
+        letterSpacing:1,
+    },
 });

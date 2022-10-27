@@ -2,7 +2,7 @@
 /* eslint-disable semi */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
-import React ,{useContext} from 'react';
+import React ,{useContext,useEffect} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // import type {Node} from 'react';
@@ -21,11 +21,39 @@ import {
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 const CatC = ({navigation}) =>{
-  const {Data} = useContext(AuthContext);
+  const {userToken,userInfo,petInfo,setpetInfo,favorite,favData, setfavData, disfavorite,checkfavorite} = useContext(AuthContext);
+  const FavButton = (item) => {
+    if (userToken){
+      if (favData){
+              return (
+                  <TouchableOpacity
+                          onPress={() => {favorite(userInfo.name,item);}}
+                          style={styles.button}>
+                          <Text style={styles.buttonText}>Like</Text>
+                  </TouchableOpacity>
+              );
+      }
+      else {
+        return (
+            <TouchableOpacity
+                    onPress={() => {disfavorite(userInfo.name,item);}}
+                    style={styles.buttonRed}>
+                    <Text style={styles.buttonText}>unLike</Text>
+            </TouchableOpacity>
+        );
+      }
+    }
+  }
+    useEffect(() => {
+      checkfavorite(userInfo.name,petInfo.name)
+      return () => {
+      }
+    }, [checkfavorite, petInfo.name, userInfo.name])
     return (
       <SafeAreaView style={styles.container}>
         <TouchableOpacity
-              onPress={() => navigation.navigate('Home')}
+              // eslint-disable-next-line no-sequences
+              onPress={() => {navigation.navigate('Home'),setpetInfo([])}}
               style={styles.backStyle}>
               <Image source={require('../assets/fonts/Register/กลับ.png')}/>
         </TouchableOpacity>
@@ -34,19 +62,19 @@ const CatC = ({navigation}) =>{
             <Image
               // eslint-disable-next-line react-native/no-inline-styles
               style={{width: 140, height: 140}}
-              source={{uri: Data.url}}
+              source={{uri: petInfo.url}}
             />
           </View>
-          <Text style={styles.textStyle}>name  : {Data.name}</Text>
-          <Text style={styles.textStyle}>info  : {Data.info}</Text>
-          <Text style={styles.textStyle}>hard  : {Data.hard}</Text>
-          <Text style={styles.textStyle}>price : {Data.price}</Text>
-          <Text style={styles.textStyle}>type : {Data.type}</Text>
+          <Text style={styles.textStyle}>name  : {petInfo.name}</Text>
+          <Text style={styles.textStyle}>info  : {petInfo.info}</Text>
+          <Text style={styles.textStyle}>hard  : {petInfo.hard}</Text>
+          <Text style={styles.textStyle}>price : {petInfo.price}</Text>
+          <Text style={styles.textStyle}>type : {petInfo.type}</Text>
+          {FavButton(petInfo.name)}
         </View>
       </SafeAreaView>
     );
 }
-
 export default CatC;
 
 const styles = StyleSheet.create({
@@ -100,4 +128,23 @@ const styles = StyleSheet.create({
     alignItems:'center',
     marginTop:10,
   },
+  button:{
+    width:'40%',
+    padding: 15,
+    borderRadius:40,
+    backgroundColor:'#87D38E',
+    alignItems:'center',
+},
+buttonRed:{
+    width:'40%',
+    padding: 15,
+    borderRadius:40,
+    backgroundColor:'#de1794',
+    alignItems:'center',
+},
+buttonText:{
+    color:'white',
+    fontSize:13,
+    letterSpacing:1,
+},
 });

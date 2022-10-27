@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable prettier/prettier */
-import React ,{useContext,useState} from 'react';
+import React ,{useContext} from 'react';
 // import type {Node} from 'react';
 import {
   SafeAreaView,
@@ -9,62 +8,28 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
-  Modal,
-  Pressable,
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 
 const User = ({navigation}) => {
   const {userInfo} = useContext(AuthContext);
   const {logout, setResLogin} = useContext(AuthContext);
-  const [modalVisible, setModalVisible] = useState(false);
     return (
         <SafeAreaView style={styles.container}>
         <View>
-        <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-            Alert.alert("Setting has been closed.");
-            setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text 
-            style={styles.modalText}>Setting</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Close Setting</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-      <Pressable
-        style={[styles.cc]}
-        onPress={() => setModalVisible(true)}
-      >
-                    <Image
-                style={styles.settingStyle}
-                source={require('../assets/fonts/PR/เฟือง.png')}
-                resizeMode="stretch"
-                />
-      </Pressable>
+          <Image
+              style={styles.settingStyle}
+              source={require('../assets/fonts/PR/เฟือง.png')}
+          />
           <Text style={styles.headderStyle}>Hello {userInfo.name}</Text>
         </View>
         <View style={styles.detailContainer}>
         <Text style={styles.textStyle}>Name     : {userInfo.name}</Text>
           <Text style={styles.textStyle}>Pet          : {userInfo.pet}</Text>
-          <Text style={styles.textStyle}>Fund       : {userInfo.fund}</Text>
-          <Text style={styles.textStyle}>Lifestyle : {userInfo.lifestyle}</Text>
-          <Text style={styles.textStyle}>Time       : {userInfo.time}</Text>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            onPress={() => {navigation.navigate('Edit')}}
+            onPress={() => {navigation.navigate('Edit');}}
             style={styles.buttonOutline}>
             <Text style={styles.buttonText}>Edit Account</Text>
           </TouchableOpacity>
@@ -72,7 +37,7 @@ const User = ({navigation}) => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             // eslint-disable-next-line no-sequences
-            onPress={() => {logout(),navigation.navigate('Login'),setResLogin(false);}}
+            onPress={() => {logout(),setResLogin(false);}}
             style={styles.button}>
             <Text style={styles.buttonText}>Logout</Text>
           </TouchableOpacity>
@@ -154,53 +119,4 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     letterSpacing:1,
   },
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 0
-  },
-  modalView: {
-    width: '95%',
-    height:'80%',
-    margin: 20,
-    backgroundColor: "#FF7CA3",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5
-  },
-  button2: {
-    borderRadius: 10,
-    padding: 10,
-    elevation: 2
-  },
-  cc: {
-    width:80,
-    marginLeft:-150,
-  },
-  buttonClose: {
-    backgroundColor: "#FFE0F3",
-  },
-  textStyle2: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
-  },
-  modalText: {
-    fontWeight: "bold",
-    fontSize:20,
-    marginBottom: 450,
-    textAlign: "center"
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  }
 });

@@ -14,6 +14,7 @@ var Predic = require('./routes/predic');
 var Edit = require('./routes/edit');
 var Delete = require('./routes/deleteAcc');
 var Info = require('./routes/info');
+var Favorite = require('./routes/favorite');
 const session = require('express-session');
 
 require("dotenv").config();
@@ -43,3 +44,4 @@ app.use('/api',Predic);
 app.use('/api',Edit);
 app.use('/api',Delete);
 app.use('/api',Info);
+app.use('/api',Favorite);

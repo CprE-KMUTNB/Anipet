@@ -21,7 +21,6 @@ import Cat from '../screen/catC';
 import Edit from '../screen/Edit';
 import { AuthContext, AuthProvider } from '../context/AuthContext';
 import User from '../screen/userScreen';
-import From1 from '../screen/fromScreen';
 
 
 const AuthStack = () => {
@@ -64,7 +63,6 @@ function HomeStackScreen(){
         <HomeStack.Navigator>
             <HomeStack.Screen component={Home} name="Home" options={{headerShown:false}} />
             <UserStack.Screen component={Cat} name="Cat" options={{headerShown:false}} />
-            <UserStack.Screen component={From1} name="From" options={{headerShown:false}} />
         </HomeStack.Navigator>
     );
 }
@@ -74,7 +72,6 @@ function UserStackScreen () {
         return (
             <UserStack.Navigator >
                 <UserStack.Screen component={User} name="User" options={{headerShown:false}} />
-                <UserStack.Screen component={Login} name="Login" options={{headerShown:false}} />
                 <UserStack.Screen component={Edit} name="Edit" options={{headerShown:false}} />
             </UserStack.Navigator>
         );
@@ -84,7 +81,6 @@ function UserStackScreen () {
             <UserStack.Screen component={PreRegister} name="PreRegis" options={{headerShown:false}} />
             <UserStack.Screen component={Register1} name="Register1" options={{headerShown:false}} />
             <UserStack.Screen component={Login} name="Login" options={{headerShown:false}} />
-            <UserStack.Screen component={User} name="User" options={{headerShown:false}} />
         </UserStack.Navigator>
     );
 }

@@ -29,7 +29,6 @@ exports.info = (req,res) => {
                     return res.status(200).json(data[0]);
                 }
               })
-            console.log(animal)
         }
     })
 }

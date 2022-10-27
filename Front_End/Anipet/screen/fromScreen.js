@@ -212,10 +212,10 @@ const styles = StyleSheet.create({
   },
   viewmargin:{
     marginTop:20,
-    marginVertical:30
+    marginVertical:30,
   },
   viewhead:{
-    marginTop:10
+    marginTop:10,
   },
   frommargin:{
     padding:5,
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     fontSize:18,
     color:'red',
     paddingLeft:16,
-    marginTop:5
+    marginTop:5,
 },
   Star: {
     marginLeft:185,
@@ -243,9 +243,9 @@ const styles = StyleSheet.create({
   },
   checkboxContainer: {
     marginLeft:300,
-    marginTop:-32
+    marginTop:-32,
   },
   checkbox: {
-    alignSelf: "center",
+    alignSelf: 'center',
   },
 });
