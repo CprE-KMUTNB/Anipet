@@ -35,7 +35,7 @@ const Login = ({navigation}) => {
               <Image source={require('../assets/fonts/Register/กลับ.png')}/>
         </TouchableOpacity>
         <View style={styles.probStyle}>
-          <Image source={require('../assets/logo.png')} style={styles.tinyLogo}/>
+          <Image source={require('../assets/LOGO2.png')} style={styles.tinyLogo}/>
         </View>
         <View style={styles.inputContainer} behavior="padding"
           keyboardVerticalOffset = "40" >
