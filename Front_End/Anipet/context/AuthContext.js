@@ -25,12 +25,14 @@ export const AuthProvider = ({children}) => {
     const [userInfo, setUserInfo] = useState([]);
     const [petInfo, setpetInfo] = useState([]);
     const [animalsData, setanimalsData] = useState([]);
+    const [predicAnimal, setpredicAnimal] = useState([]);
     const [ResRegister, setResRegister] = useState(false);
     const [ResLogin, setResLogin] = useState(false);
     const [Data, setData] = useState();
     const [favData, setfavData] = useState(true);
     const tradeData = (item) => {
         setIsLoading(true);
+        console.log(item);
         setData(item);
         setIsLoading(false);
     };
@@ -108,12 +110,13 @@ export const AuthProvider = ({children}) => {
         });
         setIsLoading(false);
     };
-    const predic = (salary,style,environment,time) => {
+    const predic = (salary,style) => {
         setIsLoading(true);
         axios.post(`${URL}/api/predic`,{
-            salary,style,environment,time,
+            userToken,style,salary,
         })
         .then(res => {
+            setpredicAnimal(res.data);
             console.log(res.data);
         })
         .catch(err => {
@@ -223,7 +226,7 @@ export const AuthProvider = ({children}) => {
             {register, login, logout, search,predic,Delete,favorite,setfavData,checkfavorite,
             edit, setResRegister, setResLogin,tradeData,info,setpetInfo,disfavorite,
             isLoading, userToken, animalsData, Data,petInfo,
-            ResRegister, ResLogin, userInfo, favData}
+            ResRegister, ResLogin, userInfo, favData, predicAnimal}
             }>
             {children}
         </AuthContext.Provider>

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 import React, {useContext} from 'react';
@@ -21,6 +20,9 @@ import Cat from '../screen/catC';
 import Edit from '../screen/Edit';
 import { AuthContext, AuthProvider } from '../context/AuthContext';
 import User from '../screen/userScreen';
+import From1 from '../screen/fromScreen';
+import PredicS from '../screen/predicScreen';
+import { predic } from '../../../backend/controller/predic';
 
 
 const AuthStack = () => {
@@ -63,6 +65,8 @@ function HomeStackScreen(){
         <HomeStack.Navigator>
             <HomeStack.Screen component={Home} name="Home" options={{headerShown:false}} />
             <UserStack.Screen component={Cat} name="Cat" options={{headerShown:false}} />
+            <UserStack.Screen component={From1} name="From" options={{headerShown:false}} />
+            <UserStack.Screen component={PredicS} name="Predic" options={{headerShown:false}} />
         </HomeStack.Navigator>
     );
 }

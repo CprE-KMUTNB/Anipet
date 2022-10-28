@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
@@ -20,25 +21,15 @@ import {
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 
-const Home = ({navigation}) => {
-    const {search, animalsData, info, favorite, userInfo,setfavData} = useContext(AuthContext);
+const Predic = ({navigation}) => {
+    const {search, predicAnimal, info, favorite, userInfo,setfavData} = useContext(AuthContext);
     const [filterData, setfilterData] = useState([]);
     const [masterData, setmasterData] = useState([]);
     const [Find, setFind] = useState('');
-
     useEffect(() => {
-        const filter = () => {
-            search('');
-        };
-        filter();
-        return () => {
-          };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[]);
-    useEffect(() => {
-        setfilterData(animalsData);
-        setmasterData(animalsData);
-    }, [animalsData]);
+        setfilterData(predicAnimal);
+        setmasterData(predicAnimal);
+    }, [predicAnimal]);
     const searchFilter = (text) => {
         if (text) {
             const newData = masterData.filter((item) => {
@@ -86,25 +77,18 @@ const Home = ({navigation}) => {
                     backgroundColor: '#FFE0F3',
                 }}>
                 <View>
+                    <TouchableOpacity
+                        onPress={() => {navigation.navigate('Home');}}
+                        style={styles.backStyle}>
+                        <Image source={require('../assets/fonts/Register/กลับ.png')}/>
+                    </TouchableOpacity>
                     <TextInput
                         style={styles.textInputStyle}
                         value={Find}
-                        placeholder="Search Here                                                                             "
+                        placeholder="Search Here                                                                     "
                         underlineColorAndroid="transparent"
                         onChangeText={(text) => searchFilter(text)}
                     />
-                    <TouchableOpacity
-                    onPress={() => navigation.navigate('From')}
-                    style={styles.FromButtomStyle}
-                    >
-                        <Text
-                        style={styles.fromStyle}>
-                            ให้พวกเราช่วยเลือกสัตว์เลี้ยงให้คุณนะ
-                        </Text>
-                        <Image
-                         style={styles.fromcat}
-                        source={require('../assets/fonts/Register/cat_prev_ui.png')}/>
-                    </TouchableOpacity>
                     <FlatList
                         data = {filterData}
                         keyExtractor = {(item,index) => index.toString()}
@@ -117,13 +101,14 @@ const Home = ({navigation}) => {
     );
 };
 
-export default Home;
+export default Predic;
 
 const styles = StyleSheet.create({
     container:{
         flex:1,
     },
     itemStyle:{
+        width:'80%',
         fontSize:25,
         fontWeight:'bold',
         padding:15,
@@ -133,10 +118,11 @@ const styles = StyleSheet.create({
         padding:15,
     },
     textInputStyle:{
+        width:'80%',
         height:50,
         borderWidth:1,
         paddingLeft:20,
-        margin:20,
+        margin:10,
         borderColor: 'white',
         borderRadius: 18,
         backgroundColor: '#FFABC4',
@@ -190,5 +176,16 @@ const styles = StyleSheet.create({
         marginTop:-38,
         width: 42,
         height: 42,
+      },
+      backStyle:{
+        width:'100%',
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin:5,
+        marginLeft:140,
       },
 });

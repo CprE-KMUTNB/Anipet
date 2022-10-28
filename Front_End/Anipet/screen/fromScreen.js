@@ -14,21 +14,21 @@ import {
   style,
   StyleSheet,
   onPress,
+  TextInput,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthContext } from '../context/AuthContext';
 import CheckBox from '@react-native-community/checkbox';
 const From1 = ({navigation}) =>{
-    const [isSelected, setSelection] = useState(false);
-    const [isSelected2, setSelection2] = useState(false);
-    const [isSelected3, setSelection3] = useState(false);
-    const [isSelected4, setSelection4] = useState(false);
-    const [isSelected5, setSelection5] = useState(false);
-    const [isSelected6, setSelection6] = useState(false);
-    const [isSelected7, setSelection7] = useState(false);
-    const [isSelected8, setSelection8] = useState(false);
-    const [isSelected9, setSelection9] = useState(false);
+  const {tradeData,predic} = useContext(AuthContext);
+  const [isSelected, setSelection] = useState(false);
+  const [isSelected2, setSelection2] = useState(false);
+  const [isSelected3, setSelection3] = useState(false);
+  const [isSelected7, setSelection7] = useState(false);
+  const [isSelected8, setSelection8] = useState(false);
+  const [isSelected9, setSelection9] = useState(false);
+  const [salary, setsalary] = useState();
     return (
       <SafeAreaView style={styles.container}>
         <TouchableOpacity
@@ -45,7 +45,7 @@ const From1 = ({navigation}) =>{
         <View style={styles.viewmargin}>
         <Text
         style={[styles.minihead]}>
-            LifeStyleของคุณ
+            your Lifestyle
         </Text>
         <Image
             style={styles.Star}
@@ -80,46 +80,6 @@ const From1 = ({navigation}) =>{
         <CheckBox
           value={isSelected3}
           onValueChange={setSelection3}
-          style={styles.checkbox}
-        />
-        </View>
-        <Text
-        style={[styles.minihead]}>
-            มีงบประมาณมากแค่ไหน
-        </Text>
-        <Image
-            style={styles.Star2}
-            source={require('../assets/fonts/Register/Star.png')}/>
-        <Text
-        style={[styles.content,styles.frommargin]}>
-            เยอะ
-        </Text>
-        <View style={styles.checkboxContainer}>
-        <CheckBox
-          value={isSelected4}
-          onValueChange={setSelection4}
-          style={styles.checkbox}
-        />
-        </View>
-        <Text
-        style={[styles.content,styles.frommargin]}>
-            ปานกลาง
-        </Text>
-        <View style={styles.checkboxContainer}>
-        <CheckBox
-          value={isSelected5}
-          onValueChange={setSelection5}
-          style={styles.checkbox}
-        />
-        </View>
-        <Text
-        style={[styles.content,styles.frommargin]}>
-            น้อย
-        </Text>
-        <View style={styles.checkboxContainer}>
-        <CheckBox
-          value={isSelected6}
-          onValueChange={setSelection6}
           style={styles.checkbox}
         />
         </View>
@@ -164,12 +124,23 @@ const From1 = ({navigation}) =>{
         />
         </View>
         </View>
-        <View style={[styles.okay]}>
-        <TouchableOpacity
-                    onPress={() => navigation.navigate('Home')}>
-          <Text style={[styles.contentokay]}>
-              เสร็จสิ้น
-          </Text>
+        <Text
+        style={[styles.minihead]}>
+            มีงบประมาณมากแค่ไหน
+        </Text>
+        <TextInput
+              style={styles.textInputStyle}
+              value={salary}
+              placeholder="your salary"
+              underlineColorAndroid="transparent"
+              onChangeText={(text) => setsalary(text)}
+              />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            // eslint-disable-next-line no-sequences
+            onPress={() => {tradeData(isSelected),navigation.navigate('Predic'),predic('2000','stay home')}}
+            style={styles.button}>
+            <Text style={styles.buttonText}>Finish</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -259,5 +230,36 @@ const styles = StyleSheet.create({
   },
   checkbox: {
     alignSelf: 'center',
+  },
+  textInputStyle:{
+    width:'80%',
+    height:50,
+    borderWidth:1,
+    paddingLeft:20,
+    margin:12,
+    marginRight: 0,
+    marginLeft: 0,
+    borderColor: '#FFABC4',
+    borderRadius: 25,
+    backgroundColor: 'white',
+  },
+  buttonContainer:{
+    width:'70%',
+    justifyContent:'center',
+    alignItems:'center',
+    marginTop:10,
+  },
+  button:{
+    width:'100%',
+    padding: 15,
+    borderRadius:40,
+    backgroundColor:'#87D38E',
+    alignItems:'center',
+  },
+  buttonText:{
+    color:'white',
+    fontSize:18,
+    fontWeight:'bold',
+    letterSpacing:1,
   },
 });
