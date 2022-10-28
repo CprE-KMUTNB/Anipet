@@ -85,14 +85,14 @@ const From1 = ({navigation}) =>{
         </View>
         <Text
         style={[styles.minihead]}>
-            LifeStyleของคุณ
+            มีงบประมาณมากแค่ไหน
         </Text>
         <Image
-            style={styles.Star}
+            style={styles.Star2}
             source={require('../assets/fonts/Register/Star.png')}/>
         <Text
         style={[styles.content,styles.frommargin]}>
-            ชอบออกไปเที่ยว
+            เยอะ
         </Text>
         <View style={styles.checkboxContainer}>
         <CheckBox
@@ -103,7 +103,7 @@ const From1 = ({navigation}) =>{
         </View>
         <Text
         style={[styles.content,styles.frommargin]}>
-            นานๆไปเที่ยวที
+            ปานกลาง
         </Text>
         <View style={styles.checkboxContainer}>
         <CheckBox
@@ -114,7 +114,7 @@ const From1 = ({navigation}) =>{
         </View>
         <Text
         style={[styles.content,styles.frommargin]}>
-            ชอบอยู่บ้าน
+            น้อย
         </Text>
         <View style={styles.checkboxContainer}>
         <CheckBox
@@ -125,14 +125,14 @@ const From1 = ({navigation}) =>{
         </View>
         <Text
         style={[styles.minihead]}>
-            LifeStyleของคุณ
+            อยากเลี้ยงสัตว์ประเภทไหน
         </Text>
         <Image
-            style={styles.Star}
+            style={styles.Star3}
             source={require('../assets/fonts/Register/Star.png')}/>
         <Text
         style={[styles.content,styles.frommargin]}>
-            ชอบออกไปเที่ยว
+            สัตว์บก
         </Text>
         <View style={styles.checkboxContainer}>
         <CheckBox
@@ -143,7 +143,7 @@ const From1 = ({navigation}) =>{
         </View>
         <Text
         style={[styles.content,styles.frommargin]}>
-            นานๆไปเที่ยวที
+            สัตว์น้ำ
         </Text>
         <View style={styles.checkboxContainer}>
         <CheckBox
@@ -154,7 +154,7 @@ const From1 = ({navigation}) =>{
         </View>
         <Text
         style={[styles.content,styles.frommargin]}>
-            ชอบอยู่บ้าน
+            สัตว์ปีก
         </Text>
         <View style={styles.checkboxContainer}>
         <CheckBox
@@ -237,6 +237,18 @@ const styles = StyleSheet.create({
 },
   Star: {
     marginLeft:185,
+    marginTop:-30,
+    width: 26,
+    height: 26,
+  },
+  Star2: {
+    marginLeft:255,
+    marginTop:-30,
+    width: 26,
+    height: 26,
+  },
+  Star3: {
+    marginLeft:280,
     marginTop:-30,
     width: 26,
     height: 26,
