@@ -8,22 +8,30 @@ exports.predic = (req,res) => {
     userdata.findById(userid.userid).then(data => {
         if (data.pet){
             const UserPet = data.pet
-            pet.find({name:UserPet}).then(test => {
+            pet.find({type:UserPet}).then(test => {
                 if(test[0]){
-                    console.log(test[0].type)
-                    var {salary,style} = req.body //รับค่าจากการตอบคำถาม
-                    pet.find({salary:salary,style:style,type:test[0].type}).then(predicted => {
-                        if(!predicted[0]){
-                            return res.status(400).json({error:"fail"})
-                        }else
-                            return res.status(200).json(predicted)
+                    var {salary,style,price} = req.body //รับค่าจากการตอบคำถาม
+                    const pipeline = [
+                        {
+                            '$match': {
+                                style: style, 
+                                type: test[0].type, 
+                                salary: {$lte: Number(salary)}
+                            }
                         }
-                    )
+                    ]
+                    pet.aggregate(pipeline,function( err, data ) {
+                        if ( err ){throw err}
+                        else{
+                            console.log(data)
+                            return res.status(200).json(data);
+                        }
+                    })
                 }
                 else
                 {
-                    var {salary,style} = req.body //รับค่าจากการตอบคำถาม
-                    pet.find({salary:salary,style:style}).then(predicted => {
+                    var {salary,style,price} = req.body //รับค่าจากการตอบคำถาม
+                    pet.find({salary:salary,style:style,price:price}).then(predicted => {
                         if(!predicted[0]){
                             return res.status(400).json({error:"fail"})
                         }else

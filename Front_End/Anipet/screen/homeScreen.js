@@ -64,7 +64,7 @@ const Home = ({navigation}) => {
                     {item.name.toUpperCase()}</Text>
                 </TouchableOpacity>
                 <Text style = {styles.infoStyle}>
-                {item.info}
+                this is a {item.type}
                 </Text>
             </View>
         );

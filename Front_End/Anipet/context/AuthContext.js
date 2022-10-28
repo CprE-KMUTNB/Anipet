@@ -123,7 +123,7 @@ export const AuthProvider = ({children}) => {
     };
     const edit = (name,pet) => {
         setIsLoading(true);
-        axios.post(`${URL}/api/update`,{
+        axios.put(`${URL}/api/update`,{
             userToken,name,pet,
         })
         .then(res => {
@@ -135,10 +135,10 @@ export const AuthProvider = ({children}) => {
         });
         setIsLoading(false);
     };
-    const search = (name) => {
+    const search = (price) => {
         setIsLoading(true);
         axios.post(`${URL}/api/search`,{
-            name,
+            price,
         })
         .then(res => {
             setanimalsData(res.data);

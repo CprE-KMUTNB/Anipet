@@ -3,7 +3,8 @@ const peturl = require("../model/ImagePet")
 
 exports.search = (req,res) => {
     const {name} = req.body
-    pet.find({name:{$regex:name}}).then(animal =>{
+    const {price} = req.body
+    pet.find({name:{$regex:`${price}`}}).then(animal =>{
         if(!animal[0])
         {
             return res.json({result:"not found that "})
