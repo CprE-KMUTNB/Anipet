@@ -30,6 +30,7 @@ export const AuthProvider = ({children}) => {
     const [ResLogin, setResLogin] = useState(false);
     const [Data, setData] = useState();
     const [favData, setfavData] = useState(true);
+    const [getFav, setgetFav] = useState([]);
     const tradeData = (item) => {
         setIsLoading(true);
         console.log(item);
@@ -49,10 +50,28 @@ export const AuthProvider = ({children}) => {
         });
         setIsLoading(false);
     };
-    const checkfavorite = (name,petName) => {
+    const getsfavorite = (username) => {
+        setIsLoading(true);
+        axios.post(`${URL}/api/getsfavorites`,{
+            username,
+        })
+        .then(res => {
+            if (res.data.success){
+                setgetFav(res.data.data);
+            }
+            else {
+                setfavData(true);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+        setIsLoading(false);
+    };
+    const checkfavorite = (username,petName) => {
         setIsLoading(true);
         axios.post(`${URL}/api/checkfavorite`,{
-            name,petName,
+            username,petName,
         })
         .then(res => {
             if (res.data.success){
@@ -67,10 +86,10 @@ export const AuthProvider = ({children}) => {
         });
         setIsLoading(false);
     };
-    const disfavorite = (name,petName) => {
+    const disfavorite = (username,petName) => {
         setIsLoading(true);
         axios.post(`${URL}/api/disfavorite`,{
-            name,petName,
+            username,petName,
         })
         .then(res => {
             if (res.data.success){
@@ -82,10 +101,10 @@ export const AuthProvider = ({children}) => {
         });
         setIsLoading(false);
     };
-    const favorite = (name,petName) => {
+    const favorite = (username,petName,type) => {
         setIsLoading(true);
         axios.post(`${URL}/api/favorite`,{
-            name,petName,
+            username,petName,type,
         })
         .then(res => {
             if (res.data.success){
@@ -117,7 +136,6 @@ export const AuthProvider = ({children}) => {
         })
         .then(res => {
             setpredicAnimal(res.data);
-            console.log(res.data);
         })
         .catch(err => {
             console.log(err);
@@ -224,8 +242,8 @@ export const AuthProvider = ({children}) => {
     return (
         <AuthContext.Provider value={
             {register, login, logout, search,predic,Delete,favorite,setfavData,checkfavorite,
-            edit, setResRegister, setResLogin,tradeData,info,setpetInfo,disfavorite,
-            isLoading, userToken, animalsData, Data,petInfo,
+            edit, setResRegister, setResLogin,tradeData,info,setpetInfo,disfavorite,getsfavorite,
+            isLoading, userToken, animalsData, Data,petInfo,getFav,
             ResRegister, ResLogin, userInfo, favData, predicAnimal}
             }>
             {children}

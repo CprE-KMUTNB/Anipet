@@ -27,7 +27,7 @@ const CatC = ({navigation}) =>{
       if (favData){
               return (
                   <TouchableOpacity
-                          onPress={() => {favorite(userInfo.name,item);}}
+                          onPress={() => {favorite(userInfo.username,item.name,item.type);}}
                           style={styles.button}>
                           <Text style={styles.buttonText}>Like</Text>
                   </TouchableOpacity>
@@ -36,7 +36,7 @@ const CatC = ({navigation}) =>{
       else {
         return (
             <TouchableOpacity
-                    onPress={() => {disfavorite(userInfo.name,item);}}
+                    onPress={() => {disfavorite(userInfo.username,item.name,item.type);}}
                     style={styles.buttonRed}>
                     <Text style={styles.buttonText}>unLike</Text>
             </TouchableOpacity>
@@ -45,17 +45,17 @@ const CatC = ({navigation}) =>{
     }
   }
     useEffect(() => {
-      checkfavorite(userInfo.name,petInfo.name)
+      checkfavorite(userInfo.username,petInfo.name)
       return () => {
       }
-    }, [checkfavorite, petInfo.name, userInfo.name])
+    }, [checkfavorite, petInfo.name, userInfo.username])
     return (
       <SafeAreaView style={styles.container}>
         <TouchableOpacity
-              // eslint-disable-next-line no-sequences
-              onPress={() => {navigation.navigate('Home'),setpetInfo([])}}
-              style={styles.backStyle}>
-              <Image source={require('../assets/fonts/Register/กลับ.png')}/>
+            // eslint-disable-next-line no-sequences
+            onPress={() => {navigation.navigate('Home'),setpetInfo([])}}
+            style={styles.backStyle}>
+            <Image source={require('../assets/fonts/Register/กลับ.png')}/>
         </TouchableOpacity>
         <View style={styles.inputContainer}>
           <View style={styles.imageContainer}>
@@ -70,7 +70,7 @@ const CatC = ({navigation}) =>{
           <Text style={styles.textStyle}>hard  : {petInfo.hard}</Text>
           <Text style={styles.textStyle}>price : {petInfo.price}</Text>
           <Text style={styles.textStyle}>type : {petInfo.type}</Text>
-          {FavButton(petInfo.name)}
+          {FavButton(petInfo)}
         </View>
       </SafeAreaView>
     );

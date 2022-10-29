@@ -22,6 +22,7 @@ import { AuthContext, AuthProvider } from '../context/AuthContext';
 import User from '../screen/userScreen';
 import From1 from '../screen/fromScreen';
 import PredicS from '../screen/predicScreen';
+import FavScreen from '../screen/FavScreen';
 import { predic } from '../../../backend/controller/predic';
 
 
@@ -48,6 +49,12 @@ const AuthStack = () => {
                 <Tab.Screen component={Map} name="Map" options={{
                     headerShown:false,
                     tabBarLabel: 'Map', tabBarIcon: ({ color, size }) => (
+                        <Image
+                        source={require('../assets/fonts/Home/โลก.png')}
+                        />)}} />
+                <Tab.Screen component={FavScreen} name="Fav" options={{
+                    headerShown:false,
+                    tabBarLabel: 'Fav', tabBarIcon: ({ color, size }) => (
                         <Image
                         source={require('../assets/fonts/Home/โลก.png')}
                         />)}} />

@@ -21,42 +21,37 @@ import {
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 
-const Predic = ({navigation}) => {
-    const {search, predicAnimal, info, favorite, userInfo,setfavData} = useContext(AuthContext);
+const FavScreen = ({navigation}) => {
+    const {info, userInfo,setfavData, userToken, getsfavorite, getFav} = useContext(AuthContext);
     const [filterData, setfilterData] = useState([]);
     const [masterData, setmasterData] = useState([]);
     const [Find, setFind] = useState('');
     useEffect(() => {
-        setfilterData(predicAnimal);
-        setmasterData(predicAnimal);
-    }, [predicAnimal]);
-    const searchFilter = (text) => {
-        if (text) {
-            const newData = masterData.filter((item) => {
-                const itemData = item.name ?
-                item.name.toUpperCase() : ''.toUpperCase();
-            const textData = text.toUpperCase();
-            return itemData.indexOf(textData) > -1;
-            });
-            setfilterData(newData);
-            setFind(text);
-        } else {
-            setfilterData(masterData);
-            setFind(text);
-        }
-    };
+        const filter = () => {
+            getsfavorite(userInfo.username);
+        };
+        filter();
+        return () => {
+          };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
+    useEffect(() => {
+        setfilterData(getFav);
+        setmasterData(getFav);
+    }, [getFav]);
+
     const ItemView = ({item}) => {
         return (
             <View style = {styles.itemWrapperStyle}>
                 <TouchableOpacity
                     // eslint-disable-next-line no-sequences
-                    onPress={() =>{navigation.navigate('Cat'),info(item.name),setfavData(true);}}>
+                    onPress={() =>{navigation.navigate('Cat'),info(item.petName),setfavData(true);}}>
                     <Text style = {styles.itemStyle}>
-                    {item.name.toUpperCase()}</Text>
+                    {item.petName.toUpperCase()}</Text>
                 </TouchableOpacity>
-                <Text style = {styles.infoStyle}>
+                {/* <Text style = {styles.infoStyle}>
                 this is a {item.type}
-                </Text>
+                </Text> */}
             </View>
         );
     };
@@ -77,18 +72,6 @@ const Predic = ({navigation}) => {
                     backgroundColor: '#FFE0F3',
                 }}>
                 <View>
-                    <TouchableOpacity
-                        onPress={() => {navigation.navigate('From');}}
-                        style={styles.backStyle}>
-                        <Image source={require('../assets/fonts/Register/กลับ.png')}/>
-                    </TouchableOpacity>
-                    <TextInput
-                        style={styles.textInputStyle}
-                        value={Find}
-                        placeholder="Search Here                                                                     "
-                        underlineColorAndroid="transparent"
-                        onChangeText={(text) => searchFilter(text)}
-                    />
                     <FlatList
                         data = {filterData}
                         keyExtractor = {(item,index) => index.toString()}
@@ -101,14 +84,13 @@ const Predic = ({navigation}) => {
     );
 };
 
-export default Predic;
+export default FavScreen;
 
 const styles = StyleSheet.create({
     container:{
         flex:1,
     },
     itemStyle:{
-        width:'80%',
         fontSize:25,
         fontWeight:'bold',
         padding:15,
@@ -117,12 +99,21 @@ const styles = StyleSheet.create({
         fontSize:15,
         padding:15,
     },
-    textInputStyle:{
-        width:'80%',
+    textInputStyle1:{
+        width:'100%',
         height:50,
         borderWidth:1,
         paddingLeft:20,
-        margin:10,
+        margin:20,
+        borderColor: 'white',
+        borderRadius: 18,
+        backgroundColor: '#FFABC4',
+    },
+    textInputStyle:{
+        height:50,
+        borderWidth:1,
+        paddingLeft:20,
+        margin:20,
         borderColor: 'white',
         borderRadius: 18,
         backgroundColor: '#FFABC4',
@@ -176,16 +167,5 @@ const styles = StyleSheet.create({
         marginTop:-38,
         width: 42,
         height: 42,
-      },
-      backStyle:{
-        width:'100%',
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignContent: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin:5,
-        marginLeft:140,
       },
 });

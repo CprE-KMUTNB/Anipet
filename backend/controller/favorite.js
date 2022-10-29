@@ -2,8 +2,9 @@ const Favorite = require("../model/favorite")
 
 exports.favorites = (req,res) => {
     const data = {
-        name:req.body.name,
+        username:req.body.username,
         petName:req.body.petName,
+        type:req.body.type,
     }
     Favorite.find(data).then(info => {
         if(!info[0]){
@@ -22,7 +23,7 @@ exports.favorites = (req,res) => {
 
 exports.Disfavorites = (req,res) => {
     const data = {
-        name:req.body.name,
+        username:req.body.username,
         petName:req.body.petName,
     }
     Favorite.find(data).then(info => {
@@ -46,8 +47,20 @@ exports.Disfavorites = (req,res) => {
 
 exports.checksfavorites = (req,res) => {
     const data = {
-        name:req.body.name,
+        username:req.body.username,
         petName:req.body.petName,
+    }
+    Favorite.find(data).then(info => {
+        if(info[0]){
+            return res.status(200).json({success: true ,data:info})
+            }
+        return res.status(200).json({success: false ,data:info})
+    })
+}
+
+exports.getsfavorites = (req,res) => {
+    const data = {
+        username:req.body.username,
     }
     Favorite.find(data).then(info => {
         if(info[0]){

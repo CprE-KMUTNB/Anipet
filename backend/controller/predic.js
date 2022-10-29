@@ -23,7 +23,6 @@ exports.predic = (req,res) => {
                     pet.aggregate(pipeline,function( err, data ) {
                         if ( err ){throw err}
                         else{
-                            console.log(data)
                             return res.status(200).json(data);
                         }
                     })

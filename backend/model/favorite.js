@@ -5,11 +5,15 @@ const favorite =new Schema({
     id:{
         type:Schema.ObjectId
     },
-    name:{
+    username:{
         type:String,
         require:true
     },
     petName:{
+        type:String,
+        require:true
+    },
+    type:{
         type:String,
         require:true
     },

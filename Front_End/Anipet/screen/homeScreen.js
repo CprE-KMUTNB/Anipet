@@ -21,7 +21,7 @@ import {
 import { AuthContext } from '../context/AuthContext';
 
 const Home = ({navigation}) => {
-    const {search, animalsData, info, favorite, userInfo,setfavData} = useContext(AuthContext);
+    const {search, animalsData, info, userInfo,setfavData, userToken} = useContext(AuthContext);
     const [filterData, setfilterData] = useState([]);
     const [masterData, setmasterData] = useState([]);
     const [Find, setFind] = useState('');
@@ -39,6 +39,25 @@ const Home = ({navigation}) => {
         setfilterData(animalsData);
         setmasterData(animalsData);
     }, [animalsData]);
+
+    const predicBar = () => {
+        if (userToken){
+            return (
+            <TouchableOpacity
+                onPress={() => navigation.navigate('From')}
+                style={styles.FromButtomStyle}
+                >
+                    <Text
+                    style={styles.fromStyle}>
+                        ให้พวกเราช่วยเลือกสัตว์เลี้ยงให้คุณนะ
+                    </Text>
+                    <Image
+                     style={styles.fromcat}
+                    source={require('../assets/fonts/Register/cat_prev_ui.png')}/>
+                </TouchableOpacity>
+            );
+        }
+    };
     const searchFilter = (text) => {
         if (text) {
             const newData = masterData.filter((item) => {
@@ -93,18 +112,7 @@ const Home = ({navigation}) => {
                         underlineColorAndroid="transparent"
                         onChangeText={(text) => searchFilter(text)}
                     />
-                    <TouchableOpacity
-                    onPress={() => navigation.navigate('From')}
-                    style={styles.FromButtomStyle}
-                    >
-                        <Text
-                        style={styles.fromStyle}>
-                            ให้พวกเราช่วยเลือกสัตว์เลี้ยงให้คุณนะ
-                        </Text>
-                        <Image
-                         style={styles.fromcat}
-                        source={require('../assets/fonts/Register/cat_prev_ui.png')}/>
-                    </TouchableOpacity>
+                    {predicBar()}
                     <TextInput
                         style={styles.textInputStyle1}
                         placeholder="Fillter price animal  "

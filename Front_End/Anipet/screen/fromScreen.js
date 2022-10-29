@@ -23,7 +23,7 @@ import CheckBox from '@react-native-community/checkbox';
 import Dropdown from 'react-native-input-select';
 const From1 = ({navigation}) =>{
   const {tradeData,predic} = useContext(AuthContext);
-  const [country, setCountry] = React.useState();
+  const [petStyle, setpetStyle] = useState()
   const [isSelected, setSelection] = useState(false);
   const [isSelected2, setSelection2] = useState(false);
   const [isSelected3, setSelection3] = useState(false);
@@ -53,14 +53,14 @@ const From1 = ({navigation}) =>{
           <Dropdown
             placeholder="Select an option..."
             options={[
-              { name: 'Like to travel', style: 'AL' },
-              { name: 'นานๆไปเที่ยวที', style: 'AX' },
-              { name: 'StayHome', style: 'DZ' },
+              { name: 'Like to travel', style: 'like to travel' },
+              { name: 'นานๆไปเที่ยวที', style: 'Chill' },
+              { name: 'StayHome', style: 'StayHome' },
             ]}
             optionLabel={'name'}
             optionValue={'style'}
-            selectedValue={country}
-            onValueChange={(value) => setCountry(value)}
+            selectedValue={petStyle}
+            onValueChange={(value) => setpetStyle(value)}
             primaryColor={'green'}
           />
         </View>
@@ -116,7 +116,7 @@ const From1 = ({navigation}) =>{
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             // eslint-disable-next-line no-sequences
-            onPress={() => {tradeData(isSelected),navigation.navigate('Predic'),predic('2000','stay home')}}
+            onPress={() => {tradeData(petStyle),navigation.navigate('Predic'),predic(salary,petStyle)}}
             style={styles.button}>
             <Text style={styles.buttonText}>Finish</Text>
           </TouchableOpacity>
