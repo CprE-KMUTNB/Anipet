@@ -19,13 +19,15 @@ import {
   FlatList,
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
+import Dropdown from 'react-native-input-select';
 
 const Home = ({navigation}) => {
     const {search, animalsData, info, userInfo,setfavData, userToken} = useContext(AuthContext);
     const [filterData, setfilterData] = useState([]);
     const [masterData, setmasterData] = useState([]);
     const [Find, setFind] = useState('');
-
+    const [petType, setpetType] = useState('');
+    const [petPrice, setpetPrice] = useState('');
     useEffect(() => {
         const filter = () => {
             search('0','99999999','');
@@ -117,8 +119,25 @@ const Home = ({navigation}) => {
                         style={styles.textInputStyle1}
                         placeholder="Fillter price animal  "
                         underlineColorAndroid="transparent"
-                        onChangeText={(text) => search('0',text,'')}
+                        value={petPrice}
+                        onChangeText={(text) => {setpetPrice(text),search('0',text,petType);}}
                     />
+                    <View style={styles.DropdownStyle}>
+                        <Dropdown
+                            placeholder="Select an option..."
+                            options={[
+                                { name: 'getAll', style: '' },
+                                { name: 'dog', style: 'dog' },
+                                { name: 'cat', style: 'cat' },
+                                { name: 'fish', style: 'fish' },
+                            ]}
+                            optionLabel={'name'}
+                            optionValue={'style'}
+                            selectedValue={petType}
+                            onValueChange={(value) => {setpetType(value),search('0',petPrice,value);}}
+                            primaryColor={'green'}
+                        />
+                        </View>
                     <FlatList
                         data = {filterData}
                         keyExtractor = {(item,index) => index.toString()}
