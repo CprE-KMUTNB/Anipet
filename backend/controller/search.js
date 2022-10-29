@@ -3,7 +3,10 @@ const peturl = require("../model/ImagePet")
 
 exports.search = (req,res) => {
     const {type} = req.body
-    const {min,max} = req.body
+    var {min,max} = req.body
+    if(max === ""){
+        max = "99999999"
+    }
     const pipeline1 = [
         {
             '$match': {
@@ -32,14 +35,11 @@ exports.search = (req,res) => {
                 pet.aggregate(pipeline2,function( err, ComAnimal ) {
                     if ( err ){throw err}
                     else{
-                        
-                        console.log(ComAnimal)
                         return res.status(200).json(ComAnimal);
                     }
                 })
             }
             else{
-                console.log(data)
                 return res.status(200).json(data);
             }
         }

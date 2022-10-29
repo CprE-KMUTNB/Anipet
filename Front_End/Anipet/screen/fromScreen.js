@@ -20,8 +20,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthContext } from '../context/AuthContext';
 import CheckBox from '@react-native-community/checkbox';
+import Dropdown from 'react-native-input-select';
 const From1 = ({navigation}) =>{
   const {tradeData,predic} = useContext(AuthContext);
+  const [country, setCountry] = React.useState();
   const [isSelected, setSelection] = useState(false);
   const [isSelected2, setSelection2] = useState(false);
   const [isSelected3, setSelection3] = useState(false);
@@ -47,49 +49,25 @@ const From1 = ({navigation}) =>{
         style={[styles.minihead]}>
             your Lifestyle
         </Text>
-        <Image
-            style={styles.Star}
-            source={require('../assets/fonts/Register/Star.png')}/>
-        <Text
-        style={[styles.content,styles.frommargin]}>
-            ชอบออกไปเที่ยว
-        </Text>
-        <View style={styles.checkboxContainer}>
-        <CheckBox
-          value={isSelected}
-          onValueChange={setSelection}
-          style={styles.checkbox}
-        />
-        </View>
-        <Text
-        style={[styles.content,styles.frommargin]}>
-            นานๆไปเที่ยวที
-        </Text>
-        <View style={styles.checkboxContainer}>
-        <CheckBox
-          value={isSelected2}
-          onValueChange={setSelection2}
-          style={styles.checkbox}
-        />
-        </View>
-        <Text
-        style={[styles.content,styles.frommargin]}>
-            ชอบอยู่บ้าน
-        </Text>
-        <View style={styles.checkboxContainer}>
-        <CheckBox
-          value={isSelected3}
-          onValueChange={setSelection3}
-          style={styles.checkbox}
-        />
+        <View style={styles.DropdownStyle}>
+          <Dropdown
+            placeholder="Select an option..."
+            options={[
+              { name: 'Like to travel', style: 'AL' },
+              { name: 'นานๆไปเที่ยวที', style: 'AX' },
+              { name: 'StayHome', style: 'DZ' },
+            ]}
+            optionLabel={'name'}
+            optionValue={'style'}
+            selectedValue={country}
+            onValueChange={(value) => setCountry(value)}
+            primaryColor={'green'}
+          />
         </View>
         <Text
         style={[styles.minihead]}>
             อยากเลี้ยงสัตว์ประเภทไหน
         </Text>
-        <Image
-            style={styles.Star3}
-            source={require('../assets/fonts/Register/Star.png')}/>
         <Text
         style={[styles.content,styles.frommargin]}>
             สัตว์บก
@@ -129,12 +107,12 @@ const From1 = ({navigation}) =>{
             มีงบประมาณมากแค่ไหน
         </Text>
         <TextInput
-              style={styles.textInputStyle}
-              value={salary}
-              placeholder="your salary"
-              underlineColorAndroid="transparent"
-              onChangeText={(text) => setsalary(text)}
-              />
+          style={styles.textInputStyle}
+          value={salary}
+          placeholder="your salary"
+          underlineColorAndroid="transparent"
+          onChangeText={(text) => setsalary(text)}
+        />
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             // eslint-disable-next-line no-sequences
@@ -157,14 +135,15 @@ const styles = StyleSheet.create({
       backgroundColor: '#FFE0F3',
   },
  texthead:{
-    fontSize:28,
-    fontWeight:'bold',
-    color:'red',
+  fontSize:28,
+  fontWeight:'bold',
+  color:'red',
  },
  minihead:{
-    fontSize:24,
-    fontWeight:'bold',
-    color:'red',
+  margin:5,
+  fontSize:24,
+  fontWeight:'bold',
+  color:'red',
  },
  content:{
     fontSize:22,

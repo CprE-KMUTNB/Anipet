@@ -28,7 +28,7 @@ const Home = ({navigation}) => {
 
     useEffect(() => {
         const filter = () => {
-            search('');
+            search('0','99999999','');
         };
         filter();
         return () => {
@@ -105,6 +105,12 @@ const Home = ({navigation}) => {
                          style={styles.fromcat}
                         source={require('../assets/fonts/Register/cat_prev_ui.png')}/>
                     </TouchableOpacity>
+                    <TextInput
+                        style={styles.textInputStyle1}
+                        placeholder="Fillter price animal  "
+                        underlineColorAndroid="transparent"
+                        onChangeText={(text) => search('0',text,'')}
+                    />
                     <FlatList
                         data = {filterData}
                         keyExtractor = {(item,index) => index.toString()}
@@ -131,6 +137,16 @@ const styles = StyleSheet.create({
     infoStyle:{
         fontSize:15,
         padding:15,
+    },
+    textInputStyle1:{
+        width:'100%',
+        height:50,
+        borderWidth:1,
+        paddingLeft:20,
+        margin:20,
+        borderColor: 'white',
+        borderRadius: 18,
+        backgroundColor: '#FFABC4',
     },
     textInputStyle:{
         height:50,

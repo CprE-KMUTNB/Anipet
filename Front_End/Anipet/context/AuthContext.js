@@ -138,10 +138,10 @@ export const AuthProvider = ({children}) => {
         });
         setIsLoading(false);
     };
-    const search = (price) => {
+    const search = (min,max,type) => {
         setIsLoading(true);
         axios.post(`${URL}/api/search`,{
-            price,
+            min,max,type,
         })
         .then(res => {
             setanimalsData(res.data);
