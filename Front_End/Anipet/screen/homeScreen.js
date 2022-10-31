@@ -120,6 +120,7 @@ const Home = ({navigation}) => {
                         placeholder="Fillter price animal  "
                         underlineColorAndroid="transparent"
                         value={petPrice}
+                        // eslint-disable-next-line no-sequences
                         onChangeText={(text) => {setpetPrice(text),search('0',text,petType);}}
                     />
                     <View style={styles.DropdownStyle}>
@@ -134,6 +135,7 @@ const Home = ({navigation}) => {
                             optionLabel={'name'}
                             optionValue={'style'}
                             selectedValue={petType}
+                            // eslint-disable-next-line no-sequences
                             onValueChange={(value) => {setpetType(value),search('0',petPrice,value);}}
                             primaryColor={'green'}
                         />

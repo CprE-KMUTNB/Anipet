@@ -25,6 +25,7 @@ exports.Disfavorites = (req,res) => {
     const data = {
         username:req.body.username,
         petName:req.body.petName,
+        type:req.body.type
     }
     Favorite.find(data).then(info => {
         if(info[0])
@@ -49,12 +50,13 @@ exports.checksfavorites = (req,res) => {
     const data = {
         username:req.body.username,
         petName:req.body.petName,
+        type:req.body.type
     }
     Favorite.find(data).then(info => {
         if(info[0]){
-            return res.status(200).json({success: true ,data:info})
+            return res.status(200).json({success: true})
             }
-        return res.status(200).json({success: false ,data:info})
+        return res.status(200).json({success: false})
     })
 }
 
@@ -66,6 +68,6 @@ exports.getsfavorites = (req,res) => {
         if(info[0]){
             return res.status(200).json({success: true ,data:info})
             }
-        return res.status(200).json({success: false ,data:info})
+        return res.status(200).json({success: false ,data:"you're not favorite any pet"})
     })
 }

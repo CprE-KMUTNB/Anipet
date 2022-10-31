@@ -19,6 +19,9 @@ exports.search = (req,res) => {
     ]
     pet.aggregate(pipeline1,function( err, data ) {
         if ( err ){throw err}
+        if(!data[0]){
+            return res.json("not found")
+        }
         else{
             if(type){
                 const pipeline2 = [

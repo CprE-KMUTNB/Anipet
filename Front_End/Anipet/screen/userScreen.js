@@ -15,8 +15,26 @@ import {
 import { AuthContext } from '../context/AuthContext';
 
 const User = ({navigation}) => {
-  const {userInfo} = useContext(AuthContext);
+  const {userInfo, Delete} = useContext(AuthContext);
   const {logout, setResLogin} = useContext(AuthContext);
+  const showConfirmDialog = () => {
+    Alert.alert(
+      'Are your sure?',
+      'Are you sure you want to delete Accout?',
+      [
+        {
+          text: 'Yes',
+          onPress: () => {
+            // eslint-disable-next-line no-sequences
+            logout(),setResLogin(false),Delete();
+          },
+        },
+        {
+          text: 'No',
+        },
+      ]
+    );
+  };
   const [modalVisible, setModalVisible] = useState(false);
     return (
         <SafeAreaView style={styles.container}>
@@ -74,6 +92,13 @@ const User = ({navigation}) => {
             <Text style={styles.buttonText}>Logout</Text>
           </TouchableOpacity>
         </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => {showConfirmDialog();}}
+            style={styles.buttonDelete}>
+            <Text style={styles.buttonText}>Delete Account</Text>
+          </TouchableOpacity>
+        </View>
         </SafeAreaView>
       );
     };
@@ -129,6 +154,13 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
     marginTop:10,
+  },
+  buttonDelete:{
+    width:'100%',
+    padding: 15,
+    borderRadius:40,
+    backgroundColor:'#bc3a3a',
+    alignItems:'center',
   },
   button:{
     width:'100%',

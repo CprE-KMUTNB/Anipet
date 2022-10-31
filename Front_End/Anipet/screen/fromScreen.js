@@ -24,6 +24,7 @@ import Dropdown from 'react-native-input-select';
 const From1 = ({navigation}) =>{
   const {tradeData,predic} = useContext(AuthContext);
   const [petStyle, setpetStyle] = useState()
+  const [petHabit, setpetHabit] = useState()
   const [isSelected, setSelection] = useState(false);
   const [isSelected2, setSelection2] = useState(false);
   const [isSelected3, setSelection3] = useState(false);
@@ -66,41 +67,23 @@ const From1 = ({navigation}) =>{
         </View>
         <Text
         style={[styles.minihead]}>
-            อยากเลี้ยงสัตว์ประเภทไหน
+            อยากเลี้ยงสัตว์นิสัยแบบไหน
         </Text>
-        <Text
-        style={[styles.content,styles.frommargin]}>
-            สัตว์บก
-        </Text>
-        <View style={styles.checkboxContainer}>
-        <CheckBox
-          value={isSelected7}
-          onValueChange={setSelection7}
-          style={styles.checkbox}
-        />
-        </View>
-        <Text
-        style={[styles.content,styles.frommargin]}>
-            สัตว์น้ำ
-        </Text>
-        <View style={styles.checkboxContainer}>
-        <CheckBox
-          value={isSelected8}
-          onValueChange={setSelection8}
-          style={styles.checkbox}
-        />
-        </View>
-        <Text
-        style={[styles.content,styles.frommargin]}>
-            สัตว์ปีก
-        </Text>
-        <View style={styles.checkboxContainer}>
-        <CheckBox
-          value={isSelected9}
-          onValueChange={setSelection9}
-          style={styles.checkbox}
-        />
-        </View>
+          <View style={styles.DropdownStyle}>
+            <Dropdown
+              placeholder="Select an option..."
+              options={[
+                { name: 'Like to travel', style: 'like to travel' },
+                { name: 'นานๆไปเที่ยวที', style: 'Chill' },
+                { name: 'StayHome', style: 'StayHome' },
+              ]}
+              optionLabel={'name'}
+              optionValue={'style'}
+              selectedValue={petHabit}
+              onValueChange={(value) => setpetHabit(value)}
+              primaryColor={'green'}
+            />
+          </View>
         </View>
         <Text
         style={[styles.minihead]}>
@@ -116,7 +99,7 @@ const From1 = ({navigation}) =>{
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             // eslint-disable-next-line no-sequences
-            onPress={() => {tradeData(petStyle),navigation.navigate('Predic'),predic(salary,petStyle)}}
+            onPress={() => {tradeData(petStyle),navigation.navigate('Predic'),predic(petStyle,petHabit)}}
             style={styles.button}>
             <Text style={styles.buttonText}>Finish</Text>
           </TouchableOpacity>

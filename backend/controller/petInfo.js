@@ -5,14 +5,11 @@ var jwt = require('jsonwebtoken');
 exports.info = (req,res) => {
     const {name} = req.body
     peturl.find({name:name}).then(animal =>{
-        if(!animal[0])
-        {
+        if(!animal[0]){
             return res.json({result:"not found that "})
         }
-        else
-        {
-            const pipeline = 
-            [
+        else{
+            const pipeline = [
                 {
                 '$match': {
                     'name': name

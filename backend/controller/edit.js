@@ -8,14 +8,19 @@ exports.update = (req,res) =>{
         return res.status(400)
     }else{
         userdata.findById(userid.userid).then(userInfo => {
-            userdata.findByIdAndUpdate(userid.userid,{
-                $set:{
-                    name : req.body.name || userInfo.name,
-                    pet : req.body.pet || userInfo.pet
-                }
-            }, {new: true} ).then(user => {
-                return res.status(200).json(user);
-            })
+            if(userInfo){
+                userdata.findByIdAndUpdate(userid.userid,{
+                    $set:{
+                        name : req.body.name || userInfo.name,
+                        pet : req.body.pet || userInfo.pet
+                    }
+                }, {new: true} ).then(user => {
+                    return res.status(200).json({data:user,response:"success"});
+                })
+            }
+            else{
+                return res.json({data:"error",response:"fail"})
+            }
         })
     }
 }

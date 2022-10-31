@@ -15,6 +15,7 @@ import {
   style,
   TextInput,
   StyleSheet,
+  Alert,
   onPress,
   Button,
   ImageBackground,
@@ -22,6 +23,23 @@ import {
 import { AuthContext } from '../context/AuthContext';
 const CatC = ({navigation}) =>{
   const {userToken,userInfo,petInfo,setpetInfo,favorite,favData, setfavData, disfavorite,checkfavorite} = useContext(AuthContext);
+  const showConfirmDialog = () => {
+    Alert.alert(
+      'Are your sure?',
+      'Are you sure you want to unfavorite this cute pet?',
+      [
+        {
+          text: 'Yes',
+          onPress: () => {
+            disfavorite(userInfo.username,petInfo.name,petInfo.type);
+          },
+        },
+        {
+          text: 'No',
+        },
+      ]
+    );
+  };
   const FavButton = (item) => {
     if (userToken){
       if (favData){
@@ -36,7 +54,7 @@ const CatC = ({navigation}) =>{
       else {
         return (
             <TouchableOpacity
-                    onPress={() => {disfavorite(userInfo.username,item.name,item.type);}}
+                    onPress={() => {showConfirmDialog();}}
                     style={styles.buttonRed}>
                     <Text style={styles.buttonText}>unLike</Text>
             </TouchableOpacity>
@@ -45,10 +63,10 @@ const CatC = ({navigation}) =>{
     }
   }
     useEffect(() => {
-      checkfavorite(userInfo.username,petInfo.name)
+      checkfavorite(userInfo.username,petInfo.name,petInfo.type)
       return () => {
       }
-    }, [checkfavorite, petInfo.name, userInfo.username])
+    }, [checkfavorite, petInfo.name, petInfo.type, userInfo.username])
     return (
       <SafeAreaView style={styles.container}>
         <TouchableOpacity

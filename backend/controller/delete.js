@@ -7,9 +7,17 @@ exports.Delete = (req,res) =>{
     if(!userid){
         return res.status(400)
     }else{
-        userdata.findByIdAndDelete(userid.userid)
-        .then(user => {
-            return res.status(200).json("Finish");
+        userdata.findById(userid.userid).then(userInfo => {
+            if(userInfo){
+                userdata.findByIdAndDelete(userid.userid)
+                .then(user => {
+                    return res.status(200).json("Finish");
+                })
+            }
+            else{
+                return res.json("delete fail")
+            }
         })
+        
     }
 }

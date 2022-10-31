@@ -68,10 +68,10 @@ export const AuthProvider = ({children}) => {
         });
         setIsLoading(false);
     };
-    const checkfavorite = (username,petName) => {
+    const checkfavorite = (username,petName,type) => {
         setIsLoading(true);
         axios.post(`${URL}/api/checkfavorite`,{
-            username,petName,
+            username,petName,type,
         })
         .then(res => {
             if (res.data.success){
@@ -86,10 +86,10 @@ export const AuthProvider = ({children}) => {
         });
         setIsLoading(false);
     };
-    const disfavorite = (username,petName) => {
+    const disfavorite = (username,petName,type) => {
         setIsLoading(true);
         axios.post(`${URL}/api/disfavorite`,{
-            username,petName,
+            username,petName,type,
         })
         .then(res => {
             if (res.data.success){
@@ -129,10 +129,10 @@ export const AuthProvider = ({children}) => {
         });
         setIsLoading(false);
     };
-    const predic = (salary,style) => {
+    const predic = (style,habit) => {
         setIsLoading(true);
         axios.post(`${URL}/api/predic`,{
-            userToken,style,salary,
+            userToken,style,habit,
         })
         .then(res => {
             setpredicAnimal(res.data);

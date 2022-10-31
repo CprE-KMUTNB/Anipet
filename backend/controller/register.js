@@ -20,7 +20,7 @@ exports.register = (req,res)=>{
                 name:req.body.name,
                 username:req.body.username,
                 password:password,
-                pet:req.body.pet,
+                pet:req.body.pet || "-",
             }
             userdata.create(data,(err)=>{
                 if(err) {
