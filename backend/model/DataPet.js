@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-const Pet =new Schema({
+const PetData =new Schema({
     id:{
         type:Schema.ObjectId
     },
@@ -9,26 +9,18 @@ const Pet =new Schema({
         type:String,
         require:true
     },
-    info:{
+    hard:{
         type:String,
         require:true
     },
-    price:{
+    environment:{
         type:String,
         require:true
     },
-    type:{
-        type:String,
-        require:true
-    },
-    salary:{
-        type:String,
-        require:true
-    },
-    style:{
+    time:{
         type:String,
         require:true
     },
 })
 
-module.exports= mongoose.model("animals",Pet)
+module.exports= mongoose.model("petData",PetData)
