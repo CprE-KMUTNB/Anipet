@@ -52,7 +52,7 @@ const Predic = ({navigation}) => {
                     // eslint-disable-next-line no-sequences
                     onPress={() =>{navigation.navigate('Cat'),info(item.name),setfavData(true);}}>
                     <Text style = {styles.itemStyle}>
-                    {item.name.toUpperCase()}</Text>
+                    {item.name}</Text>
                 </TouchableOpacity>
                 <Text style = {styles.infoStyle}>
                 this is a {item.type}

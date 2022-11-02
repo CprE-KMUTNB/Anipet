@@ -93,6 +93,7 @@ export const AuthProvider = ({children}) => {
         })
         .then(res => {
             if (res.data.success){
+                createAlert('Success',res.data.data);
                 setfavData(true);
             }
         })
@@ -108,6 +109,7 @@ export const AuthProvider = ({children}) => {
         })
         .then(res => {
             if (res.data.success){
+                createAlert('Success',res.data.data);
                 setfavData(false);
             }
         })
@@ -122,17 +124,19 @@ export const AuthProvider = ({children}) => {
             userToken,
         })
         .then(res => {
-            console.log(res.data);
+            AsyncStorage.removeItem('userToken');
+            AsyncStorage.removeItem('userInfo');
+            createAlert('Delete finish',res.data);
         })
         .catch(err => {
             console.log(err);
         });
         setIsLoading(false);
     };
-    const predic = (style,habit) => {
+    const predic = (style,habit,salary) => {
         setIsLoading(true);
         axios.post(`${URL}/api/predic`,{
-            userToken,style,habit,
+            userToken,style,habit,salary,
         })
         .then(res => {
             setpredicAnimal(res.data);
@@ -148,8 +152,9 @@ export const AuthProvider = ({children}) => {
             userToken,name,pet,
         })
         .then(res => {
-            setUserInfo(res.data);
-            AsyncStorage.setItem('userInfo', JSON.stringify(res.data));
+            setUserInfo(res.data.data);
+            createAlert('Edit finish',res.data.response);
+            AsyncStorage.setItem('userInfo', JSON.stringify(res.data.data));
         })
         .catch(err => {
             console.log(err);

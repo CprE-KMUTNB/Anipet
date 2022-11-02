@@ -50,8 +50,8 @@ const requestLocationPermission = async () => {
 };
 
 const Map = ({navigation}) => {
-  const [marker1, setMarker1] = useState([]);
-  const [marker2, setMarker2] = useState([]);
+  const [petStore, setpetStore] = useState([]);
+  const [Hospital, setHospital] = useState([]);
   const [position, setPosition] = useState({
     latitude: 13.7563,
     longitude: 100.5018,
@@ -112,7 +112,7 @@ const Map = ({navigation}) => {
 
           places.push(place);
         }
-        setMarker1(places);
+        setpetStore(places);
         // Do your work here with places Array
       })
       .catch(error => {
@@ -145,7 +145,7 @@ const Map = ({navigation}) => {
     const latitude = position.latitude; // you can update it with user's latitude & Longitude
     const longitude = position.longitude;
     let radMetter = 5 * 1000;
-    const url1 =
+    const url2 =
       'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' +
       latitude +
       ',' +
@@ -156,7 +156,7 @@ const Map = ({navigation}) => {
       '&key=' +
       'AIzaSyDziN8yZ8H1h7yOLyxeRQyoySDMlWZXIJc';
 
-    fetch(url1)
+    fetch(url2)
       .then(res => {
         return res.json();
       })
@@ -175,7 +175,7 @@ const Map = ({navigation}) => {
 
           if (googlePlace.photos) {
             for (let photo of googlePlace.photos) {
-              var photoUrl = url1.GooglePicBaseUrl + photo.photo_reference;
+              var photoUrl = url2.GooglePicBaseUrl + photo.photo_reference;
               gallery.push(photoUrl);
             }
           }
@@ -188,7 +188,7 @@ const Map = ({navigation}) => {
 
           places.push(place);
         }
-        setMarker2(places);
+        setHospital(places);
         // Do your work here with places Array
       })
       .catch(error => {
@@ -209,7 +209,7 @@ const Map = ({navigation}) => {
         coords={position}
         rotateEnabled={true}>
         <MarkerAnimated title={name} coordinate={Search} />
-        {marker1.map(point => (
+        {petStore.map(point => (
           <Marker title={point.placeName} coordinate={point.coordinate}>
             <Image
               source={require('../assets/petshop.png')}
@@ -218,7 +218,7 @@ const Map = ({navigation}) => {
             />
           </Marker>
         ))}
-        {marker2.map(point => (
+        {Hospital.map(point => (
           <Marker title={point.placeName} coordinate={point.coordinate}>
             <Image
               source={require('../assets/pethospital.png')}

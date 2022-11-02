@@ -56,7 +56,7 @@ const From1 = ({navigation}) =>{
             options={[
               { name: 'Like to travel', style: 'like to travel' },
               { name: 'นานๆไปเที่ยวที', style: 'Chill' },
-              { name: 'StayHome', style: 'StayHome' },
+              { name: 'StayHome', style: 'stay home' },
             ]}
             optionLabel={'name'}
             optionValue={'style'}
@@ -67,18 +67,18 @@ const From1 = ({navigation}) =>{
         </View>
         <Text
         style={[styles.minihead]}>
-            อยากเลี้ยงสัตว์นิสัยแบบไหน
+            What do you want pet habit
         </Text>
           <View style={styles.DropdownStyle}>
             <Dropdown
               placeholder="Select an option..."
               options={[
-                { name: 'Like to travel', style: 'like to travel' },
-                { name: 'นานๆไปเที่ยวที', style: 'Chill' },
-                { name: 'StayHome', style: 'StayHome' },
+                { name: 'Funny', habit: 'funny' },
+                { name: 'นานๆไปเที่ยวที', habit: 'Chill' },
+                { name: 'StayHome', habit: 'StayHome' },
               ]}
               optionLabel={'name'}
-              optionValue={'style'}
+              optionValue={'habit'}
               selectedValue={petHabit}
               onValueChange={(value) => setpetHabit(value)}
               primaryColor={'green'}
@@ -87,7 +87,7 @@ const From1 = ({navigation}) =>{
         </View>
         <Text
         style={[styles.minihead]}>
-            มีงบประมาณมากแค่ไหน
+            Your salary
         </Text>
         <TextInput
           style={styles.textInputStyle}
@@ -99,7 +99,7 @@ const From1 = ({navigation}) =>{
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             // eslint-disable-next-line no-sequences
-            onPress={() => {tradeData(petStyle),navigation.navigate('Predic'),predic(petStyle,petHabit)}}
+            onPress={() => {tradeData(petStyle),navigation.navigate('Predic'),predic(petStyle,petHabit,salary)}}
             style={styles.button}>
             <Text style={styles.buttonText}>Finish</Text>
           </TouchableOpacity>

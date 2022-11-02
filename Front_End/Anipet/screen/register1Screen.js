@@ -47,10 +47,10 @@ const Register1 = ({navigation}) =>{
         <View>
           {/* reg */}
           <Text style={styles.headderStyle}>
-          สมัครสมาชิก
+          Register
           </Text>
           <Text style={styles.textStyle}>
-            ชื่อ-นามสกุล*
+            Name-surname*
           </Text>
           <TextInput
             style={styles.textInputStyle}
@@ -59,7 +59,7 @@ const Register1 = ({navigation}) =>{
             placeholder="Name"
           />
           <Text style={styles.textStyle}>
-            user-name*
+            Username*
           </Text>
           <TextInput
             style={styles.textInputStyle}
@@ -68,7 +68,7 @@ const Register1 = ({navigation}) =>{
             placeholder="Username"
           />
           <Text style={styles.textStyle}>
-            password*
+            Password*
           </Text>
             <TextInput
               secureTextEntry={true}
@@ -78,7 +78,7 @@ const Register1 = ({navigation}) =>{
               placeholder="Password"
             />
           <Text style={styles.textStyle}>
-            สัตวเลี้ยง (ไม่มีให้ใส่ -)
+            Pet
           </Text>
             <TextInput
               style={styles.textInputStyle}
@@ -120,12 +120,13 @@ const styles = StyleSheet.create({
     headderStyle:{
       fontSize: 30,
       fontStyle: 'bold',
-      marginLeft: 80,
+      marginLeft: 110,
       color: '#D70505',
       fontFamily:'ITIM-REGULAR',
     },
     textStyle:{
       fontSize: 18,
+      marginRight:10,
       color: '#D70505',
       fontFamily:'ITIM-REGULAR',
     },
