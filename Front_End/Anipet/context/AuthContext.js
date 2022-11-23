@@ -56,12 +56,7 @@ export const AuthProvider = ({children}) => {
             username,
         })
         .then(res => {
-            if (res.data.success){
-                setgetFav(res.data.data);
-            }
-            else {
-                setfavData(true);
-            }
+            setgetFav(res.data);
         })
         .catch(err => {
             console.log(err);

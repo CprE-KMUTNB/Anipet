@@ -68,6 +68,6 @@ exports.getsfavorites = (req,res) => {
         if(info[0]){
             return res.status(200).json({success: true ,data:info})
             }
-        return res.status(200).json({success: false ,data:"you're not favorite any pet"})
+        return res.status(200).json({success: false ,data:["you're not favorite any pet"]})
     })
 }

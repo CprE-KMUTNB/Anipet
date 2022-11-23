@@ -20,7 +20,7 @@ exports.search = (req,res) => {
     pet.aggregate(pipeline1,function( err, data ) {
         if ( err ){throw err}
         if(!data[0]){
-            return res.json("not found")
+            return res.json({success:false,data:["not found"]})
         }
         else{
             if(type){
@@ -38,12 +38,12 @@ exports.search = (req,res) => {
                 pet.aggregate(pipeline2,function( err, ComAnimal ) {
                     if ( err ){throw err}
                     else{
-                        return res.status(200).json(ComAnimal);
+                        return res.status(200).json({success:true,data:ComAnimal});
                     }
                 })
             }
             else{
-                return res.status(200).json(data);
+                return res.status(200).json({success:true,data:data});
             }
         }
     })

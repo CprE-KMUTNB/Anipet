@@ -34,26 +34,27 @@ const FavScreen = ({navigation}) => {
         return () => {
           };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[]);
-    useEffect(() => {
-        setfilterData(getFav);
-        setmasterData(getFav);
-    }, [getFav]);
+    },[getsfavorite]);
 
     const ItemView = ({item}) => {
-        return (
+        if (getFav.success){
+            return (
+                <View style = {styles.itemWrapperStyle}>
+                    <TouchableOpacity
+                        // eslint-disable-next-line no-sequences
+                        onPress={() =>{navigation.navigate('Cat'),info(item.petName);}}>
+                        <Text style = {styles.itemStyle}>
+                        {item.petName.toUpperCase()}</Text>
+                    </TouchableOpacity>
+                </View>
+            );
+        }
+        else {
+            return (
             <View style = {styles.itemWrapperStyle}>
-                <TouchableOpacity
-                    // eslint-disable-next-line no-sequences
-                    onPress={() =>{navigation.navigate('Cat'),info(item.petName),setfavData(true);}}>
-                    <Text style = {styles.itemStyle}>
-                    {item.petName.toUpperCase()}</Text>
-                </TouchableOpacity>
-                {/* <Text style = {styles.infoStyle}>
-                this is a {item.type}
-                </Text> */}
-            </View>
-        );
+                <Text style = {styles.itemStyle}>{item}</Text>
+            </View>);
+        }
     };
     const ItemSeparatorView = () => {
         return (
@@ -73,7 +74,7 @@ const FavScreen = ({navigation}) => {
                 }}>
                 <View>
                     <FlatList
-                        data = {filterData}
+                        data = {getFav.data}
                         keyExtractor = {(item,index) => index.toString()}
                         ItemSeparatorComponent = {ItemSeparatorView}
                         renderItem = {ItemView}

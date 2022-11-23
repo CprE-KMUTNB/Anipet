@@ -38,8 +38,8 @@ const Home = ({navigation}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
     useEffect(() => {
-        setfilterData(animalsData);
-        setmasterData(animalsData);
+        setfilterData(animalsData.data);
+        setmasterData(animalsData.data);
     }, [animalsData]);
 
     const predicBar = () => {
@@ -76,19 +76,28 @@ const Home = ({navigation}) => {
         }
     };
     const ItemView = ({item}) => {
-        return (
-            <View style = {styles.itemWrapperStyle}>
-                <TouchableOpacity
-                    // eslint-disable-next-line no-sequences
-                    onPress={() =>{navigation.navigate('Cat'),info(item.name),setfavData(true);}}>
-                    <Text style = {styles.itemStyle}>
-                    {item.name}</Text>
-                </TouchableOpacity>
-                <Text style = {styles.infoStyle}>
-                this is a {item.type}
-                </Text>
-            </View>
-        );
+        if (animalsData.success){
+            return (
+                <View style = {styles.itemWrapperStyle}>
+                    <TouchableOpacity
+                        // eslint-disable-next-line no-sequences
+                        onPress={() =>{navigation.navigate('Cat'),info(item.name),setfavData(true);}}>
+                        <Text style = {styles.itemStyle}>
+                        {item.name}</Text>
+                    </TouchableOpacity>
+                    <Text style = {styles.infoStyle}>
+                    this is a {item.type}
+                    </Text>
+                </View>
+            );
+        }
+        else {
+            return (
+                <View style = {styles.itemWrapperStyle}>
+                    <Text style = {styles.itemStyle}> Not found </Text>
+                </View>
+                );
+        }
     };
     const ItemSeparatorView = () => {
         return (
@@ -115,32 +124,35 @@ const Home = ({navigation}) => {
                         onChangeText={(text) => searchFilter(text)}
                     />
                     {predicBar()}
-                    <TextInput
-                        style={styles.textInputStyle1}
-                        placeholder="Fillter price animal  "
-                        underlineColorAndroid="transparent"
-                        value={petPrice}
-                        // eslint-disable-next-line no-sequences
-                        onChangeText={(text) => {setpetPrice(text),search('0',text,petType);}}
-                    />
-                    <View style={styles.DropdownStyle}>
-                        <Dropdown
-                            placeholder="Select an option..."
-                            options={[
-                                { name: 'getAll', style: '' },
-                                { name: 'dog', style: 'dog' },
-                                { name: 'cat', style: 'cat' },
-                                { name: 'fish', style: 'fish' },
-                            ]}
-                            optionLabel={'name'}
-                            optionValue={'style'}
-                            selectedValue={petType}
+                    <View style = {styles.row}>
+                        <TextInput
+                            style={styles.textInputStyle1}
+                            placeholder="Fillter price animal  "
+                            underlineColorAndroid="transparent"
+                            value={petPrice}
                             // eslint-disable-next-line no-sequences
-                            onValueChange={(value) => {setpetType(value),search('0',petPrice,value);}}
-                            primaryColor={'green'}
+                            onChangeText={(text) => {setpetPrice(text),search('0',text,petType);}}
                         />
+                        <View style={styles.DropdownStyle}>
+                            <Dropdown
+                                placeholder="Select an option..."
+                                options={[
+                                    { name: 'All', style: '' },
+                                    { name: 'dog', style: 'dog' },
+                                    { name: 'cat', style: 'cat' },
+                                    { name: 'fish', style: 'fish' },
+                                ]}
+                                optionLabel={'name'}
+                                optionValue={'style'}
+                                selectedValue={petType}
+                                // eslint-disable-next-line no-sequences
+                                onValueChange={(value) => {setpetType(value),search('0',petPrice,value);}}
+                                primaryColor={'green'}
+                            />
                         </View>
+                    </View>
                     <FlatList
+                        style = {{marginTop : 85}}
                         data = {filterData}
                         keyExtractor = {(item,index) => index.toString()}
                         ItemSeparatorComponent = {ItemSeparatorView}
@@ -158,6 +170,10 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
     },
+    row: {
+        flex: 1,
+        flexDirection: 'row',
+    },
     itemStyle:{
         fontSize:25,
         fontWeight:'bold',
@@ -167,12 +183,16 @@ const styles = StyleSheet.create({
         fontSize:15,
         padding:15,
     },
+    DropdownStyle:{
+        width : '50%',
+        margin : 10,
+    },
     textInputStyle1:{
-        width:'100%',
+        width : '40%',
+        margin : 10,
         height:50,
         borderWidth:1,
         paddingLeft:20,
-        margin:20,
         borderColor: 'white',
         borderRadius: 18,
         backgroundColor: '#FFABC4',
