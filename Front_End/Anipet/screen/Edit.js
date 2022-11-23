@@ -35,10 +35,10 @@ const Edit = ({navigation}) =>{
         <View>
           {/* reg */}
           <Text style={styles.headderStyle}>
-          แก้ไขข้อมูล
+          Edit information
           </Text>
           <Text style={styles.textStyle}>
-            ชื่อ-นามสกุล
+          name-surname
           </Text>
           <TextInput
             style={styles.textInputStyle}
@@ -47,7 +47,7 @@ const Edit = ({navigation}) =>{
             placeholder= {userInfo.name}
           />
           <Text style={styles.textStyle}>
-            สัตวเลี้ยง (ไม่มีให้ใส่ -)
+          Pets (not provided -)
           </Text>
             <TextInput
               style={styles.textInputStyle}
@@ -61,7 +61,7 @@ const Edit = ({navigation}) =>{
                 // eslint-disable-next-line no-sequences
                 onPress={() => {edit(newName,newpet),navigation.navigate('User');}}
                 style={styles.buttonStyle}>
-                <Image source={require('../assets/fonts/Register/CP.png')} />
+                <Image source={require('../assets/navbar/CP4.png')} />
             </TouchableOpacity>
           </View>
         </View>
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     headderStyle:{
       fontSize: 30,
       fontStyle: 'bold',
-      marginLeft: 80,
+      marginLeft: 70,
       color: '#D70505',
       fontFamily:'ITIM-REGULAR',
     },

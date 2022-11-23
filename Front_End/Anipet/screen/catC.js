@@ -122,13 +122,13 @@ const styles = StyleSheet.create({
     margin:5,
   },
   imageContainer:{
-    marginStart:60,
+    marginStart:52,
     width:'62%',
     justifyContent:'center',
     backgroundColor:'#94ffbd',
     borderColor: '#bd94ff',
     borderWidth:4,
-    padding:15,
+    padding:12,
     borderRadius:20,
   },
   inputContainer:{

@@ -91,7 +91,7 @@ const Register1 = ({navigation}) =>{
             <TouchableOpacity
                 onPress={() => {register(Name,username,password,pet);}}
                 style={styles.buttonStyle}>
-                <Image source={require('../assets/fonts/Register/CP.png')} />
+                <Image source={require('../assets/navbar/CP4.png')} />
             </TouchableOpacity>
           </View>
         </View>

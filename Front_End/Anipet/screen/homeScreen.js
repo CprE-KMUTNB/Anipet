@@ -51,7 +51,7 @@ const Home = ({navigation}) => {
                 >
                     <Text
                     style={styles.fromStyle}>
-                        ให้พวกเราช่วยเลือกสัตว์เลี้ยงให้คุณนะ
+                        Let us help you choose a pet for you.
                     </Text>
                     <Image
                      style={styles.fromcat}

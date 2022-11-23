@@ -42,13 +42,13 @@ const From1 = ({navigation}) =>{
         <View style={styles.viewhead}>
         <Text
         style={styles.texthead}>
-            มาทำแบบสอบถามกัน
+            Let's do a survey
         </Text>
         </View>
         <View style={styles.viewmargin}>
         <Text
         style={[styles.minihead]}>
-            your Lifestyle
+            your Lifestyle?
         </Text>
         <View style={styles.DropdownStyle}>
           <Dropdown
@@ -121,12 +121,14 @@ const styles = StyleSheet.create({
   fontSize:28,
   fontWeight:'bold',
   color:'red',
+  fontFamily: "ITIM-REGULAR",
  },
  minihead:{
   margin:5,
-  fontSize:24,
+  fontSize:22,
   fontWeight:'bold',
   color:'red',
+  fontFamily: "ITIM-REGULAR",
  },
  content:{
     fontSize:22,
@@ -145,7 +147,7 @@ const styles = StyleSheet.create({
   },
   viewmargin:{
     marginTop:20,
-    marginVertical:30,
+    marginVertical:5,
   },
   viewhead:{
     marginTop:10,

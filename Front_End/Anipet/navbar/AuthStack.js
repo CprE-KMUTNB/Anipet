@@ -50,13 +50,13 @@ const AuthStack = () => {
                     headerShown:false,
                     tabBarLabel: 'Map', tabBarIcon: ({ color, size }) => (
                         <Image
-                        source={require('../assets/fonts/Home/โลก.png')}
+                        source={require('../assets/navbar/Map4.png')}
                         />)}} />
                 <Tab.Screen component={FavScreen} name="Fav" options={{
                     headerShown:false,
                     tabBarLabel: 'Fav', tabBarIcon: ({ color, size }) => (
                         <Image
-                        source={require('../assets/fonts/Home/โลก.png')}
+                        source={require('../assets/navbar/Like2.png')}
                         />)}} />
                 <Tab.Screen component={UserStackScreen} name="PreRegister" options={{
                     headerShown:false,
