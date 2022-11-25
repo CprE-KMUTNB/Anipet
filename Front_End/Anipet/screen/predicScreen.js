@@ -27,8 +27,8 @@ const Predic = ({navigation}) => {
     const [masterData, setmasterData] = useState([]);
     const [Find, setFind] = useState('');
     useEffect(() => {
-        setfilterData(predicAnimal);
-        setmasterData(predicAnimal);
+        setfilterData(predicAnimal.data);
+        setmasterData(predicAnimal.data);
     }, [predicAnimal]);
     const searchFilter = (text) => {
         if (text) {
@@ -46,19 +46,28 @@ const Predic = ({navigation}) => {
         }
     };
     const ItemView = ({item}) => {
-        return (
-            <View style = {styles.itemWrapperStyle}>
-                <TouchableOpacity
-                    // eslint-disable-next-line no-sequences
-                    onPress={() =>{navigation.navigate('Cat'),info(item.name),setfavData(true);}}>
-                    <Text style = {styles.itemStyle}>
-                    {item.name}</Text>
-                </TouchableOpacity>
-                <Text style = {styles.infoStyle}>
-                this is a {item.type}
-                </Text>
-            </View>
-        );
+        if (predicAnimal.success){
+            return (
+                <View style = {styles.itemWrapperStyle}>
+                    <TouchableOpacity
+                        // eslint-disable-next-line no-sequences
+                        onPress={() =>{navigation.navigate('Cat'),info(item.name),setfavData(true);}}>
+                        <Text style = {styles.itemStyle}>
+                        {item.name}</Text>
+                    </TouchableOpacity>
+                    <Text style = {styles.infoStyle}>
+                    this is a {item.type}
+                    </Text>
+                </View>
+            );
+        }
+        else {
+            return (
+                <View style = {styles.itemWrapperStyle}>
+                    <Text style = {styles.itemStyle}> Not found </Text>
+                </View>
+                );
+        }
     };
     const ItemSeparatorView = () => {
         return (

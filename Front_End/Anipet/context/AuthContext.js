@@ -33,7 +33,6 @@ export const AuthProvider = ({children}) => {
     const [getFav, setgetFav] = useState([]);
     const tradeData = (item) => {
         setIsLoading(true);
-        console.log(item);
         setData(item);
         setIsLoading(false);
     };

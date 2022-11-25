@@ -121,14 +121,14 @@ const styles = StyleSheet.create({
   fontSize:28,
   fontWeight:'bold',
   color:'red',
-  fontFamily: "ITIM-REGULAR",
+  fontFamily: 'ITIM-REGULAR',
  },
  minihead:{
   margin:5,
   fontSize:22,
   fontWeight:'bold',
   color:'red',
-  fontFamily: "ITIM-REGULAR",
+  fontFamily: 'ITIM-REGULAR',
  },
  content:{
     fontSize:22,

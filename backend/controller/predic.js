@@ -25,10 +25,10 @@ exports.predic = (req,res) => {
                         if ( err ){throw err}
                         else{
                             if(data[0]){
-                                return res.status(200).json(data);
+                                return res.status(200).json({success:true,data:data});
                             }
                             else{
-                                return res.json("not found")
+                                return res.json({success:false,data:["not found"]})
                             }
                         }
                     })
@@ -48,10 +48,10 @@ exports.predic = (req,res) => {
                         if ( err ){throw err}
                         else{
                             if(data[0]){
-                                return res.status(200).json(data);
+                                return res.status(200).json({success:true,data:data});
                             }
                             else{
-                                return res.json("not found")
+                                return res.json({success:false,data:["not found"]})
                             }
                         }
                     })
