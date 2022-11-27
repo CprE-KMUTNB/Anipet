@@ -55,7 +55,7 @@ const From1 = ({navigation}) =>{
             placeholder="Select an option..."
             options={[
               { name: 'Like to travel', style: 'like to travel' },
-              { name: 'นานๆไปเที่ยวที', style: 'Chill' },
+              { name: 'Chill', style: 'Chill' },
               { name: 'StayHome', style: 'stay home' },
             ]}
             optionLabel={'name'}

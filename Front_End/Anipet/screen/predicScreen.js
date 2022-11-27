@@ -91,13 +91,9 @@ const Predic = ({navigation}) => {
                         style={styles.backStyle}>
                         <Image source={require('../assets/fonts/Register/กลับ.png')}/>
                     </TouchableOpacity>
-                    <TextInput
-                        style={styles.textInputStyle}
-                        value={Find}
-                        placeholder="Search Here                                                                     "
-                        underlineColorAndroid="transparent"
-                        onChangeText={(text) => searchFilter(text)}
-                    />
+                    <Text style = {styles.resultStyle}>
+                    Your result is
+                    </Text>
                     <FlatList
                         data = {filterData}
                         keyExtractor = {(item,index) => index.toString()}
@@ -125,6 +121,15 @@ const styles = StyleSheet.create({
     infoStyle:{
         fontSize:15,
         padding:15,
+    },
+    resultStyle:{
+        width:'80%',
+        fontSize:28,
+        borderBottomWidth: 1,
+        fontWeight:'bold',
+        padding:15,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
     },
     textInputStyle:{
         width:'80%',

@@ -17,20 +17,33 @@ import { AuthContext } from '../context/AuthContext';
 const User = ({navigation}) => {
   const {userInfo, Delete} = useContext(AuthContext);
   const {logout, setResLogin} = useContext(AuthContext);
+  const createAlert = (status,item) =>
+    Alert.alert(
+      status,
+      item,
+      [
+        {
+          text:'Cancel',
+        },
+        {
+          text:'ok',
+        },
+      ]
+    );
   const showConfirmDialog = () => {
     Alert.alert(
       'Are your sure?',
       'Are you sure you want to delete Accout?',
       [
         {
+          text: 'No',
+        },
+        {
           text: 'Yes',
           onPress: () => {
             // eslint-disable-next-line no-sequences
-            logout(),setResLogin(false),Delete();
+            logout(),setResLogin(false),Delete(userInfo.username);
           },
-        },
-        {
-          text: 'No',
         },
       ]
     );
@@ -87,7 +100,7 @@ const User = ({navigation}) => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             // eslint-disable-next-line no-sequences
-            onPress={() => {logout(),setResLogin(false);}}
+            onPress={() => {logout(),setResLogin(false),createAlert('Logout Success','Good to see you');}}
             style={styles.button}>
             <Text style={styles.buttonText}>Logout</Text>
           </TouchableOpacity>

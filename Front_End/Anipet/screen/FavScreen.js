@@ -28,7 +28,12 @@ const FavScreen = ({navigation}) => {
     const [Find, setFind] = useState('');
     useEffect(() => {
         const filter = () => {
-            getsfavorite(userInfo.username);
+            if (userToken){
+                getsfavorite(userInfo.username);
+            }
+            else {
+                getsfavorite('je');
+            }
         };
         filter();
         return () => {
@@ -37,22 +42,30 @@ const FavScreen = ({navigation}) => {
     },[getsfavorite]);
 
     const ItemView = ({item}) => {
-        if (getFav.success){
-            return (
+        if (userToken) {
+            if (getFav.success){
+                return (
+                    <View style = {styles.itemWrapperStyle}>
+                        <TouchableOpacity
+                            // eslint-disable-next-line no-sequences
+                            onPress={() =>{navigation.navigate('Cat'),info(item.petName);}}>
+                            <Text style = {styles.itemStyle}>
+                            {item.petName.toUpperCase()}</Text>
+                        </TouchableOpacity>
+                    </View>
+                );
+            }
+            else {
+                return (
                 <View style = {styles.itemWrapperStyle}>
-                    <TouchableOpacity
-                        // eslint-disable-next-line no-sequences
-                        onPress={() =>{navigation.navigate('Cat'),info(item.petName);}}>
-                        <Text style = {styles.itemStyle}>
-                        {item.petName.toUpperCase()}</Text>
-                    </TouchableOpacity>
-                </View>
-            );
+                    <Text style = {styles.itemStyle}>{item}</Text>
+                </View>);
+            }
         }
         else {
             return (
             <View style = {styles.itemWrapperStyle}>
-                <Text style = {styles.itemStyle}>{item}</Text>
+                <Text style = {styles.itemStyle}>You need to login</Text>
             </View>);
         }
     };

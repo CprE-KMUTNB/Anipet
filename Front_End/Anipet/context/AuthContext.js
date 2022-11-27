@@ -112,10 +112,10 @@ export const AuthProvider = ({children}) => {
         });
         setIsLoading(false);
     };
-    const Delete = () => {
+    const Delete = (username) => {
         setIsLoading(true);
         axios.post(`${URL}/api/delete`,{
-            userToken,
+            userToken,username,
         })
         .then(res => {
             AsyncStorage.removeItem('userToken');
@@ -179,6 +179,7 @@ export const AuthProvider = ({children}) => {
             }
             else {
                 setResRegister(true);
+                createAlert('Register Success',`Greetings ${res.data.data.name}`);
             }
         })
         .catch(err => {
@@ -202,6 +203,7 @@ export const AuthProvider = ({children}) => {
                 AsyncStorage.setItem('userInfo', JSON.stringify(res.data.user));
                 AsyncStorage.setItem('userToken', res.data.token);
 
+                createAlert('Login Success',`Welcome ${res.data.user.name}`);
                 setResLogin(true);
             }
         })

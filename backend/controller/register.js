@@ -26,7 +26,7 @@ exports.register = (req,res)=>{
                 if(err) {
                     return res.json({error:"error",data:"already have this username"})
                 }
-                return res.status(200).json("Register finish")
+                return res.status(200).json({data:data})
             })
         });
     });
