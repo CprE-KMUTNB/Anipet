@@ -53,8 +53,8 @@ const Map = ({navigation}) => {
   const [petStore, setpetStore] = useState([]);
   const [Hospital, setHospital] = useState([]);
   const [position, setPosition] = useState({
-    latitude: 13.7563,
-    longitude: 100.5018,
+    latitude: 13.8191,
+    longitude: 100.5143,
     latitudeDelta: 0.001,
     longitudeDelta: 0.001,
   });
@@ -66,6 +66,26 @@ const Map = ({navigation}) => {
   });
   const placesRef = useRef();
   useEffect(() => {
+    const result = requestLocationPermission();
+    result.then(res => {
+      if (res) {
+        global.Geolocation.getCurrentPosition(pos => {
+          const crd = pos.coords;
+          setPosition({
+            latitude: crd.latitude,
+            longitude: crd.longitude,
+            latitudeDelta: 0.0421,
+            longitudeDelta: 0.0421,
+          });
+          setLocation({
+            latitude: crd.latitude,
+            longitude: crd.longitude,
+            latitudeDelta: 0.0421,
+            longitudeDelta: 0.0421,
+          });
+        });
+      }
+    });
     const latitude = position.latitude; // you can update it with user's latitude & Longitude
     const longitude = position.longitude;
     let radMetter = 5 * 1000; // Search withing 2 KM radius
@@ -118,27 +138,6 @@ const Map = ({navigation}) => {
       .catch(error => {
         console.log(error);
       });
-
-    const result = requestLocationPermission();
-    result.then(res => {
-      if (res) {
-        global.Geolocation.getCurrentPosition(pos => {
-          const crd = pos.coords;
-          setPosition({
-            latitude: crd.latitude,
-            longitude: crd.longitude,
-            latitudeDelta: 0.0421,
-            longitudeDelta: 0.0421,
-          });
-          setLocation({
-            latitude: crd.latitude,
-            longitude: crd.longitude,
-            latitudeDelta: 0.0421,
-            longitudeDelta: 0.0421,
-          });
-        });
-      }
-    });
   }, [position.latitude, position.longitude]);
 
   useEffect(() => {

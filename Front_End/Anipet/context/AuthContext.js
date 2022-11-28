@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 import axios from 'axios';
 export const AuthContext = createContext();
-const URL = 'http://10.0.2.2:3000';
+const URL = 'https://crazy-stole-frog.cyclic.app';
 
 export const AuthProvider = ({children}) => {
     const createAlert = (status,item) =>
